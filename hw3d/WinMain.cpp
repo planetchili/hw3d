@@ -32,6 +32,14 @@ int CALLBACK WinMain(
 	);
 	// show the damn window
 	ShowWindow( hWnd,SW_SHOW );
-	while( true );
+
+	// message pump
+	MSG msg;
+	while( GetMessage( &msg,nullptr,0,0 ) > 0 )
+	{
+		TranslateMessage( &msg );
+		DispatchMessage( &msg );
+	}
+
 	return 0;
 }
