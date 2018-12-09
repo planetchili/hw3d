@@ -1,5 +1,7 @@
 #include <Windows.h>
 #include "WindowsMessageMap.h"
+#include <sstream>
+
 
 LRESULT CALLBACK WndProc( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam )
 {
@@ -10,6 +12,18 @@ LRESULT CALLBACK WndProc( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam )
 	{
 	case WM_CLOSE:
 		PostQuitMessage( 69 );
+		break;
+	case WM_KEYDOWN:
+		if( wParam == 'D' )
+		{
+			SetWindowText( hWnd,"Respects" );
+		}
+		break;
+	case WM_KEYUP:
+		if( wParam == 'F' )
+		{
+			SetWindowText( hWnd,"Dangerfield" );
+		}
 		break;
 	}
 
