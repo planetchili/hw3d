@@ -42,7 +42,7 @@ int CALLBACK WinMain(
 		// check if GetMessage call itself borked
 		if( gResult == -1 )
 		{
-			return -1;
+			throw CHWND_LAST_EXCEPT();
 		}
 
 		// wParam here is the value passed to PostQuitMessage
