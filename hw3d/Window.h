@@ -17,29 +17,39 @@
 *	You should have received a copy of the GNU General Public License					  *
 *	along with The Chili Direct3D Engine.  If not, see <http://www.gnu.org/licenses/>.    *
 ******************************************************************************************/
-#include "Window.h"
+#pragma once
+#include "ChiliWin.h"
 
 
-int CALLBACK WinMain(
-	HINSTANCE hInstance,
-	HINSTANCE hPrevInstance,
-	LPSTR     lpCmdLine,
-	int       nCmdShow )
+class Window
 {
-	Window wnd( 800,300,"Donkey Fart Box" );
-
-	MSG msg;
-	BOOL gResult;
-	while( (gResult = GetMessage( &msg,nullptr,0,0 )) > 0 )
+private:
+	// singleton manages registration/cleanup of window class
+	class WindowClass
 	{
-		TranslateMessage( &msg );
-		DispatchMessage( &msg );
-	}
-
-	if( gResult == -1 )
-	{
-		return -1;
-	}
-
-	return msg.wParam;
-}
+	public:
+		static const char* GetName() noexcept;
+		static HINSTANCE GetInstance() noexcept;
+	private:
+		WindowClass() noexcept;
+		~WindowClass();
+		WindowClass( const WindowClass& ) = delete;
+		WindowClass& operator=( const WindowClass& ) = delete;
+		static constexpr const char* wndClassName = "Chili Direct3D Engine Window";
+		static WindowClass wndClass;
+		HINSTANCE hInst;
+	};
+public:
+	Window( int width,int height,const char* name ) noexcept;
+	~Window();
+	Window( const Window& ) = delete;
+	Window& operator=( const Window& ) = delete;
+private:
+	static LRESULT CALLBACK HandleMsgSetup( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noexcept;
+	static LRESULT CALLBACK HandleMsgThunk( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noexcept;
+	LRESULT HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noexcept;
+private:
+	int width;
+	int height;
+	HWND hWnd;
+};
