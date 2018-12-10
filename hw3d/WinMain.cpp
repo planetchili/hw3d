@@ -37,10 +37,6 @@ int CALLBACK WinMain(
 			// TranslateMessage will post auxilliary WM_CHAR messages from key msgs
 			TranslateMessage( &msg );
 			DispatchMessage( &msg );
-			if( wnd.kbd.KeyIsPressed( VK_MENU ) )
-			{
-				MessageBox( nullptr,"Something Happon!","The alt key was pressed",MB_OK | MB_ICONEXCLAMATION );
-			}
 		}
 
 		// check if GetMessage call itself borked
