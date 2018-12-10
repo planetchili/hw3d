@@ -144,12 +144,15 @@ LRESULT Window::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noex
 
 	/*********** KEYBOARD MESSAGES ***********/
 	case WM_KEYDOWN:
+	// syskey commands need to be handled to track ALT key (VK_MENU) and F10
+	case WM_SYSKEYDOWN:
 		if( !(lParam & 0x40000000) || kbd.AutorepeatIsEnabled() ) // filter autorepeat
 		{
 			kbd.OnKeyPressed( static_cast<unsigned char>(wParam) );
 		}
 		break;
 	case WM_KEYUP:
+	case WM_SYSKEYUP:
 		kbd.OnKeyReleased( static_cast<unsigned char>(wParam) );
 		break;
 	case WM_CHAR:
