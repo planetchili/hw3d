@@ -38,7 +38,7 @@ public:
 		Type type;
 		unsigned char code;
 	public:
-		Event()
+		Event() noexcept
 			:
 			type( Type::Invalid ),
 			code( 0u )
