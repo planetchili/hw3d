@@ -171,8 +171,9 @@ LRESULT Window::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noex
 	/************* MOUSE MESSAGES ****************/
 	case WM_MOUSEMOVE:
 	{
-		POINTS pt = MAKEPOINTS( lParam );
+		const POINTS pt = MAKEPOINTS( lParam );
 		mouse.OnMouseMove( pt.x,pt.y );
+		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
