@@ -18,6 +18,7 @@
 *	along with The Chili Direct3D Engine.  If not, see <http://www.gnu.org/licenses/>.    *
 ******************************************************************************************/
 #include "Window.h"
+#include <sstream>
 
 
 int CALLBACK WinMain(
@@ -37,6 +38,18 @@ int CALLBACK WinMain(
 			// TranslateMessage will post auxilliary WM_CHAR messages from key msgs
 			TranslateMessage( &msg );
 			DispatchMessage( &msg );
+
+			// do app logic (test)
+			while( !wnd.mouse.IsEmpty() )
+			{
+				const auto e = wnd.mouse.Read();
+				if( e.GetType() == Mouse::Event::Type::Move )
+				{
+					std::ostringstream oss;
+					oss << "Mouse Position: (" << e.GetPosX() << "," << e.GetPosY() << ")";
+					wnd.SetTitle( oss.str() );
+				}
+			}
 		}
 
 		// check if GetMessage call itself borked
