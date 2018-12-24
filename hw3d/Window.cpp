@@ -240,14 +240,8 @@ LRESULT Window::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noex
 	case WM_MOUSEWHEEL:
 	{
 		const POINTS pt = MAKEPOINTS( lParam );
-		if( GET_WHEEL_DELTA_WPARAM( wParam ) > 0 )
-		{
-			mouse.OnWheelUp( pt.x,pt.y );
-		}
-		else if( GET_WHEEL_DELTA_WPARAM( wParam ) < 0 )
-		{
-			mouse.OnWheelDown( pt.x,pt.y );
-		}
+		const int delta = GET_WHEEL_DELTA_WPARAM( wParam );
+		mouse.OnWheelDelta( pt.x,pt.y,delta );
 		break;
 	}
 	/************** END MOUSE MESSAGES **************/
