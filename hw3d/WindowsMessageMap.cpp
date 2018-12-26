@@ -18,7 +18,6 @@
 *	along with The Chili Direct3D Engine.  If not, see <http://www.gnu.org/licenses/>.    *
 ******************************************************************************************/
 #include "WindowsMessageMap.h"
-#include <Windows.h>
 #include <string>
 #include <sstream>
 #include <iomanip>
@@ -33,7 +32,7 @@
 
 #define REGISTER_MESSAGE(msg){msg,#msg}
 
-WindowsMessageMap::WindowsMessageMap()
+WindowsMessageMap::WindowsMessageMap() noexcept
 	:
 	map( {
 		REGISTER_MESSAGE( WM_CREATE ),
@@ -168,15 +167,6 @@ WindowsMessageMap::WindowsMessageMap()
 		REGISTER_MESSAGE( WM_QUERYNEWPALETTE ),
 		REGISTER_MESSAGE( WM_PALETTEISCHANGING ),
 		REGISTER_MESSAGE( WM_PALETTECHANGED ),
-		REGISTER_MESSAGE( WM_DDE_INITIATE ),
-		REGISTER_MESSAGE( WM_DDE_TERMINATE ),
-		REGISTER_MESSAGE( WM_DDE_ADVISE ),
-		REGISTER_MESSAGE( WM_DDE_UNADVISE ),
-		REGISTER_MESSAGE( WM_DDE_ACK ),
-		REGISTER_MESSAGE( WM_DDE_DATA ),
-		REGISTER_MESSAGE( WM_DDE_REQUEST ),
-		REGISTER_MESSAGE( WM_DDE_POKE ),
-		REGISTER_MESSAGE( WM_DDE_EXECUTE ),
 		REGISTER_MESSAGE( WM_DROPFILES ),
 		REGISTER_MESSAGE( WM_POWER ),
 		REGISTER_MESSAGE( WM_WINDOWPOSCHANGED ),
@@ -219,7 +209,7 @@ WindowsMessageMap::WindowsMessageMap()
 	} )
 {}
 
-std::string WindowsMessageMap::operator()( DWORD msg,LPARAM lp,WPARAM wp ) const
+std::string WindowsMessageMap::operator()( DWORD msg,LPARAM lp,WPARAM wp ) const noexcept
 {
 	constexpr int firstColWidth = 25;
 	const auto i = map.find( msg );
