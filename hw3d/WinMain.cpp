@@ -17,7 +17,7 @@
 *	You should have received a copy of the GNU General Public License					  *
 *	along with The Chili Direct3D Engine.  If not, see <http://www.gnu.org/licenses/>.    *
 ******************************************************************************************/
-#include "Window.h"
+#include "App.h"
 
 
 int CALLBACK WinMain(
@@ -28,25 +28,7 @@ int CALLBACK WinMain(
 {
 	try
 	{
-		Window wnd( 800,300,"Donkey Fart Box" );
-
-		MSG msg;
-		BOOL gResult;
-		while( (gResult = GetMessage( &msg,nullptr,0,0 )) > 0 )
-		{
-			// TranslateMessage will post auxilliary WM_CHAR messages from key msgs
-			TranslateMessage( &msg );
-			DispatchMessage( &msg );
-		}
-
-		// check if GetMessage call itself borked
-		if( gResult == -1 )
-		{
-			throw CHWND_LAST_EXCEPT();
-		}
-
-		// wParam here is the value passed to PostQuitMessage
-		return msg.wParam;
+		return App{}.Go();
 	}
 	catch( const ChiliException& e )
 	{
