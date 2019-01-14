@@ -71,3 +71,9 @@ void Graphics::EndFrame()
 {
 	pSwap->Present( 1u,0u );
 }
+
+void Graphics::ClearBuffer( float red,float green,float blue ) noexcept
+{
+	const float color[] = { red,green,blue,1.0f };
+	pContext->ClearRenderTargetView( pTarget,color );
+}
