@@ -18,8 +18,8 @@
  *	You should have received a copy of the GNU General Public License					  *
  *	along with The Chili DirectX Framework.  If not, see <http://www.gnu.org/licenses/>.  *
  ******************************************************************************************/
+#include "ChiliWin.h"
 #include "Mouse.h"
-#include <Windows.h>
 
 std::pair<int,int> Mouse::GetPos() const noexcept
 {
