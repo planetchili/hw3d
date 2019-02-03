@@ -104,21 +104,28 @@ void Graphics::DrawTestTriangle()
 
 	struct Vertex
 	{
-		float x;
-		float y;
-		unsigned char r;
-		unsigned char g;
-		unsigned char b;
-		unsigned char a;
+		struct
+		{
+			float x;
+			float y;
+		} pos;
+		struct
+		{
+			unsigned char r;
+			unsigned char g;
+			unsigned char b;
+			unsigned char a;
+		} color;
 	};
 
 	// create vertex buffer (1 2d triangle at center of screen)
-	const Vertex vertices[] =
+	Vertex vertices[] =
 	{
 		{ 0.0f,0.5f,255,0,0,0 },
 		{ 0.5f,-0.5f,0,255,0,0 },
 		{ -0.5f,-0.5f,0,0,255,0 },
 	};
+	vertices[0].color.g = 255;
 	wrl::ComPtr<ID3D11Buffer> pVertexBuffer;
 	D3D11_BUFFER_DESC bd = {};
 	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
