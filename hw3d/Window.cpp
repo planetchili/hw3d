@@ -238,6 +238,8 @@ LRESULT Window::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noex
 	{
 		const POINTS pt = MAKEPOINTS( lParam );
 		mouse.OnLeftPressed( pt.x,pt.y );
+		// bring window to foreground on lclick client region
+		SetForegroundWindow( hWnd );
 		break;
 	}
 	case WM_RBUTTONDOWN:
