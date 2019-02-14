@@ -92,6 +92,10 @@ Box::Box( Graphics& gfx,
 
 		AddStaticBind( std::make_unique<Topology>( gfx,D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ) );
 	}
+	else
+	{
+		SetIndexFromStatic();
+	}
 
 	AddBind( std::make_unique<TransformCbuf>( gfx,*this ) );
 }
