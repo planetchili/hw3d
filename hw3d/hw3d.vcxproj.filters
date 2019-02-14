@@ -179,6 +179,9 @@
     <ClInclude Include="Box.h">
       <Filter>Header Files\Drawable</Filter>
     </ClInclude>
+    <ClInclude Include="DrawableBase.h">
+      <Filter>Header Files\Drawable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
