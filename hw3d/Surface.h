@@ -114,7 +114,6 @@ public:
 		std::string note;
 	};
 public:
-	Surface( unsigned int width,unsigned int height,unsigned int pitch ) noexcept;
 	Surface( unsigned int width,unsigned int height ) noexcept;
 	Surface( Surface&& source ) noexcept;
 	Surface( Surface& ) = delete;

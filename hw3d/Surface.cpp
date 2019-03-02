@@ -31,9 +31,9 @@ namespace Gdiplus
 
 #pragma comment( lib,"gdiplus.lib" )
 
-Surface::Surface( unsigned int width,unsigned int height,unsigned int pitch ) noexcept
+Surface::Surface( unsigned int width,unsigned int height ) noexcept
 	:
-	pBuffer( std::make_unique<Color[]>( pitch * height ) ),
+	pBuffer( std::make_unique<Color[]>( width * height ) ),
 	width( width ),
 	height( height )
 {}
@@ -46,11 +46,6 @@ Surface& Surface::operator=( Surface&& donor ) noexcept
 	donor.pBuffer = nullptr;
 	return *this;
 }
-
-Surface::Surface( unsigned int width,unsigned int height ) noexcept
-	:
-	Surface( width,height,width )
-{}
 
 Surface::Surface( Surface && source ) noexcept
 	:
@@ -114,8 +109,7 @@ Surface Surface::FromFile( const std::string& name )
 {
 	unsigned int width = 0;
 	unsigned int height = 0;
-	unsigned int pitch = 0;
-	std::unique_ptr<Color[]> pBuffer = nullptr;
+	std::unique_ptr<Color[]> pBuffer;
 
 	{
 		// convert filenam to wide string (for Gdiplus)
@@ -130,6 +124,7 @@ Surface Surface::FromFile( const std::string& name )
 			throw Exception( __LINE__,__FILE__ ,ss.str() );
 		}
 
+		width = bitmap.GetWidth();
 		height = bitmap.GetHeight();
 		pBuffer = std::make_unique<Color[]>( width * height );
 
@@ -139,7 +134,7 @@ Surface Surface::FromFile( const std::string& name )
 			{
 				Gdiplus::Color c;
 				bitmap.GetPixel( x,y,&c );
-				pBuffer[y * pitch + x] = c.GetValue();
+				pBuffer[y * width + x] = c.GetValue();
 			}
 		}
 	}
@@ -208,7 +203,7 @@ void Surface::Save( const std::string& filename ) const
 	}
 }
 
-void Surface::Copy( const Surface & src ) noexcept(!IS_DEBUG)
+void Surface::Copy( const Surface& src ) noexcept(!IS_DEBUG)
 {
 	assert( width == src.width );
 	assert( height == src.height );
