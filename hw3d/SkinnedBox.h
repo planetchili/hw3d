@@ -1,6 +1,4 @@
 #pragma once
-
-#pragma once
 #include "DrawableBase.h"
 
 class SkinnedBox : public DrawableBase<SkinnedBox>

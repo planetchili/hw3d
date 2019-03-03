@@ -2,6 +2,7 @@
 #include "Window.h"
 #include "ChiliTimer.h"
 #include "ImguiManager.h"
+#include "Camera.h"
 
 class App
 {
@@ -18,5 +19,6 @@ private:
 	ChiliTimer timer;
 	std::vector<std::unique_ptr<class Drawable>> drawables;
 	float speed_factor = 1.0f;
+	Camera cam;
 	static constexpr size_t nDrawables = 180;
 };
