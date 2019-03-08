@@ -54,7 +54,7 @@ public:
 	Graphics( HWND hWnd );
 	Graphics( const Graphics& ) = delete;
 	Graphics& operator=( const Graphics& ) = delete;
-	~Graphics() = default;
+	~Graphics();
 	void EndFrame();
 	void BeginFrame( float red,float green,float blue ) noexcept;
 	void DrawIndexed( UINT count ) noexcept(!IS_DEBUG);
