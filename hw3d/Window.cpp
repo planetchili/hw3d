@@ -183,7 +183,7 @@ LRESULT Window::HandleMsg( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noex
 	{
 		return true;
 	}
-	const auto imio = ImGui::GetIO();
+	const auto& imio = ImGui::GetIO();
 
 	switch( msg )
 	{
