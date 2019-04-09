@@ -22,5 +22,5 @@ float4 main( float3 worldPos : Position,float3 n : Normal ) : SV_Target
 	// diffuse intensity
 	const float3 diffuse = diffuseColor * diffuseIntensity * att * max( 0.0f,dot( dirToL,n ) );
 	// final color
-	return float4(saturate( diffuse + ambient ),1.0f);
+	return float4(saturate( (diffuse + ambient) * materialColor ),1.0f);
 }
