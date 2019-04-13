@@ -1,13 +1,17 @@
 cbuffer LightCBuf
 {
 	float3 lightPos;
-	float3 materialColor;
 	float3 ambient;
 	float3 diffuseColor;
 	float diffuseIntensity;
 	float attConst;
 	float attLin;
 	float attQuad;
+};
+
+cbuffer ObjectCBuf
+{
+	float3 materialColor;
 };
 
 
