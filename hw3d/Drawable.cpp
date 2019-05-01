@@ -2,7 +2,6 @@
 #include "GraphicsThrowMacros.h"
 #include "IndexBuffer.h"
 #include <cassert>
-#include <typeinfo>
 
 void Drawable::Draw( Graphics& gfx ) const noexcept(!IS_DEBUG)
 {
