@@ -92,14 +92,27 @@ void App::DoFrame()
 	wnd.Gfx().SetCamera( cam.GetMatrix() );
 	light.Bind( wnd.Gfx(),cam.GetMatrix() );
 
+	// render geometry
 	for( auto& d : drawables )
 	{
 		d->Update( wnd.kbd.KeyIsPressed( VK_SPACE ) ? 0.0f : dt );
 		d->Draw( wnd.Gfx() );
 	}
 	light.Draw( wnd.Gfx() );
+		
+	// imgui windows
+	SpawnSimulationWindow();
+	cam.SpawnControlWindow();
+	light.SpawnControlWindow();
+	SpawnBoxWindowManagerWindow();
+	SpawnBoxWindows();
 
-	// imgui window to control simulation speed
+	// present
+	wnd.Gfx().EndFrame();
+}
+
+void App::SpawnSimulationWindow() noexcept
+{
 	if( ImGui::Begin( "Simulation Speed" ) )
 	{
 		ImGui::SliderFloat( "Speed Factor",&speed_factor,0.0f,6.0f,"%.4f",3.2f );
@@ -107,10 +120,10 @@ void App::DoFrame()
 		ImGui::Text( "Status: %s",wnd.kbd.KeyIsPressed( VK_SPACE ) ? "PAUSED" : "RUNNING (hold spacebar to pause)" );
 	}
 	ImGui::End();
-	// imgui windows to control camera and light
-	cam.SpawnControlWindow();
-	light.SpawnControlWindow();
-	// imgui window to open box windows
+}
+
+void App::SpawnBoxWindowManagerWindow() noexcept
+{
 	if( ImGui::Begin( "Boxes" ) )
 	{
 		using namespace std::string_literals;
@@ -138,14 +151,14 @@ void App::DoFrame()
 		}
 	}
 	ImGui::End();
-	// imgui box attribute control windows
+}
+
+void App::SpawnBoxWindows() noexcept
+{
 	for( auto id : boxControlIds )
 	{
 		boxes[id]->SpawnControlWindow( id,wnd.Gfx() );
 	}
-
-	// present
-	wnd.Gfx().EndFrame();
 }
 
 App::~App()

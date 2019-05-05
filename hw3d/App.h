@@ -15,6 +15,9 @@ public:
 	~App();
 private:
 	void DoFrame();
+	void SpawnSimulationWindow() noexcept;
+	void SpawnBoxWindowManagerWindow() noexcept;
+	void SpawnBoxWindows() noexcept;
 private:
 	ImguiManager imgui;
 	Window wnd;
