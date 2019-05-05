@@ -38,7 +38,7 @@ public:
 			dx::XMMatrixTranslation( r,0.0f,0.0f ) *
 			dx::XMMatrixRotationRollPitchYaw( theta,phi,chi );
 	}
-private:
+protected:
 	// positional
 	float r;
 	float roll = 0.0f;
