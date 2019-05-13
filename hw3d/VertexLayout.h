@@ -103,6 +103,10 @@ public:
 	{
 		return elements.empty() ? 0u : elements.back().GetOffsetAfter();
 	}
+	size_t GetElementCount() const noexcept
+	{
+		return elements.size();
+	}
 private:
 	std::vector<Element> elements;
 };
@@ -197,7 +201,7 @@ private:
 	void SetAttributeByIndex( size_t i,First&& first,Rest&&... rest ) noexcept(!IS_DEBUG)
 	{
 		SetAttributeByIndex( i,std::forward<First>( first ) );
-		SetAttributeByIndex( i,std::forward<Rest>( rest )... );
+		SetAttributeByIndex( i + 1,std::forward<Rest>( rest )... );
 	}
 	// helper to reduce code duplication in SetAttributeByIndex
 	template<typename Dest,typename Src>
@@ -235,6 +239,7 @@ public:
 	template<typename ...Params>
 	void EmplaceBack( Params&&... params ) noexcept(!IS_DEBUG)
 	{
+		assert( sizeof...(params) == layout.GetElementCount() && "Param count doesn't match number of vertex elements" );
 		buffer.resize( buffer.size() + layout.Size() );
 		Back().SetAttributeByIndex( 0u,std::forward<Params>( params )... );
 	}
