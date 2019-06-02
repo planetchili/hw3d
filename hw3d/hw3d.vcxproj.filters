@@ -102,12 +102,6 @@
     <ClCompile Include="Drawable.cpp">
       <Filter>Source Files\Drawable</Filter>
     </ClCompile>
-    <ClCompile Include="Box.cpp">
-      <Filter>Source Files\Drawable</Filter>
-    </ClCompile>
-    <ClCompile Include="Pyramid.cpp">
-      <Filter>Source Files\Drawable</Filter>
-    </ClCompile>
     <ClCompile Include="Surface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -119,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="Sampler.cpp">
       <Filter>Source Files\Bindable</Filter>
-    </ClCompile>
-    <ClCompile Include="SkinnedBox.cpp">
-      <Filter>Source Files\Drawable</Filter>
     </ClCompile>
     <ClCompile Include="imgui\imgui.cpp">
       <Filter>imgui</Filter>
@@ -147,20 +138,20 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SolidSphere.cpp">
-      <Filter>Source Files\Drawable</Filter>
-    </ClCompile>
     <ClCompile Include="PointLight.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TestObject.h">
-      <Filter>Header Files\Drawable</Filter>
-    </ClCompile>
-    <ClCompile Include="Cylinder.cpp">
-      <Filter>Source Files\Drawable</Filter>
-    </ClCompile>
     <ClCompile Include="AssTest.cpp">
       <Filter>Source Files\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="SolidSphere.cpp">
+      <Filter>Source Files\Drawable</Filter>
+    </ClCompile>
+    <ClCompile Include="Vertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -230,13 +221,7 @@
     <ClInclude Include="TransformCbuf.h">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="BindableBase.h">
-      <Filter>Header Files\Bindable</Filter>
-    </ClInclude>
     <ClInclude Include="Drawable.h">
-      <Filter>Header Files\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="Box.h">
       <Filter>Header Files\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="DrawableBase.h">
@@ -278,9 +263,6 @@
     <ClInclude Include="Sampler.h">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="SkinnedBox.h">
-      <Filter>Header Files\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
       <Filter>imgui</Filter>
     </ClInclude>
@@ -311,17 +293,8 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SolidSphere.h">
-      <Filter>Header Files\Drawable</Filter>
-    </ClInclude>
     <ClInclude Include="PointLight.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pyramid.h">
-      <Filter>Header Files\Drawable</Filter>
-    </ClInclude>
-    <ClInclude Include="Cylinder.h">
-      <Filter>Header Files\Drawable</Filter>
     </ClInclude>
     <ClInclude Include="AssTest.h">
       <Filter>Header Files\Drawable</Filter>
@@ -329,8 +302,23 @@
     <ClInclude Include="Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
+    <ClInclude Include="TestObject.h">
+      <Filter>Header Files\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="SolidSphere.h">
+      <Filter>Header Files\Drawable</Filter>
+    </ClInclude>
+    <ClInclude Include="BindableCommon.h">
+      <Filter>Header Files\Bindable</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ConditionalNoexcept.h">
+      <Filter>Header Files\Macros</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -355,18 +343,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="ColorBlendPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="ColorBlendVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TexturePS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TextureVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="PhongVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
@@ -377,21 +353,6 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="SolidVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="IndexedPhongPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="BlendedPhongPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="BlendedPhongVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TexturedPhongPS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="TexturedPhongVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

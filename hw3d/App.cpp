@@ -1,8 +1,4 @@
 #include "App.h"
-#include "Box.h"
-#include "Cylinder.h"
-#include "Pyramid.h"
-#include "SkinnedBox.h"
 #include "AssTest.h"
 #include <memory>
 #include <algorithm>
