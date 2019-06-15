@@ -17,8 +17,13 @@ namespace dx = DirectX;
 
 Graphics::Graphics( HWND hWnd )
 {
+	// for checking results of d3d functions
+	HRESULT hr;
+
 	RECT rcTemp;
-	GetWindowRect( hWnd, &rcTemp );
+	if( !GetWindowRect( hWnd, &rcTemp ) ) {
+		GFX_EXCEPT( __HRESULT_FROM_WIN32( GetLastError() ) );
+	}
 
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc.Width = 0;
@@ -41,9 +46,6 @@ Graphics::Graphics( HWND hWnd )
 #ifndef NDEBUG
 	swapCreateFlags |= D3D11_CREATE_DEVICE_DEBUG;
 #endif
-
-	// for checking results of d3d functions
-	HRESULT hr;
 
 	// create device and front/back buffers, and swap chain and rendering context
 	GFX_THROW_INFO( D3D11CreateDeviceAndSwapChain(
