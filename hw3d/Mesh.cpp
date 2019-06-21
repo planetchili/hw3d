@@ -65,14 +65,22 @@ void Node::AddChild( std::unique_ptr<Node> pChild ) noxnd
 	childPtrs.push_back( std::move( pChild ) );
 }
 
-void Node::ShowTree() const noexcept
+void Node::ShowTree( int& nodeIndexTracked,std::optional<int>& selectedIndex ) const noexcept
 {
+	// nodeIndex serves as the uid for gui tree nodes, incremented throughout recursion
+	const int currentNodeIndex = nodeIndexTracked;
+	nodeIndexTracked++;
+	// build up flags for current node
+	const auto node_flags = ImGuiTreeNodeFlags_OpenOnArrow
+		| ((currentNodeIndex == selectedIndex.value_or( -1 )) ? ImGuiTreeNodeFlags_Selected : 0)
+		| ((childPtrs.size() == 0) ? ImGuiTreeNodeFlags_Leaf : 0);
 	// if tree node expanded, recursively render all children
-	if( ImGui::TreeNode( name.c_str() ) )
+	if( ImGui::TreeNodeEx( (void*)(intptr_t)currentNodeIndex,node_flags,name.c_str() ) )
 	{
+		selectedIndex = ImGui::IsItemClicked() ? currentNodeIndex : selectedIndex;
 		for( const auto& pChild : childPtrs )
 		{
-			pChild->ShowTree();
+			pChild->ShowTree( nodeIndexTracked,selectedIndex );
 		}
 		ImGui::TreePop();
 	}
@@ -87,10 +95,12 @@ public:
 	{
 		// window name defaults to "Model"
 		windowName = windowName ? windowName : "Model";
+		// need an ints to track node indices and selected node
+		int nodeIndexTracker = 0;
 		if( ImGui::Begin( windowName ) )
 		{
 			ImGui::Columns( 2,nullptr,true );
-			root.ShowTree();
+			root.ShowTree( nodeIndexTracker,selectedIndex );
 
 			ImGui::NextColumn();
 			ImGui::Text( "Orientation" );
@@ -110,6 +120,7 @@ public:
 			dx::XMMatrixTranslation( pos.x,pos.y,pos.z );
 	}
 private:
+	std::optional<int> selectedIndex;
 	struct
 	{
 		float roll = 0.0f;
