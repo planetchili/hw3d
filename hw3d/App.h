@@ -16,7 +16,7 @@ public:
 	~App();
 private:
 	void DoFrame();
-	void ShowModelWindow();
+	void ShowImguiDemoWindow();
 private:
 	ImguiManager imgui;
 	Window wnd;
@@ -25,13 +25,4 @@ private:
 	Camera cam;
 	PointLight light;
 	Model nano{ wnd.Gfx(),"Models\\nanosuit.obj" };
-	struct
-	{
-		float roll = 0.0f;
-		float pitch = 0.0f;
-		float yaw = 0.0f;
-		float x = 0.0f;
-		float y = 0.0f;
-		float z = 0.0f;
-	} pos;
 };
