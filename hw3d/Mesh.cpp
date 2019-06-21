@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "imgui/imgui.h"
+#include <unordered_map>
 
 namespace dx = DirectX;
 
@@ -43,12 +44,16 @@ Node::Node( const std::string& name,std::vector<Mesh*> meshPtrs,const DirectX::X
 	meshPtrs( std::move( meshPtrs ) ),
 	name( name )
 {
-	DirectX::XMStoreFloat4x4( &this->transform,transform );
+	dx::XMStoreFloat4x4( &baseTransform,transform );
+	dx::XMStoreFloat4x4( &appliedTransform,dx::XMMatrixIdentity() );
 }
 
 void Node::Draw( Graphics& gfx,DirectX::FXMMATRIX accumulatedTransform ) const noxnd
 {
-	const auto built = DirectX::XMLoadFloat4x4( &transform ) * accumulatedTransform;
+	const auto built = 
+		dx::XMLoadFloat4x4( &baseTransform ) * 
+		dx::XMLoadFloat4x4( &appliedTransform ) * 
+		accumulatedTransform;
 	for( const auto pm : meshPtrs )
 	{
 		pm->Draw( gfx,built );
@@ -65,7 +70,7 @@ void Node::AddChild( std::unique_ptr<Node> pChild ) noxnd
 	childPtrs.push_back( std::move( pChild ) );
 }
 
-void Node::ShowTree( int& nodeIndexTracked,std::optional<int>& selectedIndex ) const noexcept
+void Node::ShowTree( int& nodeIndexTracked,std::optional<int>& selectedIndex,Node*& pSelectedNode ) const noexcept
 {
 	// nodeIndex serves as the uid for gui tree nodes, incremented throughout recursion
 	const int currentNodeIndex = nodeIndexTracked;
@@ -77,13 +82,24 @@ void Node::ShowTree( int& nodeIndexTracked,std::optional<int>& selectedIndex ) c
 	// if tree node expanded, recursively render all children
 	if( ImGui::TreeNodeEx( (void*)(intptr_t)currentNodeIndex,node_flags,name.c_str() ) )
 	{
-		selectedIndex = ImGui::IsItemClicked() ? currentNodeIndex : selectedIndex;
+		// detecting / setting selected node
+		if( ImGui::IsItemClicked() )
+		{
+			selectedIndex = currentNodeIndex;
+			pSelectedNode = const_cast<Node*>(this);
+		}
+
 		for( const auto& pChild : childPtrs )
 		{
-			pChild->ShowTree( nodeIndexTracked,selectedIndex );
+			pChild->ShowTree( nodeIndexTracked,selectedIndex,pSelectedNode );
 		}
 		ImGui::TreePop();
 	}
+}
+
+void Node::SetAppliedTransform( DirectX::FXMMATRIX transform ) noexcept
+{
+	dx::XMStoreFloat4x4( &appliedTransform,transform );
 }
 
 
@@ -100,28 +116,39 @@ public:
 		if( ImGui::Begin( windowName ) )
 		{
 			ImGui::Columns( 2,nullptr,true );
-			root.ShowTree( nodeIndexTracker,selectedIndex );
+			root.ShowTree( nodeIndexTracker,selectedIndex,pSelectedNode );
 
 			ImGui::NextColumn();
-			ImGui::Text( "Orientation" );
-			ImGui::SliderAngle( "Roll",&pos.roll,-180.0f,180.0f );
-			ImGui::SliderAngle( "Pitch",&pos.pitch,-180.0f,180.0f );
-			ImGui::SliderAngle( "Yaw",&pos.yaw,-180.0f,180.0f );
-			ImGui::Text( "Position" );
-			ImGui::SliderFloat( "X",&pos.x,-20.0f,20.0f );
-			ImGui::SliderFloat( "Y",&pos.y,-20.0f,20.0f );
-			ImGui::SliderFloat( "Z",&pos.z,-20.0f,20.0f );
+			if( pSelectedNode != nullptr )
+			{
+				auto& transform = transforms[*selectedIndex];
+				ImGui::Text( "Orientation" );
+				ImGui::SliderAngle( "Roll",&transform.roll,-180.0f,180.0f );
+				ImGui::SliderAngle( "Pitch",&transform.pitch,-180.0f,180.0f );
+				ImGui::SliderAngle( "Yaw",&transform.yaw,-180.0f,180.0f );
+				ImGui::Text( "Position" );
+				ImGui::SliderFloat( "X",&transform.x,-20.0f,20.0f );
+				ImGui::SliderFloat( "Y",&transform.y,-20.0f,20.0f );
+				ImGui::SliderFloat( "Z",&transform.z,-20.0f,20.0f );
+			}
 		}
 		ImGui::End();
 	}
 	dx::XMMATRIX GetTransform() const noexcept
 	{
-		return dx::XMMatrixRotationRollPitchYaw( pos.roll,pos.pitch,pos.yaw ) *
-			dx::XMMatrixTranslation( pos.x,pos.y,pos.z );
+		const auto& transform = transforms.at( *selectedIndex );
+		return 
+			dx::XMMatrixRotationRollPitchYaw( transform.roll,transform.pitch,transform.yaw ) *
+			dx::XMMatrixTranslation( transform.x,transform.y,transform.z );
+	}
+	Node* GetSelectedNode() const noexcept
+	{
+		return pSelectedNode;
 	}
 private:
 	std::optional<int> selectedIndex;
-	struct
+	Node* pSelectedNode;
+	struct TransformParameters
 	{
 		float roll = 0.0f;
 		float pitch = 0.0f;
@@ -129,7 +156,8 @@ private:
 		float x = 0.0f;
 		float y = 0.0f;
 		float z = 0.0f;
-	} pos;
+	};
+	std::unordered_map<int,TransformParameters> transforms;
 };
 
 Model::Model( Graphics& gfx,const std::string fileName )
@@ -152,7 +180,11 @@ Model::Model( Graphics& gfx,const std::string fileName )
 
 void Model::Draw( Graphics& gfx ) const noxnd
 {
-	pRoot->Draw( gfx,pWindow->GetTransform() );
+	if( auto node = pWindow->GetSelectedNode() )
+	{
+		node->SetAppliedTransform( pWindow->GetTransform() );
+	}
+	pRoot->Draw( gfx,dx::XMMatrixIdentity() );
 }
 
 void Model::ShowWindow( const char* windowName ) noexcept

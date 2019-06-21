@@ -21,17 +21,20 @@ private:
 class Node
 {
 	friend class Model;
+	friend class ModelWindow;
 public:
 	Node( const std::string& name,std::vector<Mesh*> meshPtrs,const DirectX::XMMATRIX& transform ) noxnd;
 	void Draw( Graphics& gfx,DirectX::FXMMATRIX accumulatedTransform ) const noxnd;
-	void ShowTree( int& nodeIndex,std::optional<int>& selectedIndex ) const noexcept;
+	void SetAppliedTransform( DirectX::FXMMATRIX transform ) noexcept;
 private:
 	void AddChild( std::unique_ptr<Node> pChild ) noxnd;
+	void ShowTree( int& nodeIndex,std::optional<int>& selectedIndex,Node*& pSelectedNode ) const noexcept;
 private:
 	std::string name;
 	std::vector<std::unique_ptr<Node>> childPtrs;
 	std::vector<Mesh*> meshPtrs;
-	DirectX::XMFLOAT4X4 transform;
+	DirectX::XMFLOAT4X4 baseTransform;
+	DirectX::XMFLOAT4X4 appliedTransform;
 };
 
 class Model
