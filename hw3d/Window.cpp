@@ -102,7 +102,7 @@ Window::Window( int width,int height,const char* name )
 	// Init ImGui Win32 Impl
 	ImGui_ImplWin32_Init( hWnd );
 	// create graphics object
-	pGfx = std::make_unique<Graphics>( hWnd );
+	pGfx = std::make_unique<Graphics>( hWnd,width,height );
 }
 
 Window::~Window()
