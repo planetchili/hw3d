@@ -21,9 +21,21 @@
 #include "ChiliWin.h"
 #include "Mouse.h"
 
+
 std::pair<int,int> Mouse::GetPos() const noexcept
 {
 	return { x,y };
+}
+
+std::optional<Mouse::RawDelta> Mouse::ReadRawDelta() noexcept
+{
+	if( rawDeltaBuffer.empty() )
+	{
+		return std::nullopt;
+	}
+	const RawDelta d = rawDeltaBuffer.front();
+	rawDeltaBuffer.pop();
+	return d;
 }
 
 int Mouse::GetPosX() const noexcept
@@ -90,6 +102,12 @@ void Mouse::OnMouseEnter() noexcept
 	TrimBuffer();
 }
 
+void Mouse::OnRawDelta( int dx,int dy ) noexcept
+{
+	rawDeltaBuffer.push( { dx,dy } );
+	TrimBuffer();
+}
+
 void Mouse::OnLeftPressed( int x,int y ) noexcept
 {
 	leftIsPressed = true;
@@ -139,6 +157,14 @@ void Mouse::TrimBuffer() noexcept
 	while( buffer.size() > bufferSize )
 	{
 		buffer.pop();
+	}
+}
+
+void Mouse::TrimRawInputBuffer() noexcept
+{
+	while( rawDeltaBuffer.size() > bufferSize )
+	{
+		rawDeltaBuffer.pop();
 	}
 }
 
