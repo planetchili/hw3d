@@ -123,12 +123,14 @@ void Window::EnableCursor()
 {
 	cursorEnabled = true;
 	ShowCursor();
+	EnableImGuiMouse();
 }
 
 void Window::DisableCursor()
 {
 	cursorEnabled = false;
 	HideCursor();
+	DisableImGuiMouse();
 }
 
 std::optional<int> Window::ProcessMessages() noexcept
@@ -170,6 +172,16 @@ void Window::HideCursor()
 void Window::ShowCursor()
 {
 	while( ::ShowCursor( TRUE ) < 0 );
+}
+
+void Window::EnableImGuiMouse()
+{
+	ImGui::GetIO().ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
+}
+
+void Window::DisableImGuiMouse()
+{
+	ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NoMouse;
 }
 
 LRESULT CALLBACK Window::HandleMsgSetup( HWND hWnd,UINT msg,WPARAM wParam,LPARAM lParam ) noexcept
