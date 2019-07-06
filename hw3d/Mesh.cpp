@@ -66,8 +66,9 @@ DirectX::XMMATRIX Mesh::GetTransformXM() const noexcept
 
 
 // Node
-Node::Node( const std::string& name,std::vector<Mesh*> meshPtrs,const DirectX::XMMATRIX& transform_in ) noxnd
+Node::Node( int id,const std::string& name,std::vector<Mesh*> meshPtrs,const DirectX::XMMATRIX& transform_in ) noxnd
 	:
+	id( id ),
 	meshPtrs( std::move( meshPtrs ) ),
 	name( name )
 {
@@ -97,23 +98,20 @@ void Node::AddChild( std::unique_ptr<Node> pChild ) noxnd
 	childPtrs.push_back( std::move( pChild ) );
 }
 
-void Node::ShowTree( int& nodeIndexTracked,std::optional<int>& selectedIndex,Node*& pSelectedNode ) const noexcept
+void Node::ShowTree( std::optional<int>& selectedIndex,Node*& pSelectedNode ) const noexcept
 {
-	// nodeIndex serves as the uid for gui tree nodes, incremented throughout recursion
-	const int currentNodeIndex = nodeIndexTracked;
-	nodeIndexTracked++;
 	// build up flags for current node
 	const auto node_flags = ImGuiTreeNodeFlags_OpenOnArrow
-		| ((currentNodeIndex == selectedIndex.value_or( -1 )) ? ImGuiTreeNodeFlags_Selected : 0)
+		| ((GetId() == selectedIndex.value_or( -1 )) ? ImGuiTreeNodeFlags_Selected : 0)
 		| ((childPtrs.size() == 0) ? ImGuiTreeNodeFlags_Leaf : 0);
 	// render this node
 	const auto expanded = ImGui::TreeNodeEx( 
-		(void*)(intptr_t)currentNodeIndex,node_flags,name.c_str()
+		(void*)(intptr_t)GetId(),node_flags,name.c_str()
 	);
 	// processing for selecting node
 	if( ImGui::IsItemClicked() )
 	{
-		selectedIndex = currentNodeIndex;
+		selectedIndex = GetId();
 		pSelectedNode = const_cast<Node*>(this);
 	}
 	// recursive rendering of open node's children
@@ -121,7 +119,7 @@ void Node::ShowTree( int& nodeIndexTracked,std::optional<int>& selectedIndex,Nod
 	{
 		for( const auto& pChild : childPtrs )
 		{
-			pChild->ShowTree( nodeIndexTracked,selectedIndex,pSelectedNode );
+			pChild->ShowTree( selectedIndex,pSelectedNode );
 		}
 		ImGui::TreePop();
 	}
@@ -130,6 +128,11 @@ void Node::ShowTree( int& nodeIndexTracked,std::optional<int>& selectedIndex,Nod
 void Node::SetAppliedTransform( DirectX::FXMMATRIX transform ) noexcept
 {
 	dx::XMStoreFloat4x4( &appliedTransform,transform );
+}
+
+int Node::GetId() const noexcept
+{
+	return id;
 }
 
 
@@ -146,7 +149,7 @@ public:
 		if( ImGui::Begin( windowName ) )
 		{
 			ImGui::Columns( 2,nullptr,true );
-			root.ShowTree( nodeIndexTracker,selectedIndex,pSelectedNode );
+			root.ShowTree( selectedIndex,pSelectedNode );
 
 			ImGui::NextColumn();
 			if( pSelectedNode != nullptr )
@@ -212,7 +215,8 @@ Model::Model( Graphics& gfx,const std::string fileName )
 		meshPtrs.push_back( ParseMesh( gfx,*pScene->mMeshes[i] ) );
 	}
 
-	pRoot = ParseNode( *pScene->mRootNode );
+	int nextId = 0;
+	pRoot = ParseNode( nextId,*pScene->mRootNode );
 }
 
 void Model::Draw( Graphics& gfx ) const noxnd
@@ -287,7 +291,7 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh )
 
 	return std::make_unique<Mesh>( gfx,std::move( bindablePtrs ) );
 }
-std::unique_ptr<Node> Model::ParseNode( const aiNode& node ) noexcept
+std::unique_ptr<Node> Model::ParseNode( int& nextId,const aiNode& node ) noexcept
 {
 	namespace dx = DirectX;
 	const auto transform = dx::XMMatrixTranspose( dx::XMLoadFloat4x4(
@@ -302,10 +306,10 @@ std::unique_ptr<Node> Model::ParseNode( const aiNode& node ) noexcept
 		curMeshPtrs.push_back( meshPtrs.at( meshIdx ).get() );
 	}
 
-	auto pNode = std::make_unique<Node>( node.mName.C_Str(),std::move( curMeshPtrs ),transform );
+	auto pNode = std::make_unique<Node>( nextId++,node.mName.C_Str(),std::move( curMeshPtrs ),transform );
 	for( size_t i = 0; i < node.mNumChildren; i++ )
 	{
-		pNode->AddChild( ParseNode( *node.mChildren[i] ) );
+		pNode->AddChild( ParseNode( nextId,*node.mChildren[i] ) );
 	}
 
 	return pNode;
