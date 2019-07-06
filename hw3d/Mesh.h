@@ -41,7 +41,7 @@ public:
 	int GetId() const noexcept;
 private:
 	void AddChild( std::unique_ptr<Node> pChild ) noxnd;
-	void ShowTree( std::optional<int>& selectedIndex,Node*& pSelectedNode ) const noexcept;
+	void ShowTree( Node*& pSelectedNode ) const noexcept;
 private:
 	std::string name;
 	int id;
