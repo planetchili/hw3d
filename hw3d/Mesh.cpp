@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include "imgui/imgui.h"
+#include "Surface.h"
 #include <unordered_map>
 #include <sstream>
 
@@ -246,13 +247,6 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh,const a
 		.Append( VertexLayout::Normal )
 	) );
 
-	auto& material = *pMaterials[mesh.mMaterialIndex];
-	for( int i = 0; i < material.mNumProperties; i++ )
-	{
-		auto& prop = *material.mProperties[i];
-		int qqq = 90;
-	}
-
 	for( unsigned int i = 0; i < mesh.mNumVertices; i++ )
 	{
 		vbuf.EmplaceBack(
@@ -273,6 +267,16 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh,const a
 	}
 
 	std::vector<std::unique_ptr<Bind::Bindable>> bindablePtrs;
+
+	if( mesh.mMaterialIndex >= 0 )
+	{
+		using namespace std::string_literals;
+		auto& material = *pMaterials[mesh.mMaterialIndex];
+		aiString texFileName;
+		material.GetTexture( aiTextureType_DIFFUSE,0,&texFileName );
+		bindablePtrs.push_back( std::make_unique<Bind::Texture>( gfx,Surface::FromFile( "Models\\nano_textured\\"s + texFileName.C_Str() ) ) );
+		bindablePtrs.push_back( std::make_unique<Bind::Sampler>( gfx ) );
+	}
 
 	bindablePtrs.push_back( std::make_unique<Bind::VertexBuffer>( gfx,vbuf ) );
 
