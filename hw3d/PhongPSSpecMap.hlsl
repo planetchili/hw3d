@@ -14,6 +14,8 @@ Texture2D spec;
 
 SamplerState splr;
 
+static const float specularPowerFactor = 100.0f;
+
 
 float4 main(float3 worldPos : Position, float3 n : Normal, float2 tc : Texcoord) : SV_Target
 {
@@ -30,9 +32,9 @@ float4 main(float3 worldPos : Position, float3 n : Normal, float2 tc : Texcoord)
     const float3 r = w * 2.0f - vToL;
 	// calculate specular intensity based on angle between viewing vector and reflection vector, narrow with power function
     const float4 specularSample = spec.Sample(splr, tc);
-    const float3 specularColorIntensity = specularSample.rgb;
-    const float specularPower = specularSample.a;
-    const float3 specular = att * specularColorIntensity * pow(max(0.0f, dot(normalize(-r), normalize(worldPos))), specularPower);
+    const float3 specularReflectionColor = specularSample.rgb;
+    const float specularPower = specularSample.a * specularPowerFactor;
+    const float3 specular = att * (diffuseColor * diffuseIntensity) * pow(max(0.0f, dot(normalize(-r), normalize(worldPos))), specularPower);
 	// final color
-    return float4(saturate(diffuse + ambient + specular), 1.0f) * tex.Sample(splr, tc);
+    return float4(saturate((diffuse + ambient) * tex.Sample(splr, tc).rgb + specular * specularReflectionColor), 1.0f);
 }
