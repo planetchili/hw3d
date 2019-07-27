@@ -311,8 +311,8 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh,const a
 
 		struct PSMaterialConstant
 		{
-			float specularIntensity = 1.6f;
-			float specularPower = 50.0f;
+			float specularIntensity = 0.8f;
+			float specularPower = 40.0f;
 			float padding[2];
 		} pmc;
 		bindablePtrs.push_back( std::make_unique<Bind::PixelConstantBuffer<PSMaterialConstant>>( gfx,pmc,1u ) );
