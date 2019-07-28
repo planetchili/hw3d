@@ -5,6 +5,7 @@
 #include "Surface.h"
 #include "GDIPlusManager.h"
 #include "imgui/imgui.h"
+#include "VertexBuffer.h"
 
 namespace dx = DirectX;
 
@@ -16,6 +17,8 @@ App::App()
 	light( wnd.Gfx() )
 {
 	wnd.Gfx().SetProjection( dx::XMMatrixPerspectiveLH( 1.0f,9.0f / 16.0f,0.5f,40.0f ) );
+	auto a = Bind::VertexShader::Resolve( wnd.Gfx(),"PhongVS.cso" );
+	auto b = Bind::VertexShader::Resolve( wnd.Gfx(),"PhongVS.cso" );
 }
 
 void App::DoFrame()
