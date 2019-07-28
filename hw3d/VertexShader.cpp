@@ -5,8 +5,6 @@
 
 namespace Bind
 {
-	using namespace std::string_literals;
-
 	VertexShader::VertexShader( Graphics& gfx,const std::string& path )
 		:
 		path( path )
@@ -33,16 +31,11 @@ namespace Bind
 	}
 	std::shared_ptr<Bindable> VertexShader::Resolve( Graphics& gfx,const std::string& path )
 	{
-		auto bind = Codex::Resolve( GenerateUID( path ) );
-		if( !bind )
-		{
-			bind = std::make_shared<VertexShader>( gfx,path );
-			Codex::Store( bind );
-		}
-		return bind;
+		return Codex::Resolve<VertexShader>( gfx,path );
 	}
 	std::string VertexShader::GenerateUID( const std::string& path )
 	{
+		using namespace std::string_literals;
 		return typeid(VertexShader).name() + "#"s + path;
 	}
 	std::string VertexShader::GetUID() const noexcept
