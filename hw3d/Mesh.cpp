@@ -294,7 +294,7 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh,const a
 	bindablePtrs.push_back( IndexBuffer::Resolve( gfx,meshTag,indices ) );
 
 	auto pvs = VertexShader::Resolve( gfx,"PhongVS.cso" );
-	auto pvsbc = static_cast<VertexShader&>(*pvs).GetBytecode();
+	auto pvsbc = pvs->GetBytecode();
 	bindablePtrs.push_back( std::move( pvs ) );
 
 	bindablePtrs.push_back( InputLayout::Resolve( gfx,vbuf.GetLayout(),pvsbc ) );
