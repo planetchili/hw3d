@@ -40,7 +40,7 @@ public:
 					const float x_pos_tc = float( x ) * divisionSize_x_tc;
 					vb.EmplaceBack(
 						dx::XMFLOAT3{ x_pos,y_pos,0.0f },
-						dx::XMFLOAT3{ 0.0f,0.0f,1.0f },
+						dx::XMFLOAT3{ 0.0f,0.0f,-1.0f },
 						dx::XMFLOAT2{ x_pos_tc,y_pos_tc }
 					);
 				}
