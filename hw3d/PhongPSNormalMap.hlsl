@@ -28,7 +28,10 @@ float4 main(float3 worldPos : Position, float3 n : Normal, float2 tc : Texcoord)
     // sample normal from map if normal mapping enabled
     if( normalMapEnabled )
     {
-        n = -nmap.Sample(splr, tc).xyz;
+        const float3 normalSample = nmap.Sample(splr, tc).xyz;
+        n.x = normalSample.x * 2.0f - 1.0f;
+        n.y = normalSample.y * 2.0f - 1.0f;
+        n.z = -normalSample.z;
     }
 	// fragment to light vector data
     const float3 vToL = lightPos - worldPos;
