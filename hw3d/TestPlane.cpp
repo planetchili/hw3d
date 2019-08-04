@@ -23,8 +23,8 @@ TestPlane::TestPlane( Graphics& gfx,float size )
 
 	struct PSMaterialConstant
 	{
-		float specularIntensity = 0.8f;
-		float specularPower = 45.0f;
+		float specularIntensity = 0.1f;
+		float specularPower = 20.0f;
 		float padding[2];
 	} pmc;
 	AddBind( PixelConstantBuffer<PSMaterialConstant>::Resolve( gfx,pmc,1u ) );
