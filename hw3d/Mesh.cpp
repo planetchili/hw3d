@@ -224,6 +224,11 @@ void Model::ShowWindow( const char* windowName ) noexcept
 	pWindow->Show( windowName,*pRoot );
 }
 
+void Model::SetRootTransform( DirectX::FXMMATRIX tf ) noexcept
+{
+	pRoot->SetAppliedTransform( tf );
+}
+
 Model::~Model() noexcept
 {}
 
@@ -326,7 +331,7 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh,const a
 
 		struct PSMaterialConstant
 		{
-			float specularIntensity = 0.8f;
+			float specularIntensity = 0.18f;
 			float specularPower;
 			BOOL  normalMapEnabled = TRUE;
 			float padding[1];
