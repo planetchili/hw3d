@@ -1,0 +1,9 @@
+newmtl Brick
+Ns 18.0000
+illum 2
+Ka 0.0000 0.0000 0.0000
+Kd 0.5880 0.5880 0.5880
+Ks 0.1800 0.1800 0.1800
+
+map_Kd brick_wall_diffuse.jpg
+map_Kn brick_wall_normal.jpg
