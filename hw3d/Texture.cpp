@@ -16,6 +16,7 @@ namespace Bind
 
 		// load surface
 		const auto s = Surface::FromFile( path );
+		hasAlpha = s.AlphaLoaded();
 
 		// create texture resource
 		D3D11_TEXTURE2D_DESC textureDesc = {};
@@ -65,5 +66,9 @@ namespace Bind
 	std::string Texture::GetUID() const noexcept
 	{
 		return GenerateUID( path,slot );
+	}
+	bool Texture::HasAlpha() const noexcept
+	{
+		return hasAlpha;
 	}
 }
