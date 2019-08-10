@@ -1,0 +1,38 @@
+# Blender MTL File: 'None'
+# Material Count: 3
+
+newmtl a_pasted__phong1
+Ns 448.073996
+Ka 1.000000 1.000000 1.000000
+Kd 0.429760 0.429760 0.429760
+Ks 2.000000 2.000000 2.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 0.261906
+illum 6
+
+newmtl mat_body
+Ns 56.806129
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 2.000000 2.000000 2.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kn Muro_body_nm.png
+map_Kd Muro_body_dm.png
+map_Ks Muro_body_sm.png
+
+newmtl mat_head
+Ns 56.806129
+Ka 1.000000 1.000000 1.000000
+Kd 1.000000 1.000000 1.000000
+Ks 2.000000 2.000000 2.000000
+Ke 0.0 0.0 0.0
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kn Muro_head_nm.png
+map_Kd Muro_head_dm.png
+map_Ks Muro_head_sm.png

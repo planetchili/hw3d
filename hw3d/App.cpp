@@ -16,8 +16,8 @@ App::App()
 	wnd( 1280,720,"The Donkey Fart Box" ),
 	light( wnd.Gfx() )
 {
-	wall.SetRootTransform( dx::XMMatrixTranslation( -1.5f,0.0f,0.0f ) );
-	tp.SetPos( { 1.5f,0.0f,0.0f } );
+	//wall.SetRootTransform( dx::XMMatrixTranslation( -1.5f,0.0f,0.0f ) );
+	//tp.SetPos( { 1.5f,0.0f,0.0f } );
 	wnd.Gfx().SetProjection( dx::XMMatrixPerspectiveLH( 1.0f,9.0f / 16.0f,0.5f,40.0f ) );
 }
 
@@ -28,9 +28,10 @@ void App::DoFrame()
 	wnd.Gfx().SetCamera( cam.GetMatrix() );
 	light.Bind( wnd.Gfx(),cam.GetMatrix() );
 		
-	wall.Draw( wnd.Gfx() );
-	tp.Draw( wnd.Gfx() );
+	//wall.Draw( wnd.Gfx() );
+	//tp.Draw( wnd.Gfx() );
 	//nano.Draw( wnd.Gfx() );
+	gobber.Draw( wnd.Gfx() );
 	light.Draw( wnd.Gfx() );
 
 	while( const auto e = wnd.kbd.ReadKey() )
@@ -100,8 +101,9 @@ void App::DoFrame()
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	ShowImguiDemoWindow();
-	wall.ShowWindow( "Wall" );
-	tp.SpawnControlWindow( wnd.Gfx() );
+	gobber.ShowWindow( "gobber" );
+	//wall.ShowWindow( "Wall" );
+	//tp.SpawnControlWindow( wnd.Gfx() );
 	//nano.ShowWindow( "Model 1" );
 
 	// present
