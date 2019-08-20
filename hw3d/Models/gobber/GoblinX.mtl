@@ -10,6 +10,7 @@ Ke 0.0 0.0 0.0
 Ni 1.000000
 d 1.000000
 illum 2
+map_Kd Textures\\GoblinEye.jpg
 
 newmtl GoblinIris
 Ns 80.000000
