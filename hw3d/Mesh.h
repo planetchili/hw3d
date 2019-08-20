@@ -40,9 +40,9 @@ public:
 		BOOL  normalMapEnabled = TRUE;
 		BOOL  specularMapEnabled = TRUE;
 		BOOL  hasGlossMap = FALSE;
-		float specularPower = 1.0f;
-		DirectX::XMFLOAT3 specularColor = { 1.0f,1.0f,1.0f };
-		float specularMapWeight = 1.0f;
+		float specularPower = 3.1f;
+		DirectX::XMFLOAT3 specularColor = { 0.75f,0.75f,0.75f };
+		float specularMapWeight = 0.671f;
 	};
 public:
 	Node( int id,const std::string& name,std::vector<Mesh*> meshPtrs,const DirectX::XMMATRIX& transform ) noxnd;
