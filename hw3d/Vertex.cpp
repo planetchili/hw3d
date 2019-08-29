@@ -146,10 +146,20 @@ namespace Dvtx
 
 
 	// VertexBuffer
-	VertexBuffer::VertexBuffer( VertexLayout layout ) noxnd
+	VertexBuffer::VertexBuffer( VertexLayout layout,size_t size ) noxnd
 		:
 		layout( std::move( layout ) )
-	{}
+	{
+		Resize( size );
+	}
+	void VertexBuffer::Resize( size_t newSize ) noxnd
+	{
+		const auto size = Size();
+		if( size < newSize )
+		{
+			buffer.resize( buffer.size() + layout.Size() * (newSize - size) );
+		}
+	}
 	const char* VertexBuffer::GetData() const noxnd
 	{
 		return buffer.data();
