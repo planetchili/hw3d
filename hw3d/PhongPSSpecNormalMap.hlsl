@@ -80,12 +80,12 @@ float3 Speculate(
     return att * specularColor * specularIntensity * pow(max(0.0f, dot(-r, viewCamToFrag)), specularPower);
 }
 
-float4 main(float3 viewPos : Position, float3 viewNormal : Normal, float3 tan : Tangent, float3 bitan : Bitangent, float2 tc : Texcoord) : SV_Target
+float4 main(float3 viewPos : Position, float3 viewNormal : Normal, float3 viewTan : Tangent, float3 viewBitan : Bitangent, float2 tc : Texcoord) : SV_Target
 {
     // sample normal from map if normal mapping enabled
     if (normalMapEnabled)
     {
-        viewNormal = MapNormal(tan, bitan, viewNormal, tc, nmap, splr);
+        viewNormal = MapNormal(viewTan, viewBitan, viewNormal, tc, nmap, splr);
     }
 	// fragment to light vector data
     const float3 viewFragToL = viewLightPos - viewPos;
