@@ -385,5 +385,11 @@
     <FxCompile Include="ShaderOps.hlsl">
       <Filter>Shader\Common</Filter>
     </FxCompile>
+    <FxCompile Include="Transform.hlsl">
+      <Filter>Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="LightVectorData.hlsl">
+      <Filter>Shader\Common</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
