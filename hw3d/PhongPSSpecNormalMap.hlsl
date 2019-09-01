@@ -1,6 +1,6 @@
 cbuffer LightCBuf
 {
-    float3 lightPos;
+    float3 viewLightPos;
     float3 ambient;
     float3 diffuseColor;
     float diffuseIntensity;
@@ -48,16 +48,16 @@ float4 main(float3 viewPos : Position, float3 viewNormal : Normal, float3 tan : 
         viewNormal = MapNormalViewSpace(tan, bitan, viewNormal, tc, nmap, splr);
     }
 	// fragment to light vector data
-    const float3 vToL = lightPos - viewPos;
-    const float distToL = length(vToL);
-    const float3 dirToL = vToL / distToL;
+    const float3 viewFragToL = viewLightPos - viewPos;
+    const float distFragToL = length(viewFragToL);
+    const float3 viewDirFragToL = viewFragToL / distFragToL;
 	// attenuation
-    const float att = 1.0f / (attConst + attLin * distToL + attQuad * (distToL * distToL));
+    const float att = 1.0f / (attConst + attLin * distFragToL + attQuad * (distFragToL * distFragToL));
 	// diffuse intensity
-    const float3 diffuse = diffuseColor * diffuseIntensity * att * max(0.0f, dot(dirToL, viewNormal));
+    const float3 diffuse = diffuseColor * diffuseIntensity * att * max(0.0f, dot(viewDirFragToL, viewNormal));
 	// reflected light vector
-    const float3 w = viewNormal * dot(vToL, viewNormal);
-    const float3 r = w * 2.0f - vToL;
+    const float3 w = viewNormal * dot(viewFragToL, viewNormal);
+    const float3 r = w * 2.0f - viewFragToL;
 	// calculate specular intensity based on angle between viewing vector and reflection vector, narrow with power function
     float3 specularReflectionColor;
     float specularPower = specularPowerConst;
