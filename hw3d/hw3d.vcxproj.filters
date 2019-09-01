@@ -40,6 +40,9 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{8b3c7dd6-6d7e-4e5f-9157-530b072ae3ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader\Common">
+      <UniqueIdentifier>{de9872ec-5ab7-495b-81e9-7da662a1234a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -323,6 +326,9 @@
     <ClInclude Include="TestCube.h">
       <Filter>Header Files\Drawable</Filter>
     </ClInclude>
+    <ClInclude Include="PointLight.hlsl">
+      <Filter>Shader\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -375,6 +381,9 @@
     </FxCompile>
     <FxCompile Include="PhongVSNotex.hlsl">
       <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderOps.hlsl">
+      <Filter>Shader\Common</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
