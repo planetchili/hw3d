@@ -10,7 +10,7 @@ Ke 0.0 0.0 0.0
 Ni 1.000000
 d 1.000000
 illum 2
-map_Kd Textures\\GoblinEye.jpg
+map_Kd Textures\GoblinEye.jpg
 
 newmtl GoblinIris
 Ns 80.000000
@@ -21,7 +21,7 @@ Ke 0.0 0.0 0.0
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd Textures\\GoblinEye.jpg
+map_Kd Textures\GoblinEye.jpg
 
 newmtl Gold
 Ns 3.25
@@ -42,6 +42,6 @@ Ke 0.0 0.0 0.0
 Ni 1.450000
 d 1.000000
 illum 2
-map_Kd Textures\\MDif.tif
-map_Ks Textures\\MSpec.tif
-map_Kn Textures\\MNorm.tif
+map_Kd Textures\MDif.tif
+map_Ks Textures\MSpec.tif
+map_Kn Textures\MNorm.tif
