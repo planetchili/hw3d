@@ -28,7 +28,7 @@ int CALLBACK WinMain(
 {
 	try
 	{
-		return App{}.Go();
+		return App{ lpCmdLine }.Go();
 	}
 	catch( const ChiliException& e )
 	{

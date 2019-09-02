@@ -170,6 +170,7 @@
     <ClInclude Include="ConditionalNoexcept.h" />
     <ClInclude Include="ConstantBuffers.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="NormalMapTwerker.h" />
     <ClInclude Include="TestCube.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="dxerr.h" />
