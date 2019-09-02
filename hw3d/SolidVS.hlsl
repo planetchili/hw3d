@@ -1,8 +1,4 @@
-cbuffer CBuf
-{
-	matrix modelView;
-	matrix modelViewProj;
-};
+#include "Transform.hlsl"
 
 float4 main( float3 pos : Position ) : SV_Position
 {
