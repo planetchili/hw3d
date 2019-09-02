@@ -394,5 +394,8 @@
     <FxCompile Include="LightVectorData.hlsl">
       <Filter>Shader\Common</Filter>
     </FxCompile>
+    <FxCompile Include="PhongPSSpec.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
