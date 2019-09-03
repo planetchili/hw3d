@@ -162,6 +162,9 @@
     <ClCompile Include="TestCube.cpp">
       <Filter>Source Files\Drawable</Filter>
     </ClCompile>
+    <ClCompile Include="ChiliXM.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -330,6 +333,9 @@
       <Filter>Shader\Common</Filter>
     </ClInclude>
     <ClInclude Include="NormalMapTwerker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ChiliXM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
