@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <sstream>
 #include <filesystem>
+#include "ChiliXM.h"
 
 namespace dx = DirectX;
 
@@ -121,6 +122,11 @@ void Node::SetAppliedTransform( DirectX::FXMMATRIX transform ) noexcept
 	dx::XMStoreFloat4x4( &appliedTransform,transform );
 }
 
+const DirectX::XMFLOAT4X4& Node::GetAppliedTransform() const noexcept
+{
+	return appliedTransform;
+}
+
 int Node::GetId() const noexcept
 {
 	return id;
@@ -145,7 +151,23 @@ public:
 			ImGui::NextColumn();
 			if( pSelectedNode != nullptr )
 			{
-				auto& transform = transforms[pSelectedNode->GetId()];
+				const auto id = pSelectedNode->GetId();
+				auto i = transforms.find( id );
+				if( i == transforms.end() )
+				{
+					const auto& applied = pSelectedNode->GetAppliedTransform();
+					const auto angles = ExtractEulerAngles( applied );
+					const auto translation = ExtractTranslation( applied );
+					TransformParameters tp;
+					tp.roll = angles.z;
+					tp.pitch = angles.x;
+					tp.yaw = angles.y;
+					tp.x = translation.x;
+					tp.y = translation.y;
+					tp.z = translation.z;
+					std::tie( i,std::ignore ) = transforms.insert( { id,tp } );
+				}
+				auto& transform = i->second;
 				ImGui::Text( "Orientation" );
 				ImGui::SliderAngle( "Roll",&transform.roll,-180.0f,180.0f );
 				ImGui::SliderAngle( "Pitch",&transform.pitch,-180.0f,180.0f );
