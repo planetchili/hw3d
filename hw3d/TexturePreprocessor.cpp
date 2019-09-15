@@ -34,14 +34,6 @@ void TexturePreprocessor::FlipYAllNormalMapsInObj( const std::string & objPath )
 		throw ModelException( __LINE__,__FILE__,imp.GetErrorString() );
 	}
 
-	// function for processing each normal in texture
-	using namespace DirectX;
-	const auto flipY = XMVectorSet( 1.0f,-1.0f,1.0f,1.0f );
-	const auto ProcessNormal = [flipY]( FXMVECTOR n ) -> XMVECTOR
-	{
-		return XMVectorMultiply( n,flipY );
-	};
-
 	// loop through materials and process any normal maps
 	for( auto i = 0u; i < pScene->mNumMaterials; i++ )
 	{
@@ -50,9 +42,22 @@ void TexturePreprocessor::FlipYAllNormalMapsInObj( const std::string & objPath )
 		if( mat.GetTexture( aiTextureType_NORMALS,0,&texFileName ) == aiReturn_SUCCESS )
 		{
 			const auto path = rootPath + texFileName.C_Str();
-			TransformFile( path,path,ProcessNormal );
+			FlipYNormalMap( path,path );
 		}
 	}
+}
+
+void TexturePreprocessor::FlipYNormalMap( const std::string& pathIn,const std::string& pathOut )
+{
+	// function for processing each normal in texture
+	using namespace DirectX;
+	const auto flipY = XMVectorSet( 1.0f,-1.0f,1.0f,1.0f );
+	const auto ProcessNormal = [flipY]( FXMVECTOR n ) -> XMVECTOR
+	{
+		return XMVectorMultiply( n,flipY );
+	};
+	// execute processing over every texel in file
+	TransformFile( pathIn,pathOut,ProcessNormal );
 }
 
 DirectX::XMVECTOR TexturePreprocessor::ColorToVector( Surface::Color c ) noexcept
