@@ -139,6 +139,7 @@
     <ClCompile Include="TestCube.cpp" />
     <ClCompile Include="TestPlane.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TexturePreprocessor.cpp" />
     <ClCompile Include="Topology.cpp" />
     <ClCompile Include="TransformCbuf.cpp" />
     <ClCompile Include="TransformCbufDoubleboi.cpp" />
@@ -180,7 +181,7 @@
     <ClInclude Include="ConditionalNoexcept.h" />
     <ClInclude Include="ConstantBuffers.h" />
     <ClInclude Include="Cube.h" />
-    <ClInclude Include="NormalMapTwerker.h" />
+    <ClInclude Include="TexturePreprocessor.h" />
     <ClInclude Include="TestCube.h" />
     <ClInclude Include="Drawable.h" />
     <ClInclude Include="dxerr.h" />

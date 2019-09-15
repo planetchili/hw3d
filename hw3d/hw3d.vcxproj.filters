@@ -165,6 +165,9 @@
     <ClCompile Include="ChiliXM.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TexturePreprocessor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -332,10 +335,10 @@
     <ClInclude Include="PointLight.hlsl">
       <Filter>Shader\Common</Filter>
     </ClInclude>
-    <ClInclude Include="NormalMapTwerker.h">
+    <ClInclude Include="ChiliXM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ChiliXM.h">
+    <ClInclude Include="TexturePreprocessor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

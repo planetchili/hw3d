@@ -6,7 +6,7 @@
 #include "GDIPlusManager.h"
 #include "imgui/imgui.h"
 #include "VertexBuffer.h"
-#include "NormalMapTwerker.h"
+#include "TexturePreprocessor.h"
 #include <shellapi.h>
 
 namespace dx = DirectX;
@@ -25,13 +25,11 @@ App::App( const std::string& commandLine )
 		int nArgs;
 		const auto pLineW = GetCommandLineW();
 		const auto pArgs = CommandLineToArgvW( pLineW,&nArgs );
-		if( nArgs >= 4 && std::wstring(pArgs[1]) == L"--ntwerk-rotx180" )
+		if( nArgs >= 3 && std::wstring(pArgs[1]) == L"--twerk-objnorm" )
 		{
 			const std::wstring pathInWide = pArgs[2];
-			const std::wstring pathOutWide = pArgs[3];
-			NormalMapTwerker::RotateXAxis180(
-				std::string( pathInWide.begin(),pathInWide.end() ),
-				std::string( pathOutWide.begin(),pathOutWide.end() )
+			TexturePreprocessor::FlipYAllNormalMapsInObj(
+				std::string( pathInWide.begin(),pathInWide.end() )
 			);
 			throw std::runtime_error( "Normal map processed successfully. Just kidding about that whole runtime error thing." );
 		}
