@@ -363,7 +363,7 @@ newmtl vase
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\vase_dif.png
-	map_Kn textures\vase_dif.png
+	map_Kn textures\vase_ddn.png
 
 newmtl Material__25
 	Ns 10.0000
