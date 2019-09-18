@@ -292,7 +292,7 @@ newmtl fabric_g
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_curtain_blue_diff.png
-	map_Kn textures\sponza_curtain_blue_diff_NRM.png
+	map_Kn textures\sponza_curtain_ddn.jpg
 	map_Ks textures\sponza_curtain_blue_diff_spec.png
 
 newmtl fabric_c
@@ -307,7 +307,7 @@ newmtl fabric_c
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_curtain_diff.png
-	map_Kn textures\sponza_curtain_blue_diff_NRM.png
+	map_Kn textures\sponza_curtain_ddn.jpg
 	map_Ks textures\sponza_curtain_blue_diff_spec.png
 
 newmtl fabric_f
@@ -322,7 +322,7 @@ newmtl fabric_f
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_curtain_green_diff.png
-	map_Kn textures\sponza_curtain_blue_diff_NRM.png
+	map_Kn textures\sponza_curtain_ddn.jpg
 	map_Ks textures\sponza_curtain_blue_diff_spec.png
 
 newmtl chain
