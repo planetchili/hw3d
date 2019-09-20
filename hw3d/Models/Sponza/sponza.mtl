@@ -130,7 +130,7 @@ newmtl ceiling
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_ceiling_a_diff.png
-	map_Kn textures\sponza_ceiling_a_diff_NRM.png
+	map_Kn textures\sponza_ceiling_ddn.jpg
 	map_Ks textures\sponza_ceiling_a_spec.png
 
 newmtl column_a
