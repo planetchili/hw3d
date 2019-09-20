@@ -114,8 +114,7 @@ newmtl arch
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_arch_diff.png
-	map_Kn textures\sponza_arch_diff_NRM.png
-	# alternative ddn
+	map_Kn textures\sponza_arch_ddn.png
 	map_Ks textures\sponza_arch_spec.png
 
 newmtl ceiling
@@ -190,7 +189,7 @@ newmtl details
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_details_diff.png
-	map_Kn textures\sponza_details_diff_NRM.png
+	map_Kn textures\sponza_details_ddn.jpg
 	map_Ks textures\sponza_details_spec.png
 
 newmtl column_b
