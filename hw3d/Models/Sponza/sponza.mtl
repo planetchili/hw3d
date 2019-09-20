@@ -337,7 +337,7 @@ newmtl chain
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\chain_texture.png
-	map_d textures\chain_texture_mask.png
+	map_Ks textures\chain_texture_spec.png
 	map_Kn textures\chain_texture_ddn.png
 
 newmtl vase_hanging
