@@ -247,7 +247,7 @@ newmtl fabric_e
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_fabric_green_diff.png
-	map_Kn textures\sponza_fabric_blue_diff_NRM.png
+	map_Kn textures\sponza_fabric_ddn.jpg
 	map_Ks textures\sponza_fabric_spec.png
 
 newmtl fabric_d
@@ -262,7 +262,7 @@ newmtl fabric_d
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_fabric_blue_diff.png
-	map_Kn textures\sponza_fabric_blue_diff_NRM.png
+	map_Kn textures\sponza_fabric_ddn.jpg
 	map_Ks textures\sponza_fabric_spec.png
 
 newmtl fabric_a
@@ -277,7 +277,7 @@ newmtl fabric_a
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_fabric_diff.png
-	map_Kn textures\sponza_fabric_blue_diff_NRM.png
+	map_Kn textures\sponza_fabric_ddn.jpg
 	map_Ks textures\sponza_fabric_spec.png
 
 newmtl fabric_g
