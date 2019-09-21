@@ -10,7 +10,7 @@ namespace Bind
 	{
 		INFOMAN( gfx );
 
-		D3D11_BLEND_DESC blendDesc = {};
+		D3D11_BLEND_DESC blendDesc = CD3D11_BLEND_DESC{ CD3D11_DEFAULT{} };
 		auto& brt = blendDesc.RenderTarget[0];
 		if( blending )
 		{
@@ -21,11 +21,6 @@ namespace Bind
 			brt.SrcBlendAlpha = D3D11_BLEND_ZERO;
 			brt.DestBlendAlpha = D3D11_BLEND_ZERO;
 			brt.BlendOpAlpha = D3D11_BLEND_OP_ADD;
-			brt.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
-		}
-		else
-		{
-			brt.BlendEnable = FALSE;
 			brt.RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 		}
 		GFX_THROW_INFO( GetDevice( gfx )->CreateBlendState( &blendDesc,&pBlender ) );
