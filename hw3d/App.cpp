@@ -58,6 +58,7 @@ App::App( const std::string& commandLine )
 	//tp.SetPos( { 12.0f,0.0f,0.0f } );
 	//gobber.SetRootTransform( dx::XMMatrixTranslation( 0.0f,0.0f,-4.0f ) );
 	//nano.SetRootTransform( dx::XMMatrixTranslation( 0.0f,-7.0f,6.0f ) );
+	bluePlane.SetPos( cam.GetPos() );
 
 	wnd.Gfx().SetProjection( dx::XMMatrixPerspectiveLH( 1.0f,9.0f / 16.0f,0.5f,400.0f ) );
 }
@@ -75,6 +76,7 @@ void App::DoFrame()
 	//gobber.Draw( wnd.Gfx() );
 	light.Draw( wnd.Gfx() );
 	sponza.Draw( wnd.Gfx() );
+	bluePlane.Draw( wnd.Gfx() );
 
 	while( const auto e = wnd.kbd.ReadKey() )
 	{

@@ -4,7 +4,9 @@
 #include "imgui/imgui.h"
 #include "TransformCbufDoubleboi.h"
 
-TestPlane::TestPlane( Graphics& gfx,float size )
+TestPlane::TestPlane( Graphics& gfx,float size,DirectX::XMFLOAT4 color )
+	:
+	pmc( { color } )
 {
 	using namespace Bind;
 	namespace dx = DirectX;
@@ -15,14 +17,11 @@ TestPlane::TestPlane( Graphics& gfx,float size )
 	AddBind( VertexBuffer::Resolve( gfx,geometryTag,model.vertices ) );
 	AddBind( IndexBuffer::Resolve( gfx,geometryTag,model.indices ) );
 
-	AddBind( Texture::Resolve( gfx,"Images\\brickwall.jpg" ) );
-	AddBind( Texture::Resolve( gfx,"Images\\brickwall_normal_obj.png",2u ) );
-
-	auto pvs = VertexShader::Resolve( gfx,"PhongVS.cso" );
+	auto pvs = VertexShader::Resolve( gfx,"SolidVS.cso" );
 	auto pvsbc = pvs->GetBytecode();
 	AddBind( std::move( pvs ) );
 
-	AddBind( PixelShader::Resolve( gfx,"PhongPSNormalMapObject.cso" ) );
+	AddBind( PixelShader::Resolve( gfx,"SolidPS.cso" ) );
 
 	AddBind( PixelConstantBuffer<PSMaterialConstant>::Resolve( gfx,pmc,1u ) );
 
@@ -30,7 +29,11 @@ TestPlane::TestPlane( Graphics& gfx,float size )
 
 	AddBind( Topology::Resolve( gfx,D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ) );
 
-	AddBind( std::make_shared<TransformCbufDoubleboi>( gfx,*this,0u,2u ) );
+	AddBind( std::make_shared<TransformCbuf>( gfx,*this,0u ) );
+
+	AddBind( Blender::Resolve( gfx,true,0.5f ) );
+	
+	AddBind( Rasterizer::Resolve( gfx,true ) );
 }
 
 void TestPlane::SetPos( DirectX::XMFLOAT3 pos ) noexcept
@@ -64,15 +67,10 @@ void TestPlane::SpawnControlWindow( Graphics& gfx ) noexcept
 		ImGui::SliderAngle( "Pitch",&pitch,-180.0f,180.0f );
 		ImGui::SliderAngle( "Yaw",&yaw,-180.0f,180.0f );
 		ImGui::Text( "Shading" );
-		bool changed0 = ImGui::SliderFloat( "Spec. Int.",&pmc.specularIntensity,0.0f,1.0f );
-		bool changed1 = ImGui::SliderFloat( "Spec. Power",&pmc.specularPower,0.0f,100.0f );
-		bool checkState = pmc.normalMappingEnabled == TRUE;
-		bool changed2 = ImGui::Checkbox( "Enable Normal Map",&checkState );
-		pmc.normalMappingEnabled = checkState ? TRUE : FALSE;
-		if( changed0 || changed1 || changed2 )
-		{
-			QueryBindable<Bind::PixelConstantBuffer<PSMaterialConstant>>()->Update( gfx,pmc );
-		}
+		auto pBlender = QueryBindable<Bind::Blender>();
+		float factor = pBlender->GetFactor();
+		ImGui::SliderFloat( "Translucency",&factor,0.0f,1.0f );
+		pBlender->SetFactor( factor );
 	}
 	ImGui::End();
 }
