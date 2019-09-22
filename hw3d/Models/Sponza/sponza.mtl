@@ -2,7 +2,7 @@
 # File Created: 20.08.2010 18:13:43
 
 newmtl leaf
-	Ns 10.0000
+	Ns 3.0000
 	Ni 1.5000
 	d 1.0000
 	Tr 0.0000
@@ -32,7 +32,7 @@ newmtl vase_round
 	map_Ks textures\vase_round_spec.png
 
 newmtl VasePlant
-	Ns 10.0000
+	Ns 3.0000
 	Ni 1.5000
 	d 1.0000
 	Tr 0.0000
@@ -43,7 +43,7 @@ newmtl VasePlant
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\vase_plant.png
-	map_Kn textures\vase_plant_ddn.jpg
+	map_Kn textures\vase_plant_NRM.png
 	map_Ks textures\vase_plant_spec.png
 
 newmtl Material__57
