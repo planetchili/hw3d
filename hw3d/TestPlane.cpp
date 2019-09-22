@@ -23,7 +23,7 @@ TestPlane::TestPlane( Graphics& gfx,float size,DirectX::XMFLOAT4 color )
 
 	AddBind( PixelShader::Resolve( gfx,"SolidPS.cso" ) );
 
-	AddBind( PixelConstantBuffer<PSMaterialConstant>::Resolve( gfx,pmc,1u ) );
+	AddBind( std::make_shared<PixelConstantBuffer<PSMaterialConstant>>( gfx,pmc,1u ) );
 
 	AddBind( InputLayout::Resolve( gfx,model.vertices.GetLayout(),pvsbc ) );
 
