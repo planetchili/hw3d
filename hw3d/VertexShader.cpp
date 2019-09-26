@@ -2,6 +2,7 @@
 #include "GraphicsThrowMacros.h"
 #include "BindableCodex.h"
 #include <typeinfo>
+#include "ChiliUtil.h"
 
 namespace Bind
 {
@@ -11,7 +12,7 @@ namespace Bind
 	{
 		INFOMAN( gfx );
 
-		GFX_THROW_INFO( D3DReadFileToBlob( std::wstring{path.begin(),path.end()}.c_str(),&pBytecodeBlob ) );
+		GFX_THROW_INFO( D3DReadFileToBlob( ToWide( path ).c_str(),&pBytecodeBlob ) );
 		GFX_THROW_INFO( GetDevice( gfx )->CreateVertexShader(
 			pBytecodeBlob->GetBufferPointer(),
 			pBytecodeBlob->GetBufferSize(),
