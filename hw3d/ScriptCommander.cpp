@@ -29,22 +29,22 @@ ScriptCommander::ScriptCommander( const std::vector<std::string>& args )
 		bool abort = false;
 		for( const auto& j : top )
 		{
-			const auto commandName = j["command"].get<std::string>();
-			const auto params = j["params"];
+			const auto commandName = j.at("command").get<std::string>();
+			const auto params = j.at( "params" );
 			if( commandName == "flip-y" )
 			{
-				const auto source = params["source"];
+				const auto source = params.at( "source" );
 				TexturePreprocessor::FlipYNormalMap( source,params.value( "dest",source ) );
 				abort = true;
 			}
 			else if( commandName == "flip-y-obj" )
 			{
-				TexturePreprocessor::FlipYAllNormalMapsInObj( params["source"] );
+				TexturePreprocessor::FlipYAllNormalMapsInObj( params.at( "source" ) );
 				abort = true;
 			}
 			else if( commandName == "validate-nmap" )
 			{
-				TexturePreprocessor::ValidateNormalMap( params["source"],params["min"],params["max"] );
+				TexturePreprocessor::ValidateNormalMap( params.at( "source" ),params.at( "min" ),params.at( "max" ) );
 				abort = true;
 			}
 			else
