@@ -362,6 +362,9 @@
     <ClInclude Include="ScriptCommander.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DynamicConstant.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">

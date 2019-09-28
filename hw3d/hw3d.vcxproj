@@ -194,6 +194,7 @@
     <ClInclude Include="ConditionalNoexcept.h" />
     <ClInclude Include="ConstantBuffers.h" />
     <ClInclude Include="Cube.h" />
+    <ClInclude Include="DynamicConstant.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Rasterizer.h" />
     <ClInclude Include="ScriptCommander.h" />
