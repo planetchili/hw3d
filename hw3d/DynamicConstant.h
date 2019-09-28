@@ -41,6 +41,8 @@ systype& operator=( const systype& rhs ) noxnd \
 
 namespace Dcb
 {
+	class Struct;
+
 	namespace dx = DirectX;
 	class LayoutElement
 	{
@@ -64,7 +66,8 @@ namespace Dcb
 			return offset;
 		}
 		virtual size_t GetOffsetEnd() const noexcept = 0;
-		class Struct& AsStruct() noxnd;
+		template<typename T>
+		Struct& Add( const std::string& key ) noxnd;
 
 		RESOLVE_BASE(Float3)
 		RESOLVE_BASE(Float)
@@ -142,13 +145,14 @@ namespace Dcb
 		const class Struct* pLayout;
 		std::vector<char> bytes;
 	};
+	
 
-
-
-	Struct& LayoutElement::AsStruct() noxnd
+	// must come after Definition of Struct
+	template<typename T>
+	Struct& LayoutElement::Add( const std::string& key ) noxnd
 	{
 		auto ps = dynamic_cast<Struct*>(this);
 		assert( ps != nullptr );
-		return *ps;
+		return ps->Add<T>( key );
 	}
 }

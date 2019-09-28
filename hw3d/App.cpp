@@ -19,8 +19,8 @@ App::App( const std::string& commandLine )
 {
 	Dcb::Struct s( 0 );
 	s.Add<Dcb::Struct>( "butts" );
-	s["butts"].AsStruct().Add<Dcb::Float3>( "pubes" );
-	s["butts"].AsStruct().Add<Dcb::Float>( "dank" );
+	s["butts"].Add<Dcb::Float3>( "pubes" );
+	s["butts"].Add<Dcb::Float>( "dank" );
 	Dcb::Buffer b( s );
 	b["butts"]["pubes"] = DirectX::XMFLOAT3{ 69.0f,0.0f,0.0f };
 	b["butts"]["dank"] = 420.0f;
