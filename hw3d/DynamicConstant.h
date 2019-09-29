@@ -225,6 +225,10 @@ namespace Dcb
 		{
 			return *pLayout;
 		}
+		std::shared_ptr<LayoutElement> CloneLayout() const
+		{
+			return pLayout;
+		}
 	private:
 		std::shared_ptr<Struct> pLayout;
 		std::vector<char> bytes;

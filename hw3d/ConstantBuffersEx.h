@@ -8,16 +8,17 @@ namespace Bind
 	class PixelConstantBufferEX : public Bindable
 	{
 	public:
-		PixelConstantBufferEX( Graphics& gfx,const Dcb::LayoutElement& layout,UINT slot )
+		PixelConstantBufferEX( Graphics& gfx,std::shared_ptr<Dcb::LayoutElement> pLayout,UINT slot )
 			:
-			PixelConstantBufferEX( gfx,layout,slot,nullptr )
+			PixelConstantBufferEX( gfx,std::move( pLayout ),slot,nullptr )
 		{}
 		PixelConstantBufferEX( Graphics& gfx,const Dcb::Buffer& buf,UINT slot )
 			:
-			PixelConstantBufferEX( gfx,buf.GetLayout(),slot,&buf )
+			PixelConstantBufferEX( gfx,buf.CloneLayout(),slot,&buf )
 		{}
 		void Update( Graphics& gfx,const Dcb::Buffer& buf )
 		{
+			assert( &buf.GetLayout() == &*pLayout );
 			INFOMAN( gfx );
 
 			D3D11_MAPPED_SUBRESOURCE msr;
@@ -29,14 +30,19 @@ namespace Bind
 			memcpy( msr.pData,buf.GetData(),buf.GetSizeInBytes() );
 			GetContext( gfx )->Unmap( pConstantBuffer.Get(),0u );
 		}
+		const Dcb::LayoutElement& GetLayout() const noexcept
+		{
+			return *pLayout;
+		}
 		void Bind( Graphics& gfx ) noexcept override
 		{
 			GetContext( gfx )->PSSetConstantBuffers( slot,1u,pConstantBuffer.GetAddressOf() );
 		}
 	private:
-		PixelConstantBufferEX( Graphics& gfx,const Dcb::LayoutElement& layout,UINT slot,const Dcb::Buffer* pBuf )
+		PixelConstantBufferEX( Graphics& gfx,std::shared_ptr<Dcb::LayoutElement> pLayout_in,UINT slot,const Dcb::Buffer* pBuf )
 			:
-			slot( slot )
+			slot( slot ),
+			pLayout( std::move( pLayout_in ) )
 		{
 			INFOMAN( gfx );
 
@@ -45,7 +51,7 @@ namespace Bind
 			cbd.Usage = D3D11_USAGE_DYNAMIC;
 			cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 			cbd.MiscFlags = 0u;
-			cbd.ByteWidth = (UINT)layout.GetSizeInBytes();
+			cbd.ByteWidth = (UINT)pLayout->GetSizeInBytes();
 			cbd.StructureByteStride = 0u;
 
 			if( pBuf != nullptr )
@@ -60,6 +66,7 @@ namespace Bind
 			}
 		}
 	public:
+		std::shared_ptr<Dcb::LayoutElement> pLayout;
 		Microsoft::WRL::ComPtr<ID3D11Buffer> pConstantBuffer;
 		UINT slot;
 	};
