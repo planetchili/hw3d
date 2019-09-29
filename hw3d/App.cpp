@@ -29,18 +29,21 @@ App::App( const std::string& commandLine )
 	s["arr"].T()["werk"].Set<Dcb::Float>( 6 );
 	s["arr"].T().Add<Dcb::Array>( "meta" );
 	s["arr"].T()["meta"].Set<Dcb::Array>( 6 );
-	s["arr"].T()["meta"].T().Set<Dcb::Float>( 4 );
+	s["arr"].T()["meta"].T().Set<Dcb::Matrix>( 4 );
 	Dcb::Buffer b( s );
 	b["butts"]["pubes"] = DirectX::XMFLOAT3{ 69.0f,0.0f,0.0f };
 	b["butts"]["dank"] = 420.0f;
 	b["woot"] = 42.0f;
 	b["arr"][2]["werk"][5] = 111.0f;
-	b["arr"][2]["meta"][5][3] = 222.0f;
+	dx::XMStoreFloat4x4(
+		&(dx::XMFLOAT4X4&)b["arr"][2]["meta"][5][3],
+		dx::XMMatrixIdentity()
+	);
 	float k = b["woot"];
 	dx::XMFLOAT3 v = b["butts"]["pubes"];
 	float u = b["butts"]["dank"];
 	float er = b["arr"][2]["werk"][5];
-	float eq = b["arr"][2]["meta"][5][3];
+	dx::XMFLOAT4X4 eq = b["arr"][2]["meta"][5][3];
 	//wall.SetRootTransform( dx::XMMatrixTranslation( -12.0f,0.0f,0.0f ) );
 	//tp.SetPos( { 12.0f,0.0f,0.0f } );
 	//gobber.SetRootTransform( dx::XMMatrixTranslation( 0.0f,0.0f,-4.0f ) );

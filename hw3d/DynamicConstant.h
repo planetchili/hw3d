@@ -17,6 +17,7 @@ virtual size_t Resolve ## eltype() const noxnd \
 class eltype : public LayoutElement \
 { \
 public: \
+	using SystemType = systype; \
 	using LayoutElement::LayoutElement; \
 	size_t Resolve ## eltype() const noxnd override final \
 	{ \
@@ -28,14 +29,14 @@ public: \
 	} \
 };
 
-#define REF_CONVERSION(eltype, systype) \
-operator systype&() noxnd \
+#define REF_CONVERSION(eltype) \
+operator eltype::SystemType&() noxnd \
 { \
-	return *reinterpret_cast<systype*>(pBytes + offset + pLayout->Resolve ## eltype()); \
+	return *reinterpret_cast<eltype::SystemType*>(pBytes + offset + pLayout->Resolve ## eltype()); \
 } \
-systype& operator=( const systype& rhs ) noxnd \
+eltype::SystemType& operator=( const eltype::SystemType& rhs ) noxnd \
 { \
-	return static_cast<systype&>(*this) = rhs; \
+	return static_cast<eltype::SystemType&>(*this) = rhs; \
 }
 
 
@@ -43,8 +44,8 @@ namespace Dcb
 {
 	class Struct;
 	class Array;
-
 	namespace dx = DirectX;
+
 	class LayoutElement
 	{
 	public:
@@ -89,14 +90,24 @@ namespace Dcb
 		template<typename T>
 		Array& Set( size_t size ) noxnd;
 
+		RESOLVE_BASE(Matrix)
+		RESOLVE_BASE(Float4)
 		RESOLVE_BASE(Float3)
+		RESOLVE_BASE(Float2)
 		RESOLVE_BASE(Float)
+		RESOLVE_BASE(Bool)
 	private:
 		size_t offset;
 	};
 
+
+	LEAF_ELEMENT( Matrix,dx::XMFLOAT4X4 )
+	LEAF_ELEMENT( Float4,dx::XMFLOAT4 )
 	LEAF_ELEMENT( Float3,dx::XMFLOAT3 )
+	LEAF_ELEMENT( Float2,dx::XMFLOAT2 )
 	LEAF_ELEMENT( Float,float )
+	LEAF_ELEMENT( Bool,BOOL )
+
 
 	class Struct : public LayoutElement
 	{
@@ -178,8 +189,12 @@ namespace Dcb
 			return { &t,pBytes,offset + t.GetSizeInBytes() * index };
 		}
 
-		REF_CONVERSION( Float3,dx::XMFLOAT3 )
-		REF_CONVERSION( Float,float )
+		REF_CONVERSION(Matrix)
+		REF_CONVERSION(Float4)
+		REF_CONVERSION(Float3)
+		REF_CONVERSION(Float2)
+		REF_CONVERSION(Float)
+		REF_CONVERSION(Bool)
 	private:
 		size_t offset;
 		const class LayoutElement* pLayout;
