@@ -37,7 +37,7 @@ App::App( const std::string& commandLine )
 	b["woot"] = 42.0f;
 	b["arr"][2]["werk"][5] = 111.0f;
 	dx::XMStoreFloat4x4(
-		&(dx::XMFLOAT4X4&)b["arr"][2]["meta"][5][3],
+		&b["arr"][2]["meta"][5][3],
 		dx::XMMatrixIdentity()
 	);
 	float k = b["woot"];
