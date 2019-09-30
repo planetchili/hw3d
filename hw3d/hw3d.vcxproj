@@ -197,6 +197,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DynamicConstant.h" />
     <ClInclude Include="json.hpp" />
+    <ClInclude Include="LayoutCodex.h" />
     <ClInclude Include="Rasterizer.h" />
     <ClInclude Include="ScriptCommander.h" />
     <ClInclude Include="TexturePreprocessor.h" />
