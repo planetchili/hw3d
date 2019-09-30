@@ -59,6 +59,8 @@ namespace Dcb
 			:
 			offset( offset )
 		{}
+		virtual ~LayoutElement()
+		{}
 
 		virtual LayoutElement& operator[]( const char* )
 		{
