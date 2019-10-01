@@ -14,7 +14,7 @@ virtual size_t Resolve ## eltype() const noxnd \
 	assert( false && "Cannot resolve to" #eltype ); return 0u; \
 }
 
-#define LEAF_ELEMENT(eltype, systype) \
+#define LEAF_ELEMENT_IMPL(eltype,systype,hlslSize) \
 class eltype : public LayoutElement \
 { \
 public: \
@@ -35,9 +35,10 @@ protected: \
 	} \
 	size_t ComputeSize() const noxnd override final \
 	{ \
-		return sizeof( SystemType ); \
+		return (hlslSize); \
 	} \
 };
+#define LEAF_ELEMENT(eltype,systype) LEAF_ELEMENT_IMPL(eltype,systype,sizeof(systype))
 
 #define REF_CONVERSION(eltype) \
 operator eltype::SystemType&() noxnd \
@@ -141,7 +142,7 @@ namespace Dcb
 	LEAF_ELEMENT( Float3,dx::XMFLOAT3 )
 	LEAF_ELEMENT( Float2,dx::XMFLOAT2 )
 	LEAF_ELEMENT( Float,float )
-	LEAF_ELEMENT( Bool,BOOL )
+	LEAF_ELEMENT_IMPL( Bool,bool,4u )
 
 
 	class Struct : public LayoutElement
