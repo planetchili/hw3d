@@ -78,6 +78,14 @@ void TestDynamicConstant()
 			bool act = b["arr"][2]["booler"];
 			assert( act == exp );
 		}
+
+		const auto& cb = b;
+		{
+			dx::XMFLOAT4X4 act = cb["arr"][2]["meta"][5][3];
+			assert( act._11 == 1.0f );
+		}
+		// this doesn't compile: buffer is const
+		// cb["arr"][2]["booler"] = true;
 	}
 	// size test array of arrays
 	{
