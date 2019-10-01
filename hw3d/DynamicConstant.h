@@ -113,10 +113,10 @@ namespace Dcb
 
 		// only works for Structs; add LayoutElement
 		template<typename T>
-		Struct& Add( const std::string& key ) noxnd;
+		LayoutElement& Add( const std::string& key ) noxnd;
 		// only works for Arrays; set the type and the # of elements
 		template<typename T>
-		Array& Set( size_t size ) noxnd;
+		LayoutElement& Set( size_t size ) noxnd;
 
 		// returns the value of offset bumped up to the next 16-byte boundary (if not already on one)
 		static size_t GetNextBoundaryOffset( size_t offset )
@@ -164,15 +164,13 @@ namespace Dcb
 			// bump up to next boundary (because structs are multiple of 16 in size)
 			return LayoutElement::GetNextBoundaryOffset( elements.back()->GetOffsetEnd() );
 		}
-		template<typename T>
-		Struct& Add( const std::string& name ) noxnd
+		void Add( const std::string& name,std::unique_ptr<LayoutElement> pElement ) noxnd
 		{
-			elements.push_back( std::make_unique<T>() );
+			elements.push_back( std::move( pElement ) );
 			if( !map.emplace( name,elements.back().get() ).second )
 			{
 				assert( false );
 			}
-			return *this;
 		}
 	protected:
 		size_t Finalize( size_t offset_in ) override final
@@ -221,12 +219,10 @@ namespace Dcb
 			// arrays are not packed in hlsl
 			return GetOffsetBegin() + LayoutElement::GetNextBoundaryOffset( pElement->GetSizeInBytes() ) * size;
 		}
-		template<typename T>
-		Array& Set( size_t size_in ) noxnd
+		void Set( std::unique_ptr<LayoutElement> pElement,size_t size_in ) noxnd
 		{
-			pElement = std::make_unique<T>();
+			pElement = std::move( pElement );
 			size = size_in;
-			return *this;
 		}
 		LayoutElement& T() override final
 		{
@@ -449,18 +445,20 @@ namespace Dcb
 
 	// must come after Definitions of Struct and Array
 	template<typename T>
-	Struct& LayoutElement::Add( const std::string& key ) noxnd
+	LayoutElement& LayoutElement::Add( const std::string& key ) noxnd
 	{
 		auto ps = dynamic_cast<Struct*>(this);
 		assert( ps != nullptr );
-		return ps->Add<T>( key );
+		ps->Add( key,std::make_unique<T>() );
+		return *this;
 	}
 
 	template<typename T>
-	Array& LayoutElement::Set( size_t size ) noxnd
+	LayoutElement& LayoutElement::Set( size_t size ) noxnd
 	{
 		auto pa = dynamic_cast<Array*>(this);
 		assert( pa != nullptr );
-		return pa->Set<T>( size );
+		pa->Set( std::make_unique<T>(),size );
+		return *this;
 	}
 }
