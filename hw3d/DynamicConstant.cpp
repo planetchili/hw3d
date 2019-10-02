@@ -82,6 +82,34 @@ namespace Dcb
 	}
 
 
+
+	class Empty : public LayoutElement
+	{
+	public:
+		size_t GetOffsetEnd() const noexcept override final
+		{
+			return 0u;
+		}
+		bool Exists() const noexcept override final
+		{
+			return false;
+		}
+	protected:
+		size_t Finalize( size_t offset_in ) override final
+		{
+			return 0u;
+		}
+		size_t ComputeSize() const noxnd override final
+		{
+			return 0u;
+		}
+	private:
+		size_t size = 0u;
+		std::unique_ptr<LayoutElement> pElement;
+	} emptyLayoutElement;
+
+
+
 	DCB_RESOLVE_BASE( Matrix )
 	DCB_RESOLVE_BASE( Float4 )
 	DCB_RESOLVE_BASE( Float3 )
@@ -102,7 +130,12 @@ namespace Dcb
 
 	LayoutElement& Struct::operator[]( const std::string& key )
 	{
-		return *map.at( key );
+		const auto i = map.find( key );
+		if( i == map.end() )
+		{
+			return emptyLayoutElement;
+		}
+		return *i->second;
 	}
 	size_t Struct::GetOffsetEnd() const noexcept
 	{
@@ -223,6 +256,14 @@ namespace Dcb
 		pLayout( pLayout ),
 		pBytes( pBytes )
 	{}
+	std::optional<ConstElementRef> ConstElementRef::Exists() const noexcept
+	{
+		if( pLayout->Exists() )
+		{
+			return ConstElementRef{ pLayout,pBytes,offset };;
+		}
+		return std::nullopt;
+	}
 	ConstElementRef ConstElementRef::operator[]( const std::string& key ) noxnd
 	{
 		return { &(*pLayout)[key],pBytes,offset };
@@ -265,6 +306,14 @@ namespace Dcb
 	ElementRef::operator ConstElementRef() const noexcept
 	{
 		return { pLayout,pBytes,offset };
+	}
+	std::optional<ElementRef> ElementRef::Exists() const noexcept
+	{
+		if( pLayout->Exists() )
+		{
+			return ElementRef{ pLayout,pBytes,offset };;
+		}
+		return std::nullopt;
 	}
 	ElementRef ElementRef::operator[]( const std::string& key ) noxnd
 	{
