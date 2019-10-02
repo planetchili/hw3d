@@ -175,7 +175,7 @@ namespace Dcb
 		};
 	public:
 		ConstElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset );
-		std::optional<ConstElementRef> Exists() const noexcept;
+		bool Exists() const noexcept;
 		ConstElementRef operator[]( const std::string& key ) noxnd;
 		ConstElementRef operator[]( size_t index ) noxnd;
 		Ptr operator&() noxnd;
@@ -212,7 +212,7 @@ namespace Dcb
 	public:
 		ElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset );
 		operator ConstElementRef() const noexcept;
-		std::optional<ElementRef> Exists() const noexcept;
+		bool Exists() const noexcept;
 		ElementRef operator[]( const std::string& key ) noxnd;
 		ElementRef operator[]( size_t index ) noxnd;
 		Ptr operator&() noxnd;
