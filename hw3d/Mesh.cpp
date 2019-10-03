@@ -433,30 +433,15 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh,const a
 		bindablePtrs.push_back( InputLayout::Resolve( gfx,vbuf.GetLayout(),pvsbc ) );
 
 		Dcb::Layout layout;
-		bool loaded = false;
-		auto tag = "diff&nrm";
-		if( LayoutCodex::Has( tag ) )
-		{
-			layout = LayoutCodex::Load( tag );
-			loaded = true;
-		}
-		else
-		{
-			layout.Add<Dcb::Float>( "specularIntensity" );
-			layout.Add<Dcb::Float>( "specularPower" );
-			layout.Add<Dcb::Bool>( "normalMapEnabled" );
-		}
+		layout.Add<Dcb::Float>( "specularIntensity" );
+		layout.Add<Dcb::Float>( "specularPower" );
+		layout.Add<Dcb::Bool>( "normalMapEnabled" );
 
-		Dcb::Buffer cbuf{ layout };
+		auto cbuf = Dcb::Buffer::Make( layout );
 		cbuf["specularIntensity"] = (specularColor.x + specularColor.y + specularColor.z) / 3.0f;
 		cbuf["specularPower"] = shininess;
 		cbuf["normalMapEnabled"] = true;
 		bindablePtrs.push_back( std::make_shared<PixelConstantBufferEX>( gfx,cbuf,1u ) );
-
-		if( !loaded )
-		{
-			LayoutCodex::Store( tag,layout );
-		}
 	}
 	else if( hasDiffuseMap && !hasNormalMap && hasSpecularMap )
 	{

@@ -114,6 +114,7 @@
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
     <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="LayoutCodex.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <FxCompile Include="LightVectorData.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>

@@ -14,7 +14,7 @@ namespace Bind
 		{}
 		PixelConstantBufferEX( Graphics& gfx,const Dcb::Buffer& buf,UINT slot )
 			:
-			PixelConstantBufferEX( gfx,buf.CloneLayout(),slot,&buf )
+			PixelConstantBufferEX( gfx,buf.ShareLayout(),slot,&buf )
 		{}
 		void Update( Graphics& gfx,const Dcb::Buffer& buf )
 		{
