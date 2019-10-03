@@ -1,4 +1,6 @@
 #include "DynamicConstant.h"
+#include <string>
+#include <algorithm>
 
 #define DCB_RESOLVE_BASE(eltype) \
 size_t LayoutElement::Resolve ## eltype() const noxnd \
@@ -23,6 +25,10 @@ size_t eltype::Finalize( size_t offset_in ) \
 size_t eltype::ComputeSize() const noxnd \
 { \
 	return (hlslSize); \
+} \
+std::string eltype::GetSignature() const noxnd \
+{ \
+	return #eltype; \
 }
 #define DCB_LEAF_ELEMENT(eltype,systype) DCB_LEAF_ELEMENT_IMPL(eltype,systype,sizeof(systype))
 
@@ -93,6 +99,11 @@ namespace Dcb
 		bool Exists() const noexcept override final
 		{
 			return false;
+		}
+		std::string GetSignature() const noxnd final
+		{
+			assert( false );
+			return "";
 		}
 	protected:
 		size_t Finalize( size_t offset_in ) override final
@@ -182,6 +193,24 @@ namespace Dcb
 		}
 		return offset;
 	}
+	std::string Struct::GetSignature() const noxnd
+	{
+		using namespace std::string_literals;
+		auto sig = "Struct{"s;
+		for( const auto& el : elements )
+		{
+			auto i = std::find_if(
+				map.begin(),map.end(),
+				[&el]( const std::pair<std::string,LayoutElement*>& v )
+				{
+					return &*el == v.second;
+				}
+			);
+			sig += i->first + ":"s + el->GetSignature() + ";"s;
+		}
+		sig += "}"s;
+		return sig;
+	}
 
 
 
@@ -211,6 +240,19 @@ namespace Dcb
 		// arrays are not packed in hlsl
 		return LayoutElement::GetNextBoundaryOffset( pElement->ComputeSize() ) * size;
 	}
+	bool Array::IndexInBounds( size_t index ) const noexcept
+	{
+		return index < size;
+	}
+	const LayoutElement& Array::T() const
+	{
+		return const_cast<Array*>(this)->T();
+	}
+	std::string Array::GetSignature() const noxnd
+	{
+		using namespace std::string_literals;
+		return "Array:"s + std::to_string( size ) + "{"s + T().GetSignature() + "}"s;
+	}
 
 
 	
@@ -236,6 +278,10 @@ namespace Dcb
 		pLayout->Finalize( 0 );
 		finalized = true;
 		return pLayout;
+	}
+	std::string Layout::GetSignature() const noxnd
+	{
+		return pLayout->GetSignature();
 	}
 	
 
@@ -364,5 +410,9 @@ namespace Dcb
 	std::shared_ptr<LayoutElement> Buffer::CloneLayout() const
 	{
 		return pLayout;
+	}
+	std::string Buffer::GetSignature() const noxnd
+	{
+		return pLayout->GetSignature();
 	}
 }

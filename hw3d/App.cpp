@@ -32,6 +32,8 @@ void TestDynamicConstant()
 		s["arr"s].T().Add<Dcb::Bool>( "booler" );
 		Dcb::Buffer b( s );
 
+		const auto sig = b.GetSignature();
+
 		{
 			auto exp = 42.0f;
 			b["woot"s] = exp;
