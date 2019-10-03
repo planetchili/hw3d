@@ -30,9 +30,17 @@ void TestDynamicConstant()
 		s["arr"s].T()["meta"s].Set<Dcb::Array>( 6 );
 		s["arr"s].T()["meta"s].T().Set<Dcb::Matrix>( 4 );
 		s["arr"s].T().Add<Dcb::Bool>( "booler" );
+
+		// fails: duplicate symbol name
+		// s.Add<Dcb::Bool>( "arr"s );
+
+		// fails: bad symbol name
+		//s.Add<Dcb::Bool>( "69man" );
+
 		Dcb::Buffer b( s );
 
 		const auto sig = b.GetSignature();
+
 
 		{
 			auto exp = 42.0f;
@@ -101,6 +109,7 @@ void TestDynamicConstant()
 
 		// this fails assertion: array out of bounds
 		// cb["arr"s][200];
+
 	}
 	// size test array of arrays
 	{
