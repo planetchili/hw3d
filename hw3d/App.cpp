@@ -54,7 +54,7 @@ App::App( const std::string& commandLine )
 			throw std::runtime_error( "Normal map validated successfully. Just kidding about that whole runtime error thing." );
 		}
 	}
-	stripey.SetRootTransform( dx::XMMatrixTranslation( -13.5f,6.0f,3.5f ) );
+	//wall.SetRootTransform( dx::XMMatrixTranslation( -12.0f,0.0f,0.0f ) );
 	//tp.SetPos( { 12.0f,0.0f,0.0f } );
 	//gobber.SetRootTransform( dx::XMMatrixTranslation( 0.0f,0.0f,-4.0f ) );
 	//nano.SetRootTransform( dx::XMMatrixTranslation( 0.0f,-7.0f,6.0f ) );
@@ -75,7 +75,6 @@ void App::DoFrame()
 	//gobber.Draw( wnd.Gfx() );
 	light.Draw( wnd.Gfx() );
 	sponza.Draw( wnd.Gfx() );
-	stripey.Draw( wnd.Gfx() );
 
 	while( const auto e = wnd.kbd.ReadKey() )
 	{
@@ -145,7 +144,7 @@ void App::DoFrame()
 	light.SpawnControlWindow();
 	ShowImguiDemoWindow();
 	//gobber.ShowWindow( wnd.Gfx(),"gobber" );
-	stripey.ShowWindow( wnd.Gfx(),"Stripey" );
+	//wall.ShowWindow( wnd.Gfx(),"Wall" );
 	//tp.SpawnControlWindow( wnd.Gfx() );
 	//nano.ShowWindow( wnd.Gfx(),"Nano" );
 	sponza.ShowWindow( wnd.Gfx(),"Sponza" );
