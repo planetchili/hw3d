@@ -15,12 +15,12 @@ class eltype : public LayoutElement \
 	friend LayoutElement; \
 public: \
 	using SystemType = systype; \
-	size_t Resolve ## eltype() const noxnd override final;\
-	size_t GetOffsetEnd() const noexcept override final;\
+	size_t Resolve ## eltype() const noxnd final;\
+	size_t GetOffsetEnd() const noexcept final;\
 	std::string GetSignature() const noxnd final; \
 protected: \
-	size_t Finalize( size_t offset_in ) override final;\
-	size_t ComputeSize() const noxnd override final;\
+	size_t Finalize( size_t offset_in ) noxnd final;\
+	size_t ComputeSize() const noxnd final;\
 };
 #define DCB_LEAF_ELEMENT(eltype,systype) DCB_LEAF_ELEMENT_IMPL(eltype,systype,sizeof(systype))
 
@@ -56,11 +56,11 @@ namespace Dcb
 			return true;
 		}
 		// [] only works for Structs; access member by name
-		virtual LayoutElement& operator[]( const std::string& );
-		const LayoutElement& operator[]( const std::string& key ) const;
+		virtual LayoutElement& operator[]( const std::string& ) noxnd;
+		const LayoutElement& operator[]( const std::string& key ) const noxnd;
 		// T() only works for Arrays; gets the array type layout object
-		virtual LayoutElement& T();
-		const LayoutElement& T() const;
+		virtual LayoutElement& T() noxnd;
+		const LayoutElement& T() const noxnd;
 
 		// offset based- functions only work after finalization!
 		size_t GetOffsetBegin() const noexcept;
@@ -86,7 +86,7 @@ namespace Dcb
 		DCB_RESOLVE_BASE(Bool)
 	protected:
 		// sets all offsets for element and subelements, returns offset directly after this element
-		virtual size_t Finalize( size_t offset ) = 0;
+		virtual size_t Finalize( size_t offset ) noxnd = 0;
 		// computes the size of this element in bytes, considering padding on Arrays and Structs
 		virtual size_t ComputeSize() const noxnd = 0;
 	protected:
@@ -106,14 +106,14 @@ namespace Dcb
 	{
 		friend LayoutElement;
 	public:
-		LayoutElement& operator[]( const std::string& key ) override final;
-		size_t GetOffsetEnd() const noexcept override final;
+		LayoutElement& operator[]( const std::string& key ) noxnd final;
+		size_t GetOffsetEnd() const noexcept final;
 		std::string GetSignature() const noxnd final;
 		void Add( const std::string& name,std::unique_ptr<LayoutElement> pElement ) noxnd;
 	protected:
 		Struct() = default;
-		size_t Finalize( size_t offset_in ) override final;
-		size_t ComputeSize() const noxnd override final;
+		size_t Finalize( size_t offset_in ) noxnd final;
+		size_t ComputeSize() const noxnd final;
 	private:
 		static size_t CalculatePaddingBeforeElement( size_t offset,size_t size ) noexcept;
 	private:
@@ -125,16 +125,16 @@ namespace Dcb
 	{
 		friend LayoutElement;
 	public:
-		size_t GetOffsetEnd() const noexcept override final;
+		size_t GetOffsetEnd() const noexcept final;
 		void Set( std::unique_ptr<LayoutElement> pElement,size_t size_in ) noxnd;
-		LayoutElement& T() override final;
-		const LayoutElement& T() const;
+		LayoutElement& T() noxnd final;
+		const LayoutElement& T() const noxnd;
 		std::string GetSignature() const noxnd final;
 		bool IndexInBounds( size_t index ) const noexcept;
 	protected:
 		Array() = default;
-		size_t Finalize( size_t offset_in ) override final;
-		size_t ComputeSize() const noxnd override final;
+		size_t Finalize( size_t offset_in ) noxnd final;
+		size_t ComputeSize() const noxnd final;
 	private:
 		size_t size = 0u;
 		std::unique_ptr<LayoutElement> pElement;
@@ -147,10 +147,8 @@ namespace Dcb
 		friend class LayoutCodex;
 		friend class Buffer;
 	public:
-		Layout();
-		// this ctor creates FINALIZED layouts only
-		Layout( std::shared_ptr<LayoutElement> pLayout );
-		LayoutElement& operator[]( const std::string& key );
+		Layout() noexcept;
+		LayoutElement& operator[]( const std::string& key ) noxnd;
 		size_t GetSizeInBytes() const noexcept;
 		template<typename T>
 		LayoutElement& Add( const std::string& key ) noxnd
@@ -158,9 +156,12 @@ namespace Dcb
 			assert( !finalized && "cannot modify finalized layout" );
 			return pLayout->Add<T>( key );
 		}
-		void Finalize();
+		void Finalize() noxnd;
 		bool IsFinalized() const noexcept;
 		std::string GetSignature() const noxnd;
+	private:
+		// this ctor creates FINALIZED layouts only
+		Layout( std::shared_ptr<LayoutElement> pLayout ) noexcept;
 	private:
 		std::shared_ptr<LayoutElement> ShareRoot() const noexcept;
 		bool finalized = false;
@@ -184,7 +185,7 @@ namespace Dcb
 			DCB_PTR_CONVERSION( Float,const )
 			DCB_PTR_CONVERSION( Bool,const )
 		private:
-			Ptr( ConstElementRef& ref );
+			Ptr( ConstElementRef& ref ) noexcept;
 			ConstElementRef& ref;
 		};
 	public:
@@ -200,7 +201,7 @@ namespace Dcb
 		DCB_REF_CONST( Float )
 		DCB_REF_CONST( Bool )
 	private:
-		ConstElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset );
+		ConstElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset ) noexcept;
 		size_t offset;
 		const class LayoutElement* pLayout;
 		char* pBytes;
@@ -221,7 +222,7 @@ namespace Dcb
 			DCB_PTR_CONVERSION( Float )
 			DCB_PTR_CONVERSION( Bool )
 		private:
-			Ptr( ElementRef& ref );
+			Ptr( ElementRef& ref ) noexcept;
 			ElementRef& ref;
 		};
 	public:
@@ -238,7 +239,7 @@ namespace Dcb
 		DCB_REF_NONCONST(Float)
 		DCB_REF_NONCONST(Bool)
 	private:
-		ElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset );
+		ElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset ) noexcept;
 		size_t offset;
 		const class LayoutElement* pLayout;
 		char* pBytes;
@@ -254,11 +255,11 @@ namespace Dcb
 		const char* GetData() const noexcept;
 		size_t GetSizeInBytes() const noexcept;
 		const LayoutElement& GetLayout() const noexcept;
-		std::shared_ptr<LayoutElement> ShareLayout() const;
+		std::shared_ptr<LayoutElement> ShareLayout() const noexcept;
 		std::string GetSignature() const noxnd;
 	private:
-		Buffer( Layout& lay );
-		Buffer( Layout&& lay );
+		Buffer( Layout& lay ) noexcept;
+		Buffer( Layout&& lay ) noexcept;
 		std::shared_ptr<LayoutElement> pLayout;
 		std::vector<char> bytes;
 	};

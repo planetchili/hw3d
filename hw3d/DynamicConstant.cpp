@@ -19,7 +19,7 @@ size_t eltype::GetOffsetEnd() const noexcept \
 { \
 	return GetOffsetBegin() + ComputeSize(); \
 } \
-size_t eltype::Finalize( size_t offset_in ) \
+size_t eltype::Finalize( size_t offset_in ) noxnd \
 { \
 	offset = offset_in; \
 	return offset_in + ComputeSize(); \
@@ -59,21 +59,21 @@ namespace Dcb
 {
 	LayoutElement::~LayoutElement()
 	{}
-	LayoutElement& LayoutElement::operator[]( const std::string& )
+	LayoutElement& LayoutElement::operator[]( const std::string& ) noxnd
 	{
 		assert( false && "cannot access member on non Struct" );
 		return *this;
 	}
-	const LayoutElement& LayoutElement::operator[]( const std::string& key ) const
+	const LayoutElement& LayoutElement::operator[]( const std::string& key ) const noxnd
 	{
 		return const_cast<LayoutElement&>(*this)[key];
 	}
-	LayoutElement& LayoutElement::T()
+	LayoutElement& LayoutElement::T() noxnd
 	{
 		assert( false );
 		return *this;
 	}
-	const LayoutElement& LayoutElement::T() const
+	const LayoutElement& LayoutElement::T() const noxnd
 	{
 		return const_cast<LayoutElement&>(*this).T();
 	}
@@ -95,11 +95,11 @@ namespace Dcb
 	class Empty : public LayoutElement
 	{
 	public:
-		size_t GetOffsetEnd() const noexcept override final
+		size_t GetOffsetEnd() const noexcept final
 		{
 			return 0u;
 		}
-		bool Exists() const noexcept override final
+		bool Exists() const noexcept final
 		{
 			return false;
 		}
@@ -109,11 +109,11 @@ namespace Dcb
 			return "";
 		}
 	protected:
-		size_t Finalize( size_t offset_in ) override final
+		size_t Finalize( size_t offset_in ) noxnd final
 		{
 			return 0u;
 		}
-		size_t ComputeSize() const noxnd override final
+		size_t ComputeSize() const noxnd final
 		{
 			return 0u;
 		}
@@ -142,7 +142,7 @@ namespace Dcb
 
 
 
-	LayoutElement& Struct::operator[]( const std::string& key )
+	LayoutElement& Struct::operator[]( const std::string& key ) noxnd
 	{
 		const auto i = map.find( key );
 		if( i == map.end() )
@@ -175,7 +175,7 @@ namespace Dcb
 			assert( false && "duplicate symbol name in Struct" );
 		}
 	}
-	size_t Struct::Finalize( size_t offset_in )
+	size_t Struct::Finalize( size_t offset_in ) noxnd
 	{
 		assert( elements.size() != 0u );
 		offset = offset_in;
@@ -239,11 +239,11 @@ namespace Dcb
 		pElement = std::move( pElement_in );
 		size = size_in;
 	}
-	LayoutElement& Array::T()
+	LayoutElement& Array::T() noxnd
 	{
 		return *pElement;
 	}
-	size_t Array::Finalize( size_t offset_in )
+	size_t Array::Finalize( size_t offset_in ) noxnd
 	{
 		assert( size != 0u && pElement );
 		offset = offset_in;
@@ -259,7 +259,7 @@ namespace Dcb
 	{
 		return index < size;
 	}
-	const LayoutElement& Array::T() const
+	const LayoutElement& Array::T() const noxnd
 	{
 		return const_cast<Array*>(this)->T();
 	}
@@ -271,17 +271,17 @@ namespace Dcb
 
 
 	
-	Layout::Layout()
+	Layout::Layout() noexcept
 	{
 		struct Enabler : public Struct{};
 		pLayout = std::make_shared<Enabler>();
 	}
-	Layout::Layout( std::shared_ptr<LayoutElement> pLayout )
+	Layout::Layout( std::shared_ptr<LayoutElement> pLayout ) noexcept
 		:
 		pLayout( std::move( pLayout ) ),
 		finalized( true )
 	{}
-	LayoutElement& Layout::operator[]( const std::string& key )
+	LayoutElement& Layout::operator[]( const std::string& key ) noxnd
 	{
 		assert( !finalized && "cannot modify finalized layout" );
 		return (*pLayout)[key];
@@ -290,7 +290,7 @@ namespace Dcb
 	{
 		return pLayout->GetSizeInBytes();
 	}
-	void Layout::Finalize()
+	void Layout::Finalize() noxnd
 	{
 		pLayout->Finalize( 0u );
 		finalized = true;
@@ -311,7 +311,7 @@ namespace Dcb
 	
 
 
-	ConstElementRef::Ptr::Ptr( ConstElementRef& ref )
+	ConstElementRef::Ptr::Ptr( ConstElementRef& ref ) noexcept
 		:
 		ref( ref )
 	{}
@@ -321,7 +321,7 @@ namespace Dcb
 	DCB_PTR_CONVERSION( ConstElementRef,Float2,const )
 	DCB_PTR_CONVERSION( ConstElementRef,Float,const )
 	DCB_PTR_CONVERSION( ConstElementRef,Bool,const )
-	ConstElementRef::ConstElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset )
+	ConstElementRef::ConstElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset ) noexcept
 		:
 		offset( offset ),
 		pLayout( pLayout ),
@@ -356,7 +356,7 @@ namespace Dcb
 	DCB_REF_CONST( ConstElementRef,Bool )
 				
 
-	ElementRef::Ptr::Ptr( ElementRef& ref )
+	ElementRef::Ptr::Ptr( ElementRef& ref ) noexcept
 		:
 		ref( ref )
 	{}
@@ -366,7 +366,7 @@ namespace Dcb
 	DCB_PTR_CONVERSION( ElementRef,Float2 )
 	DCB_PTR_CONVERSION( ElementRef,Float )
 	DCB_PTR_CONVERSION( ElementRef,Bool )
-	ElementRef::ElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset )
+	ElementRef::ElementRef( const LayoutElement* pLayout,char* pBytes,size_t offset ) noexcept
 		:
 		offset( offset ),
 		pLayout( pLayout ),
@@ -411,11 +411,11 @@ namespace Dcb
 	{
 		return { LayoutCodex::Resolve( lay ) };
 	}
-	Buffer::Buffer( Layout&& lay )
+	Buffer::Buffer( Layout&& lay ) noexcept
 		:
 		Buffer( lay )
 	{}
-	Buffer::Buffer( Layout& lay )
+	Buffer::Buffer( Layout& lay ) noexcept
 		:
 		pLayout( lay.ShareRoot() ),
 		bytes( pLayout->GetOffsetEnd() )
@@ -440,7 +440,7 @@ namespace Dcb
 	{
 		return *pLayout;
 	}
-	std::shared_ptr<LayoutElement> Buffer::ShareLayout() const
+	std::shared_ptr<LayoutElement> Buffer::ShareLayout() const noexcept
 	{
 		return pLayout;
 	}
