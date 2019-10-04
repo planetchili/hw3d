@@ -45,6 +45,11 @@ ScriptCommander::ScriptCommander( const std::vector<std::string>& args )
 					TexturePreprocessor::ValidateNormalMap( params.at( "source" ),params.at( "min" ),params.at( "max" ) );
 					abort = true;
 				}
+				else if( commandName == "make-stripes" )
+				{
+					TexturePreprocessor::MakeStripes( params.at( "dest" ),params.at( "size" ),params.at( "stripeWidth" ) );
+					abort = true;
+				}
 				else
 				{
 					throw SCRIPT_ERROR( "Unknown command: "s + commandName );
