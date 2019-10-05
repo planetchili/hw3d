@@ -68,6 +68,10 @@ namespace Dcb
 	{
 		return const_cast<LayoutElement&>(*this)[key];
 	}
+	bool LayoutElement::Exists() const noexcept
+	{
+		return true;
+	}
 	LayoutElement& LayoutElement::T() noxnd
 	{
 		assert( false );
