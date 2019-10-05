@@ -95,7 +95,11 @@ namespace Dcb
 	}
 
 
-
+	// this layout is a special layout returned whenever a Struct is indexed with a
+	// bad key, or an Empty is indexed at all. Instead of merely causing an exception
+	// when accessing a non-existent member, returning an Empty allows the existence
+	// of elements to be queried at runtime via Exists() which only returns false from
+	// an Empty
 	class Empty : public LayoutElement
 	{
 	public:
@@ -278,39 +282,48 @@ namespace Dcb
 	Layout::Layout() noexcept
 	{
 		struct Enabler : public Struct{};
-		pLayout = std::make_shared<Enabler>();
+		pRoot = std::make_shared<Enabler>();
 	}
-	Layout::Layout( std::shared_ptr<LayoutElement> pLayout ) noexcept
+	Layout::Layout( std::shared_ptr<LayoutElement> pRoot ) noexcept
 		:
-		pLayout( std::move( pLayout ) ),
-		finalized( true )
+		pRoot( std::move( pRoot ) )
 	{}
-	LayoutElement& Layout::operator[]( const std::string& key ) noxnd
-	{
-		assert( !finalized && "cannot modify finalized layout" );
-		return (*pLayout)[key];
-	}
 	size_t Layout::GetSizeInBytes() const noexcept
 	{
-		return pLayout->GetSizeInBytes();
-	}
-	void Layout::Finalize() noxnd
-	{
-		pLayout->Finalize( 0u );
-		finalized = true;
-	}
-	bool Layout::IsFinalized() const noexcept
-	{
-		return finalized;
+		return pRoot->GetSizeInBytes();
 	}
 	std::string Layout::GetSignature() const noxnd
 	{
-		assert( finalized );
-		return pLayout->GetSignature();
+		return pRoot->GetSignature();
 	}
-	std::shared_ptr<LayoutElement> Layout::ShareRoot() const noexcept
+
+	LayoutElement& RawLayout::operator[]( const std::string& key ) noxnd
 	{
-		return pLayout;
+		return (*pRoot)[key];
+	}
+	std::shared_ptr<LayoutElement> RawLayout::DeliverRoot() noexcept
+	{
+		auto temp = std::move( pRoot );
+		temp->Finalize( 0 );
+		*this = RawLayout();
+		return std::move( temp );
+	}
+	void RawLayout::ClearRoot() noexcept
+	{
+		*this = RawLayout();
+	}
+
+	CookedLayout::CookedLayout( std::shared_ptr<LayoutElement> pRoot ) noexcept
+		:
+		Layout( std::move( pRoot ) )
+	{}
+	std::shared_ptr<LayoutElement> CookedLayout::ShareRoot() const noexcept
+	{
+		return pRoot;
+	}
+	const LayoutElement& CookedLayout::operator[]( const std::string& key ) const noxnd
+	{
+		return (*pRoot)[key];
 	}
 	
 
@@ -402,24 +415,24 @@ namespace Dcb
 		return { *this };
 	}
 	DCB_REF_NONCONST( ElementRef,Matrix )
-		DCB_REF_NONCONST( ElementRef,Float4 )
-		DCB_REF_NONCONST( ElementRef,Float3 )
-		DCB_REF_NONCONST( ElementRef,Float2 )
-		DCB_REF_NONCONST( ElementRef,Float )
-		DCB_REF_NONCONST( ElementRef,Bool )
+	DCB_REF_NONCONST( ElementRef,Float4 )
+	DCB_REF_NONCONST( ElementRef,Float3 )
+	DCB_REF_NONCONST( ElementRef,Float2 )
+	DCB_REF_NONCONST( ElementRef,Float )
+	DCB_REF_NONCONST( ElementRef,Bool )
 
 
 
 
-	Buffer Buffer::Make( Layout& lay ) noxnd
+	Buffer Buffer::Make( RawLayout&& lay ) noxnd
 	{
-		return { LayoutCodex::Resolve( lay ) };
+		return { LayoutCodex::Resolve( std::move( lay ) ) };
 	}
-	Buffer::Buffer( Layout&& lay ) noexcept
-		:
-		Buffer( lay )
-	{}
-	Buffer::Buffer( Layout& lay ) noexcept
+	Buffer Buffer::Make( const CookedLayout& lay ) noxnd
+	{
+		return { lay.ShareRoot() };
+	}
+	Buffer::Buffer( const CookedLayout& lay ) noexcept
 		:
 		pLayout( lay.ShareRoot() ),
 		bytes( pLayout->GetOffsetEnd() )
@@ -447,9 +460,5 @@ namespace Dcb
 	std::shared_ptr<LayoutElement> Buffer::ShareLayout() const noexcept
 	{
 		return pLayout;
-	}
-	std::string Buffer::GetSignature() const noxnd
-	{
-		return pLayout->GetSignature();
 	}
 }

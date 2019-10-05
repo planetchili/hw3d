@@ -9,7 +9,7 @@ namespace Dcb
 	class LayoutCodex
 	{
 	public:
-		static Dcb::Layout Resolve( Dcb::Layout& layout ) noxnd;
+		static Dcb::CookedLayout Resolve( Dcb::RawLayout&& layout ) noxnd;
 	private:
 		static LayoutCodex& Get_() noexcept;
 		std::unordered_map<std::string,std::shared_ptr<Dcb::LayoutElement>> map;

@@ -59,7 +59,7 @@ namespace Dcb
 		// the reason for the friend relationships is generally so that intermediate
 		// classes that the client should not create can have their constructors made
 		// private, Finalize() cannot be called on arbitrary LayoutElements, etc.
-		friend class Layout;
+		friend class RawLayout;
 		friend class Array;
 		friend class Struct;
 	public:
@@ -171,38 +171,62 @@ namespace Dcb
 		std::unique_ptr<LayoutElement> pElement;
 	};
 
+	
 
 	// the layout class serves as a shell to hold the root of the LayoutElement tree
-	// client does not create LayoutElements directly, create layout and then use it
-	// to access the elements and add on from there. When building is done, tree is
-	// finalized (all offsets calculated) and a flag is set preventing further changes
-	// to the tree
+	// client does not create LayoutElements directly, create a raw layout and then
+	// use it to access the elements and add on from there. When building is done,
+	// raw layout is moved to Codex (usually via Buffer::Make), and the internal layout
+	// element tree is "delivered" (finalized and moved out). Codex returns a baked
+	// layout, which the buffer can then use to initialize itself. Baked layout can
+	// also be used to directly init multiple Buffers. baked layouts are conceptually
+	// immutable. base Layout cannot be constructed.
 	class Layout
 	{
 		friend class LayoutCodex;
 		friend class Buffer;
 	public:
-		Layout() noexcept;
-		LayoutElement& operator[]( const std::string& key ) noxnd;
 		size_t GetSizeInBytes() const noexcept;
+		std::string GetSignature() const noxnd;
+	protected:
+		Layout() noexcept;
+		Layout( std::shared_ptr<LayoutElement> pRoot ) noexcept;
+		std::shared_ptr<LayoutElement> pRoot;
+	};
+	
+	// Raw layout represents a layout that has not yet been finalized and registered
+	// structure can be edited by adding layout nodes
+	class RawLayout : public Layout
+	{
+		friend class LayoutCodex;
+	public:
+		RawLayout() = default;
+		LayoutElement& operator[]( const std::string& key ) noxnd;
 		template<typename T>
 		LayoutElement& Add( const std::string& key ) noxnd
 		{
-			assert( !finalized && "cannot modify finalized layout" );
-			return pLayout->Add<T>( key );
+			return pRoot->Add<T>( key );
 		}
-		void Finalize() noxnd;
-		bool IsFinalized() const noexcept;
-		std::string GetSignature() const noxnd;
 	private:
-		// this ctor creates FINALIZED layouts only (use by Codex to return layouts)
-		Layout( std::shared_ptr<LayoutElement> pLayout ) noexcept;
-	private:
-		// used by Codex and Buffer to get a shared ptr to the layout
-		std::shared_ptr<LayoutElement> ShareRoot() const noexcept;
-		bool finalized = false;
-		std::shared_ptr<LayoutElement> pLayout;
+		std::shared_ptr<LayoutElement> DeliverRoot() noexcept;
+		void ClearRoot() noexcept;
 	};
+	
+	// CookedLayout represend a completed and registered Layout shell object
+	// layout tree is fixed
+	class CookedLayout : public Layout
+	{
+		friend class LayoutCodex;
+		friend class Buffer;
+	public:
+		const LayoutElement& operator[]( const std::string& key ) const noxnd;
+	private:
+		// this ctor used by Codex to return cooked layouts
+		CookedLayout( std::shared_ptr<LayoutElement> pRoot ) noexcept;
+		// used by buffer to add reference to shared ptr to layout tree root
+		std::shared_ptr<LayoutElement> ShareRoot() const noexcept;
+	};
+
 
 
 	// The reference classes (ElementRef and ConstElementRef) form the shells for
@@ -233,6 +257,8 @@ namespace Dcb
 			ConstElementRef& ref;
 		};
 	public:
+		// polymorphic function returns true for all node types instead of
+		// EmptyLayout (see EmptyLayout class internal to DynamicConstant.cpp)
 		bool Exists() const noexcept;
 		ConstElementRef operator[]( const std::string& key ) noxnd;
 		ConstElementRef operator[]( size_t index ) noxnd;
@@ -273,6 +299,8 @@ namespace Dcb
 		};
 	public:
 		operator ConstElementRef() const noexcept;
+		// polymorphic function returns true for all node types instead of
+		// EmptyLayout (see EmptyLayout class internal to DynamicConstant.cpp)
 		bool Exists() const noexcept;
 		ElementRef operator[]( const std::string& key ) noxnd;
 		ElementRef operator[]( size_t index ) noxnd;
@@ -301,17 +329,18 @@ namespace Dcb
 	class Buffer
 	{
 	public:
-		static Buffer Make( Layout& lay ) noxnd;
+		// ctors private, clients call Make to create buffers
+		// Make with a rawlayout first passes layout to Codex for cooking/Resolution
+		static Buffer Make( RawLayout&& lay ) noxnd;
+		static Buffer Make( const CookedLayout& lay ) noxnd;
 		ElementRef operator[]( const std::string& key ) noxnd;
 		ConstElementRef operator[]( const std::string& key ) const noxnd;
 		const char* GetData() const noexcept;
 		size_t GetSizeInBytes() const noexcept;
 		const LayoutElement& GetLayout() const noexcept;
 		std::shared_ptr<LayoutElement> ShareLayout() const noexcept;
-		std::string GetSignature() const noxnd;
 	private:
-		Buffer( Layout& lay ) noexcept;
-		Buffer( Layout&& lay ) noexcept;
+		Buffer( const CookedLayout& lay ) noexcept;
 		std::shared_ptr<LayoutElement> pLayout;
 		std::vector<char> bytes;
 	};
