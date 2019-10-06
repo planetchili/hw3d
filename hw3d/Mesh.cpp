@@ -394,7 +394,7 @@ std::unique_ptr<Mesh> Model::ParseMesh( Graphics& gfx,const aiMesh& mesh,const a
 		buf["hasGlossMap"] = hasAlphaGloss;
 		buf["specularPower"] = shininess;
 		buf["specularColor"] = dx::XMFLOAT3{ 0.75f,0.75f,0.75f };
-		buf["specularColor"] = 0.671f;
+		buf["specularMapWeight"] = 0.671f;
 
 		bindablePtrs.push_back( std::make_shared<PixelConstantBufferEX>( gfx,buf,1u ) );
 	}
