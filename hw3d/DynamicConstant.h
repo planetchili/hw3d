@@ -220,11 +220,11 @@ namespace Dcb
 		friend class Buffer;
 	public:
 		const LayoutElement& operator[]( const std::string& key ) const noxnd;
+		// add reference to shared ptr to layout tree root
+		std::shared_ptr<LayoutElement> ShareRoot() const noexcept;
 	private:
 		// this ctor used by Codex to return cooked layouts
 		CookedLayout( std::shared_ptr<LayoutElement> pRoot ) noexcept;
-		// used by buffer to add reference to shared ptr to layout tree root
-		std::shared_ptr<LayoutElement> ShareRoot() const noexcept;
 	};
 
 
@@ -333,11 +333,13 @@ namespace Dcb
 		// Make with a rawlayout first passes layout to Codex for cooking/Resolution
 		static Buffer Make( RawLayout&& lay ) noxnd;
 		static Buffer Make( const CookedLayout& lay ) noxnd;
+		Buffer( const Buffer& ) noexcept;
 		ElementRef operator[]( const std::string& key ) noxnd;
 		ConstElementRef operator[]( const std::string& key ) const noxnd;
 		const char* GetData() const noexcept;
 		size_t GetSizeInBytes() const noexcept;
 		const LayoutElement& GetLayout() const noexcept;
+		void CopyFrom( const Buffer& ) noxnd;
 		std::shared_ptr<LayoutElement> ShareLayout() const noexcept;
 	private:
 		Buffer( const CookedLayout& lay ) noexcept;
