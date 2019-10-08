@@ -208,8 +208,9 @@ namespace Dcb
 			return pRoot->Add<T>( key );
 		}
 	private:
-		std::shared_ptr<LayoutElement> DeliverRoot() noexcept;
 		void ClearRoot() noexcept;
+		// finalize the layout and then pilfer
+		std::shared_ptr<LayoutElement> DeliverRoot() noexcept;
 	};
 	
 	// CookedLayout represend a completed and registered Layout shell object
@@ -225,6 +226,8 @@ namespace Dcb
 	private:
 		// this ctor used by Codex to return cooked layouts
 		CookedLayout( std::shared_ptr<LayoutElement> pRoot ) noexcept;
+		// use to pilfer the layout tree
+		std::shared_ptr<LayoutElement> RelinquishRoot() const noexcept;
 	};
 
 
@@ -329,21 +332,27 @@ namespace Dcb
 	class Buffer
 	{
 	public:
-		// ctors private, clients call Make to create buffers
-		// Make with a rawlayout first passes layout to Codex for cooking/Resolution
-		static Buffer Make( RawLayout&& lay ) noxnd;
-		static Buffer Make( const CookedLayout& lay ) noxnd;
+		Buffer( RawLayout&& lay ) noxnd;
+		Buffer( const CookedLayout& lay ) noxnd;
+		Buffer( CookedLayout&& lay ) noxnd;
 		Buffer( const Buffer& ) noexcept;
+		// have to be careful with this one...
+		// the buffer that has been pilfered must not be used :x
+		Buffer( Buffer&& ) noexcept;
+		// how you begin indexing into buffer (root is always Struct)
 		ElementRef operator[]( const std::string& key ) noxnd;
 		ConstElementRef operator[]( const std::string& key ) const noxnd;
+		// get the raw bytes
 		const char* GetData() const noexcept;
+		// size of the raw byte buffer
 		size_t GetSizeInBytes() const noexcept;
-		const LayoutElement& GetLayout() const noexcept;
+		const LayoutElement& GetRootLayoutElement() const noexcept;
+		// copy bytes from another buffer (layouts must match)
 		void CopyFrom( const Buffer& ) noxnd;
-		std::shared_ptr<LayoutElement> ShareLayout() const noexcept;
+		// return another sptr to the layout root
+		std::shared_ptr<LayoutElement> ShareLayoutRoot() const noexcept;
 	private:
-		Buffer( const CookedLayout& lay ) noexcept;
-		std::shared_ptr<LayoutElement> pLayout;
+		std::shared_ptr<LayoutElement> pLayoutRoot;
 		std::vector<char> bytes;
 	};
 	

@@ -10,7 +10,7 @@ namespace Bind
 	public:
 		void Update( Graphics& gfx,const Dcb::Buffer& buf )
 		{
-			assert( &buf.GetLayout() == &GetLayout() );
+			assert( &buf.GetRootLayoutElement() == &GetRootLayoutElement() );
 			INFOMAN( gfx );
 
 			D3D11_MAPPED_SUBRESOURCE msr;
@@ -26,7 +26,7 @@ namespace Bind
 		{
 			GetContext( gfx )->PSSetConstantBuffers( slot,1u,pConstantBuffer.GetAddressOf() );
 		}
-		virtual const Dcb::LayoutElement& GetLayout() const noexcept = 0;
+		virtual const Dcb::LayoutElement& GetRootLayoutElement() const noexcept = 0;
 	protected:
 		PixelConstantBufferEX( Graphics& gfx,const Dcb::LayoutElement& layoutRoot,UINT slot,const Dcb::Buffer* pBuf )
 			:
@@ -64,16 +64,16 @@ namespace Bind
 		CachingPixelConstantBufferEX( Graphics& gfx,const Dcb::CookedLayout& layout,UINT slot )
 			:
 			PixelConstantBufferEX( gfx,*layout.ShareRoot(),slot,nullptr ),
-			buf( Dcb::Buffer::Make( layout ) )
+			buf( Dcb::Buffer( layout ) )
 		{}
 		CachingPixelConstantBufferEX( Graphics& gfx,const Dcb::Buffer& buf,UINT slot )
 			:
-			PixelConstantBufferEX( gfx,buf.GetLayout(),slot,&buf ),
+			PixelConstantBufferEX( gfx,buf.GetRootLayoutElement(),slot,&buf ),
 			buf( buf )
 		{}
-		const Dcb::LayoutElement& GetLayout() const noexcept override
+		const Dcb::LayoutElement& GetRootLayoutElement() const noexcept override
 		{
-			return buf.GetLayout();
+			return buf.GetRootLayoutElement();
 		}
 		const Dcb::Buffer& GetBuffer() const noexcept
 		{
@@ -108,10 +108,10 @@ namespace Bind
 		{}
 		NocachePixelConstantBufferEX( Graphics& gfx,const Dcb::Buffer& buf,UINT slot )
 			:
-			PixelConstantBufferEX( gfx,buf.GetLayout(),slot,&buf ),
-			pLayoutRoot( buf.ShareLayout() )
+			PixelConstantBufferEX( gfx,buf.GetRootLayoutElement(),slot,&buf ),
+			pLayoutRoot( buf.ShareLayoutRoot() )
 		{}
-		const Dcb::LayoutElement& GetLayout() const noexcept override
+		const Dcb::LayoutElement& GetRootLayoutElement() const noexcept override
 		{
 			return *pLayoutRoot;
 		}

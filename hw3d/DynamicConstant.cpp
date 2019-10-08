@@ -138,7 +138,7 @@ namespace Dcb
 	DCB_RESOLVE_BASE( Float2 )
 	DCB_RESOLVE_BASE( Float )
 	DCB_RESOLVE_BASE( Bool )
-	
+
 
 
 	DCB_LEAF_ELEMENT( Matrix,dx::XMFLOAT4X4 )
@@ -169,8 +169,8 @@ namespace Dcb
 		// symbols can contain alphanumeric and underscore, must not start with digit
 		return !name.empty() && !std::isdigit( name.front() ) &&
 			std::all_of( name.begin(),name.end(),[]( char c ) {
-				return std::isalnum( c ) || c == '_';
-			}
+			return std::isalnum( c ) || c == '_';
+		}
 		);
 	}
 	void Struct::Add( const std::string& name,std::unique_ptr<LayoutElement> pElement ) noxnd
@@ -225,9 +225,9 @@ namespace Dcb
 			auto i = std::find_if(
 				map.begin(),map.end(),
 				[&el]( const std::pair<std::string,LayoutElement*>& v )
-				{
-					return &*el == v.second;
-				}
+			{
+				return &*el == v.second;
+			}
 			);
 			sig += i->first + ":"s + el->GetSignature() + ";"s;
 		}
@@ -278,10 +278,11 @@ namespace Dcb
 	}
 
 
-	
+
 	Layout::Layout() noexcept
 	{
-		struct Enabler : public Struct{};
+		struct Enabler : public Struct
+		{};
 		pRoot = std::make_shared<Enabler>();
 	}
 	Layout::Layout( std::shared_ptr<LayoutElement> pRoot ) noexcept
@@ -317,6 +318,10 @@ namespace Dcb
 		:
 		Layout( std::move( pRoot ) )
 	{}
+	std::shared_ptr<LayoutElement> CookedLayout::RelinquishRoot() const noexcept
+	{
+		return std::move( pRoot );
+	}
 	std::shared_ptr<LayoutElement> CookedLayout::ShareRoot() const noexcept
 	{
 		return pRoot;
@@ -325,7 +330,7 @@ namespace Dcb
 	{
 		return (*pRoot)[key];
 	}
-	
+
 
 
 	ConstElementRef::Ptr::Ptr( ConstElementRef& ref ) noexcept
@@ -371,7 +376,7 @@ namespace Dcb
 	DCB_REF_CONST( ConstElementRef,Float2 )
 	DCB_REF_CONST( ConstElementRef,Float )
 	DCB_REF_CONST( ConstElementRef,Bool )
-				
+
 
 	ElementRef::Ptr::Ptr( ElementRef& ref ) noexcept
 		:
@@ -423,28 +428,33 @@ namespace Dcb
 
 
 
-	
+	Buffer::Buffer( RawLayout&& lay ) noxnd
+		:
+		Buffer( LayoutCodex::Resolve( std::move( lay ) ) )
+	{}
+	Buffer::Buffer( const CookedLayout& lay ) noxnd
+		:
+		pLayoutRoot( lay.ShareRoot() ),
+		bytes( pLayoutRoot->GetOffsetEnd() )
+	{}
+	Buffer::Buffer( CookedLayout&& lay ) noxnd
+		:
+		pLayoutRoot( lay.RelinquishRoot() ),
+		bytes( pLayoutRoot->GetOffsetEnd() )
+	{}
 	Buffer::Buffer( const Buffer& buf ) noexcept
 		:
-		pLayout( buf.ShareLayout() ),
+		pLayoutRoot( buf.pLayoutRoot ),
 		bytes( buf.bytes )
 	{}
-	Buffer Buffer::Make( RawLayout&& lay ) noxnd
-	{
-		return { LayoutCodex::Resolve( std::move( lay ) ) };
-	}
-	Buffer Buffer::Make( const CookedLayout& lay ) noxnd
-	{
-		return { lay.ShareRoot() };
-	}
-	Buffer::Buffer( const CookedLayout& lay ) noexcept
+	Buffer::Buffer( Buffer&& buf ) noexcept
 		:
-		pLayout( lay.ShareRoot() ),
-		bytes( pLayout->GetOffsetEnd() )
+		pLayoutRoot( std::move( buf.pLayoutRoot ) ),
+		bytes( std::move( buf.bytes ) )
 	{}
 	ElementRef Buffer::operator[]( const std::string& key ) noxnd
 	{
-		return { &(*pLayout)[key],bytes.data(),0u };
+		return { &(*pLayoutRoot)[key],bytes.data(),0u };
 	}
 	ConstElementRef Buffer::operator[]( const std::string& key ) const noxnd
 	{
@@ -458,17 +468,17 @@ namespace Dcb
 	{
 		return bytes.size();
 	}
-	const LayoutElement& Buffer::GetLayout() const noexcept
+	const LayoutElement& Buffer::GetRootLayoutElement() const noexcept
 	{
-		return *pLayout;
+		return *pLayoutRoot;
 	}
 	void Buffer::CopyFrom( const Buffer& other ) noxnd
 	{
-		assert( &GetLayout() == &other.GetLayout() );
+		assert( &GetRootLayoutElement() == &other.GetRootLayoutElement() );
 		std::copy( other.bytes.begin(),other.bytes.end(),bytes.begin() );
 	}
-	std::shared_ptr<LayoutElement> Buffer::ShareLayout() const noexcept
+	std::shared_ptr<LayoutElement> Buffer::ShareLayoutRoot() const noexcept
 	{
-		return pLayout;
+		return pLayoutRoot;
 	}
 }
