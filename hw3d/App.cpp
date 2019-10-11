@@ -22,8 +22,8 @@ App::App( const std::string& commandLine )
 	//tp.SetPos( { 12.0f,0.0f,0.0f } );
 	//gobber.SetRootTransform( dx::XMMatrixTranslation( 0.0f,0.0f,-4.0f ) );
 	//nano.SetRootTransform( dx::XMMatrixTranslation( 0.0f,-7.0f,6.0f ) );
-	bluePlane.SetPos( cam.GetPos() );
-	redPlane.SetPos( cam.GetPos() );
+	//bluePlane.SetPos( cam.GetPos() );
+	//redPlane.SetPos( cam.GetPos() );
 
 	wnd.Gfx().SetProjection( dx::XMMatrixPerspectiveLH( 1.0f,9.0f / 16.0f,0.5f,400.0f ) );
 }
@@ -40,9 +40,13 @@ void App::DoFrame()
 	//nano.Draw( wnd.Gfx() );
 	//gobber.Draw( wnd.Gfx() );
 	light.Draw( wnd.Gfx() );
-	sponza.Draw( wnd.Gfx() );
-	bluePlane.Draw( wnd.Gfx() );
-	redPlane.Draw( wnd.Gfx() );
+	cube.Draw( wnd.Gfx() );
+	cube2.Draw( wnd.Gfx() );
+	cube.DrawOutline( wnd.Gfx() );
+	cube2.DrawOutline( wnd.Gfx() );
+	//sponza.Draw( wnd.Gfx() );
+	//bluePlane.Draw( wnd.Gfx() );
+	//redPlane.Draw( wnd.Gfx() );
 
 	while( const auto e = wnd.kbd.ReadKey() )
 	{
@@ -111,13 +115,15 @@ void App::DoFrame()
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	ShowImguiDemoWindow();
+	cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
+	cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
 	//gobber.ShowWindow( wnd.Gfx(),"gobber" );
 	//wall.ShowWindow( wnd.Gfx(),"Wall" );
 	//tp.SpawnControlWindow( wnd.Gfx() );
 	//nano.ShowWindow( wnd.Gfx(),"Nano" );
-	sponza.ShowWindow( wnd.Gfx(),"Sponza" );
-	bluePlane.SpawnControlWindow( wnd.Gfx(),"Blue Plane" );
-	redPlane.SpawnControlWindow( wnd.Gfx(),"Red Plane" );
+	//sponza.ShowWindow( wnd.Gfx(),"Sponza" );
+	//bluePlane.SpawnControlWindow( wnd.Gfx(),"Blue Plane" );
+	//redPlane.SpawnControlWindow( wnd.Gfx(),"Red Plane" );
 
 	// present
 	wnd.Gfx().EndFrame();

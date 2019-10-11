@@ -203,6 +203,7 @@
     <ClInclude Include="LayoutCodex.h" />
     <ClInclude Include="Rasterizer.h" />
     <ClInclude Include="ScriptCommander.h" />
+    <ClInclude Include="Stencil.h" />
     <ClInclude Include="Testing.h" />
     <ClInclude Include="TexturePreprocessor.h" />
     <ClInclude Include="TestCube.h" />
