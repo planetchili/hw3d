@@ -40,11 +40,11 @@ void App::DoFrame()
 	//nano.Draw( wnd.Gfx() );
 	//gobber.Draw( wnd.Gfx() );
 	light.Draw( wnd.Gfx() );
+	sponza.Draw( wnd.Gfx() );
 	cube.Draw( wnd.Gfx() );
 	cube2.Draw( wnd.Gfx() );
 	cube.DrawOutline( wnd.Gfx() );
 	cube2.DrawOutline( wnd.Gfx() );
-	//sponza.Draw( wnd.Gfx() );
 	//bluePlane.Draw( wnd.Gfx() );
 	//redPlane.Draw( wnd.Gfx() );
 
@@ -117,11 +117,11 @@ void App::DoFrame()
 	ShowImguiDemoWindow();
 	cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
 	cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
+	sponza.ShowWindow( wnd.Gfx(),"Sponza" );
 	//gobber.ShowWindow( wnd.Gfx(),"gobber" );
 	//wall.ShowWindow( wnd.Gfx(),"Wall" );
 	//tp.SpawnControlWindow( wnd.Gfx() );
 	//nano.ShowWindow( wnd.Gfx(),"Nano" );
-	//sponza.ShowWindow( wnd.Gfx(),"Sponza" );
 	//bluePlane.SpawnControlWindow( wnd.Gfx(),"Blue Plane" );
 	//redPlane.SpawnControlWindow( wnd.Gfx(),"Red Plane" );
 
