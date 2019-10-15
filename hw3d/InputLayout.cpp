@@ -22,6 +22,10 @@ namespace Bind
 			&pInputLayout
 		) );
 	}
+	const Dvtx::VertexLayout InputLayout::GetLayout() const noexcept
+	{
+		return layout;
+	}
 
 	void InputLayout::Bind( Graphics& gfx ) noexcept
 	{
