@@ -425,6 +425,9 @@
     <ClInclude Include="PerfLog.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TechniqueProbe.h">
+      <Filter>Header Files\Jobber</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">

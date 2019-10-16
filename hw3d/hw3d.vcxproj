@@ -215,6 +215,7 @@
     <ClInclude Include="Stencil.h" />
     <ClInclude Include="Step.h" />
     <ClInclude Include="Technique.h" />
+    <ClInclude Include="TechniqueProbe.h" />
     <ClInclude Include="Testing.h" />
     <ClInclude Include="TexturePreprocessor.h" />
     <ClInclude Include="TestCube.h" />
