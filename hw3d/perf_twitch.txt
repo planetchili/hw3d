@@ -1,0 +1,1584 @@
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.054ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.121ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.104ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.050ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.043ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.067ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.042ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.046ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.024ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.022ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.015ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.010ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.062ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.046ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.025ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.025ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.062ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.028ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.044ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.065ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.042ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.058ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.048ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.021ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.022ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.018ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.021ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.018ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.017ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.014ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.017ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.018ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.015ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.014ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.025ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.015ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.014ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.014ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.054ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.045ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.017ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.043ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.047ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.045ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.028ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.015ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.014ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.023ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.021ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.066ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.065ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.042ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.045ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.084ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.043ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.008ms
+[Execute] 0.049ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.026ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.014ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.014ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.015ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.022ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.021ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.012ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.017ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.010ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.049ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.045ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.050ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.028ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.004ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.042ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.042ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.057ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.016ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.015ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.021ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.020ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.018ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.018ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.017ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.018ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.013ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.000ms
+[Execute] 0.011ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.022ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.028ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.059ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.029ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.028ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.046ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.044ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.045ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.028ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.046ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.028ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.022ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.027ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.023ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.019ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.042ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.042ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.039ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.036ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.035ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.040ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.038ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.037ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.031ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.032ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.034ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.041ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.033ms
+[Begin] 0.000ms
+[Submit 2x Cube] 0.001ms
+[Execute] 0.030ms
