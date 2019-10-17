@@ -172,36 +172,41 @@ void TestCube::SpawnControlWindow( Graphics& gfx,const char* name ) noexcept
 				using namespace std::string_literals;
 				ImGui::TextColored( { 0.4f,1.0f,0.6f,1.0f },pTech->GetName().c_str() );
 				bool active = pTech->IsActive();
-				ImGui::Checkbox( ("Tech Active##"s + pTech->GetName()).c_str(),&active );
+				ImGui::Checkbox( ("Tech Active##"s + std::to_string( techIdx )).c_str(),&active );
 				pTech->SetActiveState( active );
 			}
-			bool VisitBuffer( Dcb::Buffer& buf ) override
+			bool OnVisitBuffer( Dcb::Buffer& buf ) override
 			{
 				namespace dx = DirectX;
 				float dirty = false;
 				const auto dcheck = [&dirty]( bool changed ) {dirty = dirty || changed;};
+				auto tag = [tagScratch = std::string{},tagString = "##" + std::to_string( bufIdx )]
+				( const char* label ) mutable
+				{
+					tagScratch = label + tagString;
+					return tagScratch.c_str();
+				};
 
 				if( auto v = buf["scale"]; v.Exists() )
 				{
-					dcheck( ImGui::SliderFloat( "Scale",&v,1.0f,2.0f,"%.3f",3.5f ) );
+					dcheck( ImGui::SliderFloat( tag( "Scale" ),&v,1.0f,2.0f,"%.3f",3.5f ) );
 				}
 				if( auto v = buf["color"]; v.Exists() )
 				{
-					dcheck( ImGui::ColorPicker4( "Color",reinterpret_cast<float*>(&static_cast<dx::XMFLOAT4&>(v)) ) );
+					dcheck( ImGui::ColorPicker4( tag( "Color" ),reinterpret_cast<float*>(&static_cast<dx::XMFLOAT4&>(v)) ) );
 				}
 				if( auto v = buf["specularIntensity"]; v.Exists() )
 				{
-					dcheck( ImGui::SliderFloat( "Spec. Intens.",&v,0.0f,1.0f ) );
+					dcheck( ImGui::SliderFloat( tag( "Spec. Intens." ),&v,0.0f,1.0f ) );
 				}
 				if( auto v = buf["specularPower"]; v.Exists() )
 				{
-					dcheck( ImGui::SliderFloat( "Glossiness",&v,1.0f,100.0f,"%.1f",1.5f ) );
+					dcheck( ImGui::SliderFloat( tag( "Glossiness" ),&v,1.0f,100.0f,"%.1f",1.5f ) );
 				}
 				return dirty;
 			}
-		};
+		} probe;
 
-		static Probe probe;
 		Accept( probe );
 	}
 	ImGui::End();
