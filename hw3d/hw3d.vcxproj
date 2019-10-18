@@ -207,6 +207,7 @@
     <ClInclude Include="Job.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LayoutCodex.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="NullPixelShader.h" />
     <ClInclude Include="Pass.h" />
     <ClInclude Include="PerfLog.h" />
