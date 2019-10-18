@@ -255,6 +255,7 @@ namespace Dvtx
 	{
 	public:
 		VertexBuffer( VertexLayout layout,size_t size = 0u ) noxnd;
+		VertexBuffer( VertexLayout layout,const aiMesh& mesh );
 		const char* GetData() const noxnd;
 		const VertexLayout& GetLayout() const noexcept;
 		void Resize( size_t newSize ) noxnd;
