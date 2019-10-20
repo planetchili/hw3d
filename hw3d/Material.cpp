@@ -121,6 +121,88 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 	}
 	// outline technique
 	{
+		Technique outline( "Outline" );
+		{
+			Step mask( 1 );
+
+			auto pvs = VertexShader::Resolve( gfx,"SolidVS.cso" );
+			auto pvsbc = pvs->GetBytecode();
+			mask.AddBindable( std::move( pvs ) );
+
+			// TODO: better sub-layout generation tech for future consideration maybe
+			mask.AddBindable( InputLayout::Resolve( gfx,vtxLayout,pvsbc ) );
+
+			mask.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
+
+			// TODO: might need to specify rasterizer when doubled-sided models start being used
+
+			outline.AddStep( std::move( mask ) );
+		}
+		{
+			Step draw( 2 );
+
+			// these can be pass-constant (tricky due to layout issues)
+			auto pvs = VertexShader::Resolve( gfx,"SolidVS.cso" );
+			auto pvsbc = pvs->GetBytecode();
+			draw.AddBindable( std::move( pvs ) );
+
+			// this can be pass-constant
+			draw.AddBindable( PixelShader::Resolve( gfx,"SolidPS.cso" ) );
+
+			Dcb::RawLayout lay;
+			lay.Add<Dcb::Float4>( "materialColor" );
+			auto buf = Dcb::Buffer( std::move( lay ) );
+			buf["materialColor"] = DirectX::XMFLOAT4{ 1.0f,0.4f,0.4f,1.0f };
+			draw.AddBindable( std::make_shared<Bind::CachingPixelConstantBufferEX>( gfx,buf,1u ) );
+
+			// TODO: better sub-layout generation tech for future consideration maybe
+			draw.AddBindable( InputLayout::Resolve( gfx,vtxLayout,pvsbc ) );
+
+			// quick and dirty... nicer solution maybe takes a lamba... we'll see :)
+			class TransformCbufScaling : public TransformCbuf
+			{
+			public:
+				TransformCbufScaling( Graphics& gfx,float scale = 1.04 )
+					:
+					TransformCbuf( gfx ),
+					buf( MakeLayout() )
+				{
+					buf["scale"] = scale;
+				}
+				void Accept( TechniqueProbe& probe ) override
+				{
+					probe.VisitBuffer( buf );
+				}
+				void Bind( Graphics& gfx ) noexcept override
+				{
+					const float scale = buf["scale"];
+					const auto scaleMatrix = DirectX::XMMatrixScaling( scale,scale,scale );
+					auto xf = GetTransforms( gfx );
+					xf.modelView = xf.modelView * scaleMatrix;
+					xf.modelViewProj = xf.modelViewProj * scaleMatrix;
+					UpdateBindImpl( gfx,xf );
+				}
+				std::unique_ptr<CloningBindable> Clone() const noexcept override
+				{
+					return std::make_unique<TransformCbufScaling>( *this );
+				}
+			private:
+				static Dcb::RawLayout MakeLayout()
+				{
+					Dcb::RawLayout layout;
+					layout.Add<Dcb::Float>( "scale" );
+					return layout;
+				}
+			private:
+				Dcb::Buffer buf;
+			};
+			draw.AddBindable( std::make_shared<TransformCbufScaling>( gfx ) );
+
+			// TODO: might need to specify rasterizer when doubled-sided models start being used
+
+			outline.AddStep( std::move( draw ) );
+		}
+		techniques.push_back( std::move( outline ) );
 	}
 }
 Dvtx::VertexBuffer Material::ExtractVertices( const aiMesh& mesh ) const noexcept
