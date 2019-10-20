@@ -1,8 +1,11 @@
 #include "TexturePreprocessor.h"
 #include <filesystem>
 #include <sstream>
-#include "Mesh.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 #include "ChiliMath.h"
+#include "ModelException.h"
 
 
 template<typename F>

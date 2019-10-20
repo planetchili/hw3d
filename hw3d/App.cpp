@@ -8,6 +8,11 @@
 #include "ChiliUtil.h"
 #include "Testing.h"
 #include "PerfLog.h"
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+#include "Mesh.h"
+#include "DynamicConstant.h"
 
 namespace dx = DirectX;
 

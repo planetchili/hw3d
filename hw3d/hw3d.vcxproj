@@ -155,6 +155,10 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
     </FxCompile>
+    <ClCompile Include="Model.cpp" />
+    <ClCompile Include="ModelException.cpp" />
+    <ClCompile Include="ModelWindow.cpp" />
+    <ClCompile Include="Node.cpp" />
     <ClCompile Include="NullPixelShader.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -229,6 +233,10 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="LayoutCodex.h" />
     <ClInclude Include="Material.h" />
+    <ClInclude Include="Model.h" />
+    <ClInclude Include="ModelException.h" />
+    <ClInclude Include="ModelWindow.h" />
+    <ClInclude Include="Node.h" />
     <ClInclude Include="NullPixelShader.h" />
     <ClInclude Include="Pass.h" />
     <ClInclude Include="PerfLog.h" />

@@ -1,4 +1,6 @@
 #include "Material.h"
+#include "DynamicConstant.h"
+#include "ConstantBuffersEx.h"
 
 Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesystem::path& path ) noxnd
 	:
