@@ -5,6 +5,8 @@
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include "Material.h"
+#include "Mesh.h"
 
 namespace dx = DirectX;
 
@@ -36,6 +38,21 @@ void TestDynamicMeshLoading()
 		const auto d = buf[i].Attr<VertexLayout::Bitangent>();
 		const auto e = buf[i].Attr<VertexLayout::Texture2D>();
 	}
+}
+
+void TestMaterialSystemLoading( Graphics& gfx )
+{
+	std::string path = "Models\\brick_wall\\brick_wall.obj";
+	Assimp::Importer imp;
+	const auto pScene = imp.ReadFile( path,
+		aiProcess_Triangulate |
+		aiProcess_JoinIdenticalVertices |
+		aiProcess_ConvertToLeftHanded |
+		aiProcess_GenNormals |
+		aiProcess_CalcTangentSpace
+	);
+	Material mat{ gfx,*pScene->mMaterials[1],path };
+	Mesh mesh{ gfx,mat,*pScene->mMeshes[0] };
 }
 
 void TestDynamicConstant()

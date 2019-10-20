@@ -163,18 +163,7 @@ namespace Dvtx
 		size_t GetElementCount() const noexcept;
 		std::vector<D3D11_INPUT_ELEMENT_DESC> GetD3DLayout() const noxnd;
 		std::string GetCode() const noxnd;
-		template<ElementType Type>
-		bool Has() const noexcept
-		{
-			for( auto& e : elements )
-			{
-				if( e.GetType() == Type )
-				{
-					return true;
-				}
-			}
-			return false;
-		}
+		bool Has( ElementType type ) const noexcept;
 	private:
 		std::vector<Element> elements;
 	};

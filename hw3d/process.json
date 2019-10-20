@@ -2,11 +2,9 @@
 	"enabled": false,
 	"commands": [
     {
-      "command": "make-stripes",
+      "command": "flip-y",
       "params": {
-        "dest": "Images\\stripes.png",
-        "size": 256,
-        "stripeWidth": 4
+        "source": "Models\\brick_wall\\brick_wall_normal.jpg"
       }
     }
 	]

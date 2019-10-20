@@ -20,6 +20,11 @@ namespace Bind
 		pParent = &parent;
 	}
 
+	std::unique_ptr<CloningBindable> TransformCbuf::Clone() const noexcept
+	{
+		return std::make_unique<TransformCbuf>( *this );
+	}
+
 	void TransformCbuf::UpdateBindImpl( Graphics& gfx,const Transforms& tf ) noexcept
 	{
 		assert( pParent != nullptr );

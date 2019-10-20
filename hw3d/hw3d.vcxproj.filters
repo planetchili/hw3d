@@ -55,6 +55,9 @@
     <Filter Include="Source Files\Model">
       <UniqueIdentifier>{562fafbf-5d77-4aff-980b-56008d9d1542}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{e72c8dd2-c363-4679-a1aa-059b4ca35655}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -208,6 +211,9 @@
       <Filter>Source Files\Jobber</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -458,6 +464,9 @@
     <None Include="DXTrace.inl">
       <Filter>Dxerr</Filter>
     </None>
+    <None Include="process.json">
+      <Filter>Other</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="PhongVS.hlsl">
@@ -470,12 +479,6 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="SolidVS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongPSNormalMap.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongVSNormalMap.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="PhongPSSpecNormalMap.hlsl">
@@ -503,6 +506,12 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="PhongPSSpecNormMask.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongDifNrmPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongDifNrmVS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
