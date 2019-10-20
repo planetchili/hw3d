@@ -25,7 +25,8 @@ float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float3 vi
     // replace normal with mapped if normal mapping enabled
     if (useNormalMap)
     {
-        viewNormal = MapNormal(normalize(viewTan), normalize(viewBitan), viewNormal, tc, nmap, splr);
+        const float3 mappedNormal = MapNormal(normalize(viewTan), normalize(viewBitan), viewNormal, tc, nmap, splr);
+        viewNormal = lerp(viewNormal, mappedNormal, normalMapWeight);
     }
 	// fragment to light vector data
     const LightVectorData lv = CalculateLightVectorData(viewLightPos, viewFragPos);
