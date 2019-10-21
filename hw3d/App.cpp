@@ -47,9 +47,9 @@ void App::DoFrame()
 	//wall.Draw( wnd.Gfx() );
 	//tp.Draw( wnd.Gfx() );
 	//nano.Draw( wnd.Gfx() );
-	gobber.Submit( fc );
+	//gobber.Submit( fc );
 	light.Submit( fc );
-	//sponza.Draw( wnd.Gfx() );
+	sponza.Submit( fc );
 	//cube.Submit( fc );
 	//cube2.Submit( fc );
 	//bluePlane.Draw( wnd.Gfx() );
