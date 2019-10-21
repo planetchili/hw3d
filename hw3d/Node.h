@@ -14,7 +14,7 @@ public:
 	void SetAppliedTransform( DirectX::FXMMATRIX transform ) noexcept;
 	const DirectX::XMFLOAT4X4& GetAppliedTransform() const noexcept;
 	int GetId() const noexcept;
-	void ShowTree( Node*& pSelectedNode ) const noexcept;
+	//void ShowTree( Node*& pSelectedNode ) const noexcept;
 private:
 	void AddChild( std::unique_ptr<Node> pChild ) noxnd;
 private:
