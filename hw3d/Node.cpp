@@ -22,11 +22,11 @@ void Node::Submit( FrameCommander& frame,DirectX::FXMMATRIX accumulatedTransform
 		accumulatedTransform;
 	for( const auto pm : meshPtrs )
 	{
-		pm->Submit( frame,accumulatedTransform );
+		pm->Submit( frame,built );
 	}
 	for( const auto& pc : childPtrs )
 	{
-		pc->Submit( frame,accumulatedTransform );
+		pc->Submit( frame,built );
 	}
 }
 
