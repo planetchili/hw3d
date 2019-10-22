@@ -30,12 +30,5 @@ private:
 		float y = 0.0f;
 		float z = 0.0f;
 	};
-	struct NodeData
-	{
-		TransformParameters tranformParams;
-		bool transformParamsDirty;
-		std::optional<Dcb::Buffer> materialCbuf;
-		bool materialCbufDirty;
-	};
-	std::unordered_map<int,NodeData> transforms;
+	std::unordered_map<int,TransformParameters> transforms;
 };

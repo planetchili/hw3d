@@ -116,33 +116,24 @@ void ModelWindow::ApplyParameters() noxnd
 dx::XMMATRIX ModelWindow::GetTransform() const noxnd
 {
 	assert( pSelectedNode != nullptr );
-	const auto& transform = transforms.at( pSelectedNode->GetId() ).tranformParams;
-	return
-		dx::XMMatrixRotationRollPitchYaw( transform.roll,transform.pitch,transform.yaw ) *
-		dx::XMMatrixTranslation( transform.x,transform.y,transform.z );
-}
-const Dcb::Buffer& ModelWindow::GetMaterial() const noxnd
-{
-	assert( pSelectedNode != nullptr );
-	const auto& mat = transforms.at( pSelectedNode->GetId() ).materialCbuf;
-	assert( mat );
-	return *mat;
+	return dx::XMMatrixIdentity();
 }
 bool ModelWindow::TransformDirty() const noxnd
 {
-	return pSelectedNode && transforms.at( pSelectedNode->GetId() ).transformParamsDirty;
+	return false;
+	//return pSelectedNode && transforms.at( pSelectedNode->GetId() ).transformParamsDirty;
 }
 void ModelWindow::ResetTransformDirty() noxnd
 {
-	transforms.at( pSelectedNode->GetId() ).transformParamsDirty = false;
+	//transforms.at( pSelectedNode->GetId() ).transformParamsDirty = false;
 }
 bool ModelWindow::MaterialDirty() const noxnd
 {
-	return pSelectedNode && transforms.at( pSelectedNode->GetId() ).materialCbufDirty;
+	return false;//return pSelectedNode && transforms.at( pSelectedNode->GetId() ).materialCbufDirty;
 }
 void ModelWindow::ResetMaterialDirty() noxnd
 {
-	transforms.at( pSelectedNode->GetId() ).materialCbufDirty = false;
+	//transforms.at( pSelectedNode->GetId() ).materialCbufDirty = false;
 }
 bool ModelWindow::IsDirty() const noxnd
 {
