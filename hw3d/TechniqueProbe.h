@@ -8,6 +8,8 @@ namespace Dcb
 class TechniqueProbe
 {
 public:
+	// TODO: add callback for visiting each mesh
+
 	void SetTechnique( class Technique* pTech_in )
 	{
 		pTech = pTech_in;
