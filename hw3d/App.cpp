@@ -26,10 +26,8 @@ App::App( const std::string& commandLine )
 	scriptCommander( TokenizeQuoted( commandLine ) ),
 	light( wnd.Gfx() )
 {
-	//TestScaleMatrixTranslation();
-	//TestDynamicConstant();
-	//cube.SetPos( { 4.0f,0.0f,0.0f } );
-	//cube2.SetPos( { 0.0f,4.0f,0.0f } );
+	cube.SetPos( { 4.0f,0.0f,0.0f } );
+	cube2.SetPos( { 0.0f,4.0f,0.0f } );
 
 	//wall.SetRootTransform( dx::XMMatrixTranslation( -12.0f,0.0f,0.0f ) );
 	//tp.SetPos( { 12.0f,0.0f,0.0f } );
@@ -53,9 +51,9 @@ void App::DoFrame()
 	//nano.Draw( wnd.Gfx() );
 	//gobber.Submit( fc );
 	light.Submit( fc );
+	cube.Submit( fc );
 	sponza.Submit( fc );
-	//cube.Submit( fc );
-	//cube2.Submit( fc );
+	cube2.Submit( fc );
 	//bluePlane.Draw( wnd.Gfx() );
 	//redPlane.Draw( wnd.Gfx() );
 	fc.Execute( wnd.Gfx() );
@@ -285,8 +283,8 @@ void App::DoFrame()
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	ShowImguiDemoWindow();
-	//cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
-	//cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
+	cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
+	cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
 	//sponza.ShowWindow( wnd.Gfx(),"Sponza" );
 	//gobber.ShowWindow( wnd.Gfx(),"gobber" );
 	//wall.ShowWindow( wnd.Gfx(),"Wall" );
