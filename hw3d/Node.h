@@ -14,7 +14,15 @@ public:
 	void SetAppliedTransform( DirectX::FXMMATRIX transform ) noexcept;
 	const DirectX::XMFLOAT4X4& GetAppliedTransform() const noexcept;
 	int GetId() const noexcept;
-	//void ShowTree( Node*& pSelectedNode ) const noexcept;
+	bool HasChildren() const noexcept
+	{
+		return childPtrs.size() > 0;
+	}
+	void Accept( class ModelProbe& probe );
+	const std::string& GetName() const
+	{
+		return name;
+	}
 private:
 	void AddChild( std::unique_ptr<Node> pChild ) noxnd;
 private:
