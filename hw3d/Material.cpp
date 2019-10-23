@@ -118,7 +118,7 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 			}
 			buf["useNormalMap"].SetIfExists( true );
 			buf["normalMapWeight"].SetIfExists( 1.0f );
-			step.AddBindable( std::make_unique<Bind::CachingPixelConstantBufferEX>( gfx,std::move( buf ),1u ) );
+			step.AddBindable( std::make_unique<Bind::CachingPixelConstantBufferEx>( gfx,std::move( buf ),1u ) );
 		}
 		phong.AddStep( std::move( step ) );
 		techniques.push_back( std::move( phong ) );
@@ -146,7 +146,7 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 			Step draw( 2 );
 
 			// these can be pass-constant (tricky due to layout issues)
-			auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
+			auto pvs = VertexShader::Resolve( gfx,"Offset_VS.cso" );
 			auto pvsbc = pvs->GetBytecode();
 			draw.AddBindable( std::move( pvs ) );
 
@@ -157,7 +157,13 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 			lay.Add<Dcb::Float3>( "materialColor" );
 			auto buf = Dcb::Buffer( std::move( lay ) );
 			buf["materialColor"] = DirectX::XMFLOAT3{ 1.0f,0.4f,0.4f };
-			draw.AddBindable( std::make_shared<Bind::CachingPixelConstantBufferEX>( gfx,buf,1u ) );
+			draw.AddBindable( std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,1u ) );
+
+			//Dcb::RawLayout lay;
+			//lay.Add<Dcb::Float>( "offset" );
+			//auto buf = Dcb::Buffer( std::move( lay ) );
+			//buf["offset"] = 0.5f;                  
+			//draw.AddBindable( std::make_shared<Bind::CachingVertexConstantBufferEx>( gfx,buf,1u ) );
 
 			// TODO: better sub-layout generation tech for future consideration maybe
 			draw.AddBindable( InputLayout::Resolve( gfx,vtxLayout,pvsbc ) );
