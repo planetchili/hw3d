@@ -163,7 +163,6 @@
     </FxCompile>
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="ModelException.cpp" />
-    <ClCompile Include="ModelWindow.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="NullPixelShader.cpp" />
     <ClCompile Include="PointLight.cpp" />
@@ -241,7 +240,6 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="ModelException.h" />
-    <ClInclude Include="ModelWindow.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="ModelProbe.h" />
     <ClInclude Include="NullPixelShader.h" />

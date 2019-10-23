@@ -3,7 +3,6 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include "ModelException.h"
-#include "ModelWindow.h"
 #include "Node.h"
 #include "Mesh.h"
 #include "Material.h"
