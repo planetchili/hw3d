@@ -78,13 +78,6 @@ public:
 		}
 	}
 private:
-	static Dvtx::VertexLayout MakeFullscreenQuadLayout()
-	{
-		Dvtx::VertexLayout lay;
-		lay.Append( Dvtx::VertexLayout::Position2D );
-		return lay;
-	}
-private:
 	std::array<Pass,3> passes;
 	DepthStencil ds;
 	RenderTarget rt;
