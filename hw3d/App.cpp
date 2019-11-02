@@ -321,6 +321,7 @@ void App::DoFrame()
 	ShowImguiDemoWindow();
 	cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
 	cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
+	fc.ShowWindows( wnd.Gfx() );
 	//sponza.ShowWindow( wnd.Gfx(),"Sponza" );
 	//gobber.ShowWindow( wnd.Gfx(),"gobber" );
 	//wall.ShowWindow( wnd.Gfx(),"Wall" );
