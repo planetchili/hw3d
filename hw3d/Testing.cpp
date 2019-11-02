@@ -189,6 +189,16 @@ void TestDynamicConstant()
 		auto act = b.GetSizeInBytes();
 		assert( act == 16u * 4u * 4u * 6u );
 	}
+	// size test array of floats
+	{
+		Dcb::RawLayout s;
+		s.Add<Dcb::Array>( "arr" );
+		s["arr"].Set<Dcb::Float>( 16 );
+		auto b = Dcb::Buffer( std::move( s ) );
+
+		auto act = b.GetSizeInBytes();
+		assert( act == 256u );
+	}
 	// size test array of structs with padding
 	{
 		Dcb::RawLayout s;

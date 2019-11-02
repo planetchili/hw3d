@@ -1,26 +1,41 @@
 Texture2D tex;
 SamplerState splr;
 
-static const int r = 12;
-static const float divisor = (2 * r + 1) * (2 * r + 1);
+cbuffer Kernel
+{
+    uint nTaps;
+    float coefficients[15];
+}
+
+cbuffer Control
+{
+    bool horizontal;
+}
 
 float4 main(float2 uv : Texcoord) : SV_Target
 {
     uint width, height;
     tex.GetDimensions(width, height);
-    const float dx = 1.0f / width;
-    const float dy = 1.0f / height;
-    float accAlpha = 0.0f;
-    float3 maxColor = float3(0.0f, 0.0f, 0.0f);
-    for (int y = -r; y <= r; y++)
+    float dx, dy;
+    if (horizontal)
     {
-        for (int x = -r; x <= r; x++)
-        {
-            const float2 tc = uv + float2(dx * x, dy * y);
-            const float4 s = tex.Sample(splr, tc).rgba;
-            accAlpha += s.a;
-            maxColor = max(s.rgb, maxColor);
-        }
+        dx = 1.0f / width;
+        dy = 0.0f;
     }
-    return float4(maxColor, accAlpha / divisor);
+    else
+    {
+        dx = 0.0f;
+        dy = 1.0f / height;
+    }
+    const int r = nTaps / 2;
+
+    float4 acc = { 0.0f, 0.0f, 0.0f, 0.0f };
+    for (int i = -r; i <= r; i++)
+    {
+        const float2 tc = uv + float2(dx * i, dy * i);
+        const float4 s = tex.Sample(splr, tc).rgba;
+        const float coef = coefficients[i + r];
+        acc += s * coef;
+    }
+    return acc;
 }

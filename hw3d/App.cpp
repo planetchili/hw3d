@@ -26,6 +26,7 @@ App::App( const std::string& commandLine )
 	scriptCommander( TokenizeQuoted( commandLine ) ),
 	light( wnd.Gfx() )
 {
+	TestDynamicConstant();
 	cube.SetPos( { 4.0f,0.0f,0.0f } );
 	cube2.SetPos( { 0.0f,4.0f,0.0f } );
 
