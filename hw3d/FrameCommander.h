@@ -37,7 +37,8 @@ public:
 		// setup fullscreen shaders
 		pVsFull = Bind::VertexShader::Resolve( gfx,"Fullscreen_VS.cso" );
 		pLayoutFull = Bind::InputLayout::Resolve( gfx,lay,pVsFull->GetBytecode() );
-		pSamplerFull = Bind::Sampler::Resolve( gfx,false,true );
+		pSamplerFullPoint = Bind::Sampler::Resolve( gfx,false,true );
+		pSamplerFullBilin = Bind::Sampler::Resolve( gfx,true,true );
 		pBlenderMerge = Bind::Blender::Resolve( gfx,true );
 	}
 	void Accept( Job job,size_t target ) noexcept
@@ -74,7 +75,7 @@ public:
 		pIbFull->Bind( gfx );
 		pVsFull->Bind( gfx );
 		pLayoutFull->Bind( gfx );
-		pSamplerFull->Bind( gfx );
+		pSamplerFullPoint->Bind( gfx );
 		blur.Bind( gfx );
 		blur.SetHorizontal( gfx );
 		gfx.DrawIndexed( pIbFull->GetCount() );
@@ -82,6 +83,7 @@ public:
 		gfx.BindSwapBuffer( ds );
 		rt2.BindAsTexture( gfx,0u );
 		pBlenderMerge->Bind( gfx );
+		pSamplerFullBilin->Bind( gfx );
 		Stencil::Resolve( gfx,Stencil::Mode::Mask )->Bind( gfx );
 		blur.SetVertical( gfx );
 		gfx.DrawIndexed( pIbFull->GetCount() );
@@ -107,6 +109,7 @@ private:
 	std::shared_ptr<Bind::IndexBuffer> pIbFull;
 	std::shared_ptr<Bind::VertexShader> pVsFull;
 	std::shared_ptr<Bind::InputLayout> pLayoutFull;
-	std::shared_ptr<Bind::Sampler> pSamplerFull;
+	std::shared_ptr<Bind::Sampler> pSamplerFullPoint;
+	std::shared_ptr<Bind::Sampler> pSamplerFullBilin;
 	std::shared_ptr<Bind::Blender> pBlenderMerge;
 };
