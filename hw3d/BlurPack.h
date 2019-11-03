@@ -6,9 +6,9 @@
 class BlurPack
 {
 public:
-	BlurPack( Graphics& gfx,int radius = 7,float sigma = 2.6f )
+	BlurPack( Graphics& gfx,int radius = 7,float sigma = 2.6f,const char* shader = "Blur_PS.cso" )
 		:
-		shader( gfx,"Blur_PS.cso" ),
+		shader( gfx,shader ),
 		pcb( gfx,0u ),
 		ccb( gfx,1u ),
 		radius( radius ),
