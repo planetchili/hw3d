@@ -16,6 +16,7 @@
 #include "ModelProbe.h"
 #include "Node.h"
 #include "ChiliXM.h"
+#include "TechniqueProbe.h"
 
 namespace dx = DirectX;
 

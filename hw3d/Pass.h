@@ -6,21 +6,9 @@
 class Pass
 {
 public:
-	void Accept( Job job ) noexcept
-	{
-		jobs.push_back( job );
-	}
-	void Execute( Graphics& gfx ) const noxnd
-	{
-		for( const auto& j : jobs )
-		{
-			j.Execute( gfx );
-		}
-	}
-	void Reset() noexcept
-	{
-		jobs.clear();
-	}
+	void Accept( Job job ) noexcept;
+	void Execute( Graphics& gfx ) const noxnd;
+	void Reset() noexcept;
 private:
 	std::vector<Job> jobs;
 };
