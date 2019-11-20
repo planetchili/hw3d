@@ -347,6 +347,17 @@ namespace Dcb
 		bool Exists() const noexcept;
 		ElementRef operator[]( const std::string& key ) const noxnd;
 		ElementRef operator[]( size_t index ) const noxnd;
+		// optionally set value if not an empty Ref
+		template<typename S>
+		bool SetIfExists( const S& val ) noxnd
+		{
+			if( Exists() )
+			{
+				*this = val;
+				return true;
+			}
+			return false;
+		}
 		Ptr operator&() const noxnd;
 		// conversion for reading/writing as a supported SysType
 		template<typename T>
