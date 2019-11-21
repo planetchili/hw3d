@@ -193,4 +193,20 @@ void TestDynamicConstant()
 		auto cooked = Dcb::LayoutCodex::Resolve( std::move( pscLayout ) );
 		assert( cooked.GetSizeInBytes() == 320u );
 	}
+	// testing pointer stuff
+	{
+		Dcb::RawLayout s;
+		s.Add<Dcb::Struct>( "butts"s );
+		s["butts"s].Add<Dcb::Float3>( "pubes"s );
+		s["butts"s].Add<Dcb::Float>( "dank"s );
+		
+		auto b = Dcb::Buffer( std::move( s ) );
+		const auto exp = 696969.6969f;
+		b["butts"s]["dank"s] = 696969.6969f;
+		assert( (float&)b["butts"s]["dank"s] == exp );
+		assert( *(float*)&b["butts"s]["dank"s] == exp );
+		const auto exp2 = 42.424242f;
+		*(float*)&b["butts"s]["dank"s] = exp2;
+		assert( (float&)b["butts"s]["dank"s] == exp2 );
+	}
 }
