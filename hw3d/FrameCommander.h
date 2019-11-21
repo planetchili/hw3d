@@ -16,8 +16,8 @@ public:
 	FrameCommander( Graphics& gfx )
 		:
 		ds( gfx,gfx.GetWidth(),gfx.GetHeight() ),
-		rt1( gfx,gfx.GetWidth() / 2,gfx.GetHeight() / 2 ),
-		rt2( gfx,gfx.GetWidth() / 2,gfx.GetHeight() / 2 ),
+		rt1( { gfx,gfx.GetWidth() / downFactor,gfx.GetHeight() / downFactor } ),
+		rt2( { gfx,gfx.GetWidth() / downFactor,gfx.GetHeight() / downFactor } ),
 		blur( gfx,7,2.6f,"BlurOutline_PS.cso" )
 	{
 		namespace dx = DirectX;
@@ -54,7 +54,7 @@ public:
 
 		// setup render target used for normal passes
 		ds.Clear( gfx );
-		rt1.Clear( gfx );
+		rt1->Clear( gfx );
 		gfx.BindSwapBuffer( ds );
 		// main phong lighting pass
 		Blender::Resolve( gfx,false )->Bind( gfx );
@@ -65,12 +65,12 @@ public:
 		NullPixelShader::Resolve( gfx )->Bind( gfx );
 		passes[1].Execute( gfx );
 		// outline drawing pass
-		rt1.BindAsTarget( gfx );
+		rt1->BindAsTarget( gfx );
 		Stencil::Resolve( gfx,Stencil::Mode::Off )->Bind( gfx );
 		passes[2].Execute( gfx );
 		// fullscreen blur h-pass
-		rt2.BindAsTarget( gfx );
-		rt1.BindAsTexture( gfx,0 );
+		rt2->BindAsTarget( gfx );
+		rt1->BindAsTexture( gfx,0 );
 		pVbFull->Bind( gfx );
 		pIbFull->Bind( gfx );
 		pVsFull->Bind( gfx );
@@ -81,7 +81,7 @@ public:
 		gfx.DrawIndexed( pIbFull->GetCount() );
 		// fullscreen blur v-pass + combine
 		gfx.BindSwapBuffer( ds );
-		rt2.BindAsTexture( gfx,0u );
+		rt2->BindAsTexture( gfx,0u );
 		pBlenderMerge->Bind( gfx );
 		pSamplerFullBilin->Bind( gfx );
 		Stencil::Resolve( gfx,Stencil::Mode::Mask )->Bind( gfx );
@@ -97,13 +97,23 @@ public:
 	}
 	void ShowWindows( Graphics& gfx )
 	{
-		blur.ShowWindow( gfx );
+		if( ImGui::Begin( "Blur" ) )
+		{
+			if( ImGui::SliderInt( "Down Factor",&downFactor,1,16 ) )
+			{
+				rt1.emplace( gfx,gfx.GetWidth() / downFactor,gfx.GetHeight() / downFactor );
+				rt2.emplace( gfx,gfx.GetWidth() / downFactor,gfx.GetHeight() / downFactor );
+			}
+			blur.RenderWidgets( gfx );
+		}
+		ImGui::End();
 	}
 private:
 	std::array<Pass,3> passes;
+	int downFactor = 1;
 	DepthStencil ds;
-	RenderTarget rt1;
-	RenderTarget rt2;
+	std::optional<RenderTarget> rt1;
+	std::optional<RenderTarget> rt2;
 	BlurPack blur;
 	std::shared_ptr<Bind::VertexBuffer> pVbFull;
 	std::shared_ptr<Bind::IndexBuffer> pIbFull;
