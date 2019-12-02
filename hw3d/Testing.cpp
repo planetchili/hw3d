@@ -165,7 +165,7 @@ void TestDynamicConstant()
 		assert( static_cast<dx::XMFLOAT3>(b1["arr"][0]).x == 69.0f );
 		assert( static_cast<dx::XMFLOAT3>(b2["arr"][0]).x == 420.0f );
 	}
-	// specific testing scenario
+	// specific testing scenario (packing error)
 	{
 		Dcb::RawLayout pscLayout;
 		pscLayout.Add<Dcb::Float3>( "materialColor" );
@@ -208,5 +208,18 @@ void TestDynamicConstant()
 		const auto exp2 = 42.424242f;
 		*(float*)&b["butts"s]["dank"s] = exp2;
 		assert( (float&)b["butts"s]["dank"s] == exp2 );
+	}
+	// specific testing scenario (packing error)
+	{
+		Dcb::RawLayout lay;
+		lay.Add<Dcb::Bool>( "normalMapEnabled" );
+		lay.Add<Dcb::Bool>( "specularMapEnabled" );
+		lay.Add<Dcb::Bool>( "hasGlossMap" );
+		lay.Add<Dcb::Float>( "specularPower" );
+		lay.Add<Dcb::Float3>( "specularColor" );
+		lay.Add<Dcb::Float>( "specularMapWeight" );
+
+		auto buf = Dcb::Buffer( std::move( lay ) );
+		assert( buf.GetSizeInBytes() == 32u );
 	}
 }
