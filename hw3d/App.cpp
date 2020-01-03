@@ -17,6 +17,8 @@
 #include "Node.h"
 #include "ChiliXM.h"
 #include "TechniqueProbe.h"
+#include "BufferClearPass.h"
+#include "LambertianPass.h"
 
 namespace dx = DirectX;
 
@@ -27,9 +29,29 @@ App::App( const std::string& commandLine )
 	scriptCommander( TokenizeQuoted( commandLine ) ),
 	light( wnd.Gfx() )
 {
-	TestDynamicConstant();
 	cube.SetPos( { 4.0f,0.0f,0.0f } );
 	cube2.SetPos( { 0.0f,4.0f,0.0f } );
+	
+	{
+		{
+			auto bcp = std::make_unique<BufferClearPass>( "clear" );
+			bcp->SetInputSource( "renderTarget","$.backbuffer" );
+			bcp->SetInputSource( "depthStencil","$.masterDepth" );
+			rg.AppendPass( std::move( bcp ) );
+		}
+		{
+			auto lp = std::make_unique<LambertianPass>( "lambertian" );
+			lp->SetInputSource( "renderTarget","clear.renderTarget" );
+			lp->SetInputSource( "depthStencil","clear.depthStencil" );
+			rg.AppendPass( std::move( lp ) );
+		}
+		rg.SetSinkTarget( "backbuffer","lambertian.renderTarget" );
+		rg.Finalize();
+
+		cube.LinkTechniques( rg );
+		cube2.LinkTechniques( rg );
+		light.LinkTechniques( rg );
+	}
 
 	//wall.SetRootTransform( dx::XMMatrixTranslation( -12.0f,0.0f,0.0f ) );
 	//tp.SetPos( { 12.0f,0.0f,0.0f } );
@@ -52,13 +74,13 @@ void App::DoFrame()
 	//tp.Draw( wnd.Gfx() );
 	//nano.Draw( wnd.Gfx() );
 	//gobber.Submit( fc );
-	light.Submit( fc );
-	cube.Submit( fc );
-	sponza.Submit( fc );
-	cube2.Submit( fc );
+	light.Submit();
+	cube.Submit();
+	// sponza.Submit( fc );
+	cube2.Submit();
 	//bluePlane.Draw( wnd.Gfx() );
 	//redPlane.Draw( wnd.Gfx() );
-	fc.Execute( wnd.Gfx() );
+	rg.Execute( wnd.Gfx() );
 
 	while( const auto e = wnd.kbd.ReadKey() )
 	{
@@ -316,13 +338,12 @@ void App::DoFrame()
 	static MP modelProbe;
 
 	// imgui windows
-	modelProbe.SpawnWindow( sponza );
+	//modelProbe.SpawnWindow( sponza );
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	ShowImguiDemoWindow();
 	cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
 	cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
-	fc.ShowWindows( wnd.Gfx() );
 	//sponza.ShowWindow( wnd.Gfx(),"Sponza" );
 	//gobber.ShowWindow( wnd.Gfx(),"gobber" );
 	//wall.ShowWindow( wnd.Gfx(),"Wall" );
@@ -333,7 +354,7 @@ void App::DoFrame()
 
 	// present
 	wnd.Gfx().EndFrame();
-	fc.Reset();
+	rg.Reset();
 }
 
 void App::ShowImguiDemoWindow()

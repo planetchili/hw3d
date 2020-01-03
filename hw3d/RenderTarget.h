@@ -1,21 +1,50 @@
 #pragma once
-#include "Graphics.h"
-#include "GraphicsResource.h"
+#include "Bindable.h"
+#include "BufferResource.h"
 
-class DepthStencil;
+class Graphics;
 
-class RenderTarget : public GraphicsResource
+namespace Bind
 {
-public:
-	RenderTarget( Graphics& gfx,UINT width,UINT height );
-	void BindAsTexture( Graphics& gfx,UINT slot ) const noexcept;
-	void BindAsTarget( Graphics& gfx ) const noexcept;
-	void BindAsTarget( Graphics& gfx,const DepthStencil& depthStencil ) const noexcept;
-	void Clear( Graphics& gfx,const std::array<float,4>& color ) const noexcept;
-	void Clear( Graphics& gfx ) const noexcept;
-private:
-	UINT width;
-	UINT height;
-	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pTextureView;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTargetView;
-};
+	class DepthStencil;
+
+	class RenderTarget : public Bindable, public BufferResource
+	{
+	public:
+		void BindAsBuffer( Graphics& gfx ) noexcept override;
+		void BindAsBuffer( Graphics& gfx,BufferResource* depthStencil ) noexcept override;
+		void BindAsBuffer( Graphics& gfx,DepthStencil* depthStencil ) noexcept;
+		void Clear( Graphics& gfx ) noexcept override;
+		void Clear( Graphics& gfx,const std::array<float,4>& color ) noexcept;
+		UINT GetWidth() const noexcept;
+		UINT GetHeight() const noexcept;
+	private:
+		void BindAsBuffer( Graphics& gfx,ID3D11DepthStencilView* pDepthStencilView ) noexcept;
+	protected:
+		RenderTarget( Graphics& gfx,ID3D11Texture2D* pTexture );
+		RenderTarget( Graphics& gfx,UINT width,UINT height );
+		UINT width;
+		UINT height;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTargetView;
+	};
+
+	class ShaderInputRenderTarget : public RenderTarget
+	{
+	public:
+		ShaderInputRenderTarget( Graphics& gfx,UINT width,UINT height,UINT slot );
+		void Bind( Graphics& gfx ) noexcept override;
+	private:
+		UINT slot;
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pShaderResourceView;
+	};
+
+	// RT for Graphics to create RenderTarget for the back buffer
+	class OutputOnlyRenderTarget : public RenderTarget
+	{
+		friend Graphics;
+	public:
+		void Bind( Graphics& gfx ) noexcept override;
+	private:
+		OutputOnlyRenderTarget( Graphics& gfx,ID3D11Texture2D* pTexture );
+	};
+}

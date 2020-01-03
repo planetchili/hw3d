@@ -2,7 +2,6 @@
 #include "Cube.h"
 #include "BindableCommon.h"
 #include "ConstantBuffersEx.h"
-#include "TransformCbufDoubleboi.h"
 #include "imgui/imgui.h"
 #include "DynamicConstant.h"
 #include "TechniqueProbe.h"
@@ -23,7 +22,7 @@ TestCube::TestCube( Graphics& gfx,float size )
 	{
 		Technique shade("Shade");
 		{
-			Step only( 0 );
+			Step only( "lambertian" );
 
 			only.AddBindable( Texture::Resolve( gfx,"Images\\brickwall.jpg" ) );
 			only.AddBindable( Sampler::Resolve( gfx ) );
@@ -53,52 +52,52 @@ TestCube::TestCube( Graphics& gfx,float size )
 		AddTechnique( std::move( shade ) );
 	}
 
-	{
-		Technique outline("Outline");
-		{
-			Step mask( 1 );
+	//{
+	//	Technique outline("Outline");
+	//	{
+	//		Step mask( "mask" );
 
-			auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
-			auto pvsbc = pvs->GetBytecode();
-			mask.AddBindable( std::move( pvs ) );
+	//		auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
+	//		auto pvsbc = pvs->GetBytecode();
+	//		mask.AddBindable( std::move( pvs ) );
 
-			// TODO: better sub-layout generation tech for future consideration maybe
-			mask.AddBindable( InputLayout::Resolve( gfx,model.vertices.GetLayout(),pvsbc ) );
+	//		// TODO: better sub-layout generation tech for future consideration maybe
+	//		mask.AddBindable( InputLayout::Resolve( gfx,model.vertices.GetLayout(),pvsbc ) );
 
-			mask.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
+	//		mask.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
 
-			// TODO: might need to specify rasterizer when doubled-sided models start being used
+	//		// TODO: might need to specify rasterizer when doubled-sided models start being used
 
-			outline.AddStep( std::move( mask ) );
-		}
-		{
-			Step draw( 2 );
+	//		outline.AddStep( std::move( mask ) );
+	//	}
+	//	{
+	//		Step draw( "draw" );
 
-			// these can be pass-constant (tricky due to layout issues)
-			auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
-			auto pvsbc = pvs->GetBytecode();
-			draw.AddBindable( std::move( pvs ) );
+	//		// these can be pass-constant (tricky due to layout issues)
+	//		auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
+	//		auto pvsbc = pvs->GetBytecode();
+	//		draw.AddBindable( std::move( pvs ) );
 
-			// this can be pass-constant
-			draw.AddBindable( PixelShader::Resolve( gfx,"Solid_PS.cso" ) );
+	//		// this can be pass-constant
+	//		draw.AddBindable( PixelShader::Resolve( gfx,"Solid_PS.cso" ) );
 
-			Dcb::RawLayout lay;
-			lay.Add<Dcb::Float4>( "color" );
-			auto buf = Dcb::Buffer( std::move( lay ) );
-			buf["color"] = DirectX::XMFLOAT4{ 1.0f,0.4f,0.4f,1.0f };
-			draw.AddBindable( std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,1u ) );
+	//		Dcb::RawLayout lay;
+	//		lay.Add<Dcb::Float4>( "color" );
+	//		auto buf = Dcb::Buffer( std::move( lay ) );
+	//		buf["color"] = DirectX::XMFLOAT4{ 1.0f,0.4f,0.4f,1.0f };
+	//		draw.AddBindable( std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,1u ) );
 
-			// TODO: better sub-layout generation tech for future consideration maybe
-			draw.AddBindable( InputLayout::Resolve( gfx,model.vertices.GetLayout(),pvsbc ) );
+	//		// TODO: better sub-layout generation tech for future consideration maybe
+	//		draw.AddBindable( InputLayout::Resolve( gfx,model.vertices.GetLayout(),pvsbc ) );
 
-			draw.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
+	//		draw.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
 
-			// TODO: might need to specify rasterizer when doubled-sided models start being used
+	//		// TODO: might need to specify rasterizer when doubled-sided models start being used
 
-			outline.AddStep( std::move( draw ) );
-		}
-		AddTechnique( std::move( outline ) );
-	}
+	//		outline.AddStep( std::move( draw ) );
+	//	}
+	//	AddTechnique( std::move( outline ) );
+	//}
 }
 
 void TestCube::SetPos( DirectX::XMFLOAT3 pos ) noexcept

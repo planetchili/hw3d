@@ -16,7 +16,7 @@ class Model
 {
 public:
 	Model( Graphics& gfx,const std::string& pathString,float scale = 1.0f );
-	void Submit( FrameCommander& frame ) const noxnd;
+	void Submit() const noxnd;
 	void SetRootTransform( DirectX::FXMMATRIX tf ) noexcept;
 	void Accept( class ModelProbe& probe );
 	~Model() noexcept;

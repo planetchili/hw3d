@@ -1,12 +1,11 @@
 #pragma once
-#include "Graphics.h"
-#include "ConditionalNoexcept.h"
 #include "GraphicsResource.h"
 #include <memory>
 #include <string>
 
 class Drawable;
 class TechniqueProbe;
+class Graphics;
 
 namespace Bind
 {

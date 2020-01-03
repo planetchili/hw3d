@@ -11,11 +11,10 @@
 #include <random>
 #include "ConditionalNoexcept.h"
 
-class DepthStencil;
-
 namespace Bind
 {
 	class Bindable;
+	class RenderTarget;
 }
 
 class Graphics
@@ -65,8 +64,6 @@ public:
 	~Graphics();
 	void EndFrame();
 	void BeginFrame( float red,float green,float blue ) noexcept;
-	void BindSwapBuffer() noexcept;
-	void BindSwapBuffer( const DepthStencil& ds ) noexcept;
 	void DrawIndexed( UINT count ) noxnd;
 	void SetProjection( DirectX::FXMMATRIX proj ) noexcept;
 	DirectX::XMMATRIX GetProjection() const noexcept;
@@ -77,6 +74,7 @@ public:
 	bool IsImguiEnabled() const noexcept;
 	UINT GetWidth() const noexcept;
 	UINT GetHeight() const noexcept;
+	std::shared_ptr<Bind::RenderTarget> GetTarget();
 private:
 	UINT width;
 	UINT height;
@@ -89,6 +87,5 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11Device> pDevice;
 	Microsoft::WRL::ComPtr<IDXGISwapChain> pSwap;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext> pContext;
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView> pTarget;
-	Microsoft::WRL::ComPtr<ID3D11DepthStencilView> pDSV;
+	std::shared_ptr<Bind::RenderTarget> pTarget;
 };
