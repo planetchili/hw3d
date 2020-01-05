@@ -4,20 +4,22 @@
 #include <vector>
 #include "PassInput.h"
 #include "PassOutput.h"
+#include "Stencil.h"
 
 class Graphics;
 
 class LambertianPass : public RenderQueuePass
 {
 public:
-	LambertianPass( std::string name )
+	LambertianPass( Graphics& gfx,std::string name )
 		:
 		RenderQueuePass( std::move( name ) )
 	{
-		RegisterInput( BufferInput<Bind::RenderTarget>::Make( "renderTarget",renderTarget ) );
-		RegisterInput( BufferInput<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
-		RegisterOutput( BufferOutput<Bind::RenderTarget>::Make( "renderTarget",renderTarget ) );
+		using namespace Bind;
+		RegisterInput( BufferInput<RenderTarget>::Make( "renderTarget",renderTarget ) );
+		RegisterInput( BufferInput<DepthStencil>::Make( "depthStencil",depthStencil ) );
+		RegisterOutput( BufferOutput<RenderTarget>::Make( "renderTarget",renderTarget ) );
+		RegisterOutput( BufferOutput<DepthStencil>::Make( "depthStencil",depthStencil ) );
+		AddBind( Stencil::Resolve( gfx,Stencil::Mode::Mask ) );
 	}
-private:
-	std::vector<Job> jobs;
 };

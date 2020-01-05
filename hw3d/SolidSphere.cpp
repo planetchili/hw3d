@@ -39,8 +39,6 @@ SolidSphere::SolidSphere( Graphics& gfx,float radius )
 
 		only.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
 
-		only.AddBindable( Blender::Resolve( gfx,false ) );
-
 		only.AddBindable( Rasterizer::Resolve( gfx,false ) );
 
 		solid.AddStep( std::move( only ) );

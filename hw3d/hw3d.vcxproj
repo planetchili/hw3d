@@ -266,6 +266,8 @@
     <ClInclude Include="DepthStencil.h" />
     <ClInclude Include="DynamicConstant.h" />
     <ClInclude Include="LambertianPass.h" />
+    <ClInclude Include="OutlineDrawingPass.h" />
+    <ClInclude Include="OutlineMaskGenerationPass.h" />
     <ClInclude Include="RenderGraph.h" />
     <ClInclude Include="FullscreenPass.h" />
     <ClInclude Include="GraphicsResource.h" />
