@@ -206,6 +206,7 @@
     <ClCompile Include="TestCube.cpp" />
     <ClCompile Include="Testing.cpp" />
     <ClCompile Include="TestPlane.cpp" />
+    <ClCompile Include="TestRenderGraph.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePreprocessor.cpp" />
     <ClCompile Include="Topology.cpp" />
@@ -297,6 +298,7 @@
     <ClInclude Include="TechniqueProbe.h" />
     <ClInclude Include="Testing.h" />
     <ClInclude Include="TestModelProbe.h" />
+    <ClInclude Include="TestRenderGraph.h" />
     <ClInclude Include="TexturePreprocessor.h" />
     <ClInclude Include="TestCube.h" />
     <ClInclude Include="Drawable.h" />

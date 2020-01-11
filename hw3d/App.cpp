@@ -1,17 +1,10 @@
 #include "App.h"
-#include <memory>
 #include <algorithm>
 #include "ChiliMath.h"
-#include "Surface.h"
 #include "imgui/imgui.h"
-#include "VertexBuffer.h"
 #include "ChiliUtil.h"
 #include "Testing.h"
 #include "PerfLog.h"
-#include "BufferClearPass.h"
-#include "LambertianPass.h"
-#include "OutlineDrawingPass.h"
-#include "OutlineMaskGenerationPass.h"
 #include "TestModelProbe.h"
 
 namespace dx = DirectX;
@@ -26,38 +19,10 @@ App::App( const std::string& commandLine )
 	cube.SetPos( { 4.0f,0.0f,0.0f } );
 	cube2.SetPos( { 0.0f,4.0f,0.0f } );
 	
-	{
-		{
-			auto pass = std::make_unique<BufferClearPass>( "clear" );
-			pass->SetInputSource( "renderTarget","$.backbuffer" );
-			pass->SetInputSource( "depthStencil","$.masterDepth" );
-			rg.AppendPass( std::move( pass ) );
-		}
-		{
-			auto pass = std::make_unique<LambertianPass>( wnd.Gfx(),"lambertian" );
-			pass->SetInputSource( "renderTarget","clear.renderTarget" );
-			pass->SetInputSource( "depthStencil","clear.depthStencil" );
-			rg.AppendPass( std::move( pass ) );
-		}
-		{
-			auto pass = std::make_unique<OutlineMaskGenerationPass>( wnd.Gfx(),"outlineMask" );
-			pass->SetInputSource( "depthStencil","lambertian.depthStencil" );
-			rg.AppendPass( std::move( pass ) );
-		}
-		{
-			auto pass = std::make_unique<OutlineDrawingPass>( wnd.Gfx(),"outlineDraw" );
-			pass->SetInputSource( "renderTarget","lambertian.renderTarget" );
-			pass->SetInputSource( "depthStencil","outlineMask.depthStencil" );
-			rg.AppendPass( std::move( pass ) );
-		}
-		rg.SetSinkTarget( "backbuffer","outlineDraw.renderTarget" );
-		rg.Finalize();
-
-		cube.LinkTechniques( rg );
-		cube2.LinkTechniques( rg );
-		light.LinkTechniques( rg );
-		sponza.LinkTechniques( rg );
-	}
+	cube.LinkTechniques( rg );
+	cube2.LinkTechniques( rg );
+	light.LinkTechniques( rg );
+	sponza.LinkTechniques( rg );
 
 	wnd.Gfx().SetProjection( dx::XMMatrixPerspectiveLH( 1.0f,9.0f / 16.0f,0.5f,400.0f ) );
 }

@@ -7,7 +7,7 @@
 #include "TestCube.h"
 #include "Model.h"
 #include "ScriptCommander.h"
-#include "RenderGraph.h"
+#include "TestRenderGraph.h"
 
 class App
 {
@@ -26,7 +26,7 @@ private:
 	ImguiManager imgui;
 	Window wnd;
 	ScriptCommander scriptCommander;
-	RenderGraph rg{ wnd.Gfx() };
+	TestRenderGraph rg{ wnd.Gfx() };
 	ChiliTimer timer;
 	float speed_factor = 1.0f;
 	Camera cam;
