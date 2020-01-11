@@ -4,13 +4,9 @@
 #include "ImguiManager.h"
 #include "Camera.h"
 #include "PointLight.h"
-#include "TestPlane.h"
 #include "TestCube.h"
 #include "Model.h"
-#include <set>
 #include "ScriptCommander.h"
-#include "Stencil.h"
-#include "Material.h"
 #include "RenderGraph.h"
 
 class App
@@ -21,7 +17,8 @@ public:
 	int Go();
 	~App();
 private:
-	void DoFrame();
+	void DoFrame( float dt );
+	void HandleInput( float dt );
 	void ShowImguiDemoWindow();
 private:
 	std::string commandLine;
