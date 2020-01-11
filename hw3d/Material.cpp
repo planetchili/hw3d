@@ -1,6 +1,10 @@
 #include "Material.h"
+#include "BindableCommon.h"
 #include "DynamicConstant.h"
 #include "ConstantBuffersEx.h"
+#include "TransformCbufScaling.h"
+#include "Stencil.h"
+#include <filesystem>
 
 Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesystem::path& path ) noxnd
 	:
@@ -83,7 +87,6 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 		// common (post)
 		{
 			step.AddBindable( std::make_shared<TransformCbuf>( gfx,0u ) );
-			step.AddBindable( Blender::Resolve( gfx,false ) );
 			auto pvs = VertexShader::Resolve( gfx,shaderCode + "_VS.cso" );
 			auto pvsbc = pvs->GetBytecode();
 			step.AddBindable( std::move( pvs ) );
@@ -123,55 +126,55 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 		phong.AddStep( std::move( step ) );
 		techniques.push_back( std::move( phong ) );
 	}
-	//// outline technique
-	//{
-	//	Technique outline( "Outline",false );
-	//	{
-	//		Step mask( "mask" );
+	// outline technique
+	{
+		Technique outline( "Outline",false );
+		{
+			Step mask( "outlineMask" );
 
-	//		auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
-	//		auto pvsbc = pvs->GetBytecode();
-	//		mask.AddBindable( std::move( pvs ) );
+			auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
+			auto pvsbc = pvs->GetBytecode();
+			mask.AddBindable( std::move( pvs ) );
 
-	//		// TODO: better sub-layout generation tech for future consideration maybe
-	//		mask.AddBindable( InputLayout::Resolve( gfx,vtxLayout,pvsbc ) );
+			// TODO: better sub-layout generation tech for future consideration maybe
+			mask.AddBindable( InputLayout::Resolve( gfx,vtxLayout,pvsbc ) );
 
-	//		mask.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
+			mask.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
 
-	//		// TODO: might need to specify rasterizer when doubled-sided models start being used
+			// TODO: might need to specify rasterizer when doubled-sided models start being used
 
-	//		outline.AddStep( std::move( mask ) );
-	//	}
-	//	{
-	//		Step draw( "draw" );
+			outline.AddStep( std::move( mask ) );
+		}
+		{
+			Step draw( "outlineDraw" );
 
-	//		// these can be pass-constant (tricky due to layout issues)
-	//		auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
-	//		auto pvsbc = pvs->GetBytecode();
-	//		draw.AddBindable( std::move( pvs ) );
+			// these can be pass-constant (tricky due to layout issues)
+			auto pvs = VertexShader::Resolve( gfx,"Solid_VS.cso" );
+			auto pvsbc = pvs->GetBytecode();
+			draw.AddBindable( std::move( pvs ) );
 
-	//		// this can be pass-constant
-	//		draw.AddBindable( PixelShader::Resolve( gfx,"Solid_PS.cso" ) );
+			// this can be pass-constant
+			draw.AddBindable( PixelShader::Resolve( gfx,"Solid_PS.cso" ) );
 
-	//		{
-	//			Dcb::RawLayout lay;
-	//			lay.Add<Dcb::Float3>( "materialColor" );
-	//			auto buf = Dcb::Buffer( std::move( lay ) );
-	//			buf["materialColor"] = DirectX::XMFLOAT3{ 1.0f,0.4f,0.4f };
-	//			draw.AddBindable( std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,1u ) );
-	//		}
+			{
+				Dcb::RawLayout lay;
+				lay.Add<Dcb::Float3>( "materialColor" );
+				auto buf = Dcb::Buffer( std::move( lay ) );
+				buf["materialColor"] = DirectX::XMFLOAT3{ 1.0f,0.4f,0.4f };
+				draw.AddBindable( std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,1u ) );
+			}
 
-	//		// TODO: better sub-layout generation tech for future consideration maybe
-	//		draw.AddBindable( InputLayout::Resolve( gfx,vtxLayout,pvsbc ) );
+			// TODO: better sub-layout generation tech for future consideration maybe
+			draw.AddBindable( InputLayout::Resolve( gfx,vtxLayout,pvsbc ) );
 
-	//		draw.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
+			draw.AddBindable( std::make_shared<TransformCbufScaling>( gfx,1.04f ) );
 
-	//		// TODO: might need to specify rasterizer when doubled-sided models start being used
+			// TODO: might need to specify rasterizer when doubled-sided models start being used
 
-	//		outline.AddStep( std::move( draw ) );
-	//	}
-	//	techniques.push_back( std::move( outline ) );
-	//}
+			outline.AddStep( std::move( draw ) );
+		}
+		techniques.push_back( std::move( outline ) );
+	}
 }
 Dvtx::VertexBuffer Material::ExtractVertices( const aiMesh& mesh ) const noexcept
 {

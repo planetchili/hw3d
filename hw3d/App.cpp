@@ -64,14 +64,8 @@ App::App( const std::string& commandLine )
 		cube.LinkTechniques( rg );
 		cube2.LinkTechniques( rg );
 		light.LinkTechniques( rg );
+		sponza.LinkTechniques( rg );
 	}
-
-	//wall.SetRootTransform( dx::XMMatrixTranslation( -12.0f,0.0f,0.0f ) );
-	//tp.SetPos( { 12.0f,0.0f,0.0f } );
-	//gobber.SetRootTransform( dx::XMMatrixTranslation( 0.0f,0.0f,-4.0f ) );
-	//nano.SetRootTransform( dx::XMMatrixTranslation( 0.0f,-7.0f,6.0f ) );
-	//bluePlane.SetPos( cam.GetPos() );
-	//redPlane.SetPos( cam.GetPos() );
 
 	wnd.Gfx().SetProjection( dx::XMMatrixPerspectiveLH( 1.0f,9.0f / 16.0f,0.5f,400.0f ) );
 }
@@ -83,16 +77,11 @@ void App::DoFrame()
 	wnd.Gfx().SetCamera( cam.GetMatrix() );
 	light.Bind( wnd.Gfx(),cam.GetMatrix() );
 		
-	//wall.Draw( wnd.Gfx() );
-	//tp.Draw( wnd.Gfx() );
-	//nano.Draw( wnd.Gfx() );
-	//gobber.Submit( fc );
 	light.Submit();
 	cube.Submit();
-	// sponza.Submit( fc );
+	sponza.Submit();
 	cube2.Submit();
-	//bluePlane.Draw( wnd.Gfx() );
-	//redPlane.Draw( wnd.Gfx() );
+
 	rg.Execute( wnd.Gfx() );
 
 	while( const auto e = wnd.kbd.ReadKey() )
@@ -351,19 +340,12 @@ void App::DoFrame()
 	static MP modelProbe;
 
 	// imgui windows
-	//modelProbe.SpawnWindow( sponza );
+	modelProbe.SpawnWindow( sponza );
 	cam.SpawnControlWindow();
 	light.SpawnControlWindow();
 	ShowImguiDemoWindow();
 	cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
 	cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
-	//sponza.ShowWindow( wnd.Gfx(),"Sponza" );
-	//gobber.ShowWindow( wnd.Gfx(),"gobber" );
-	//wall.ShowWindow( wnd.Gfx(),"Wall" );
-	//tp.SpawnControlWindow( wnd.Gfx() );
-	//nano.ShowWindow( wnd.Gfx(),"Nano" );
-	//bluePlane.SpawnControlWindow( wnd.Gfx(),"Blue Plane" );
-	//redPlane.SpawnControlWindow( wnd.Gfx(),"Red Plane" );
 
 	// present
 	wnd.Gfx().EndFrame();
