@@ -26,6 +26,11 @@ void Bind::TransformCbufScaling::Bind( Graphics& gfx ) noexcept
 	UpdateBindImpl( gfx,xf );
 }
 
+std::unique_ptr<Bind::CloningBindable> Bind::TransformCbufScaling::Clone() const noexcept
+{
+	return std::make_unique<TransformCbufScaling>( *this );
+}
+
 Dcb::RawLayout Bind::TransformCbufScaling::MakeLayout()
 {
 	Dcb::RawLayout layout;
