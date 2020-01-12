@@ -19,13 +19,14 @@ private:
 		float time;
 		void WriteTo( std::ostream& out ) const noexcept
 		{
+			using namespace std::string_literals;
 			if( label.empty() )
 			{
 				out << time * 1000.0f << "ms\n";
 			}
 			else
 			{
-				out << "[" << label << "] " << time * 1000.0f << "ms\n";
+				out << std::setw( 16 ) << std::left << "["s + label + "] "s << std::setw(6) << std::right << time * 1000.0f << "ms\n";
 			}
 		}
 	};
