@@ -104,8 +104,9 @@ public:
 			throw RGC_EXCEPTION( oss.str() );
 		}
 		target = std::move( p );
+		linked = true;
 	}
-	ImmutableInput( std::string registeredName,std::shared_ptr<Bind::Bindable>& target )
+	ImmutableInput( std::string registeredName,std::shared_ptr<T>& target )
 		:
 		PassInput( std::move( registeredName ) ),
 		target( target )

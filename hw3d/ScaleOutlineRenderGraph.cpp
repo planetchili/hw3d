@@ -1,10 +1,10 @@
-#include "TestRenderGraph.h"
+#include "ScaleOutlineRenderGraph.h"
 #include "BufferClearPass.h"
 #include "LambertianPass.h"
 #include "OutlineDrawingPass.h"
 #include "OutlineMaskGenerationPass.h"
 
-TestRenderGraph::TestRenderGraph( Graphics& gfx )
+ScaleOutlineRenderGraph::ScaleOutlineRenderGraph( Graphics& gfx )
 	:
 	RenderGraph( gfx )
 {

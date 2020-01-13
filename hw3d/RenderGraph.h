@@ -21,12 +21,15 @@ class RenderGraph
 public:
 	RenderGraph( Graphics& gfx );
 	~RenderGraph();
-	void SetSinkTarget( const std::string& sinkName,const std::string& target );
-	void AppendPass( std::unique_ptr<Pass> pass );
 	void Execute( Graphics& gfx ) noxnd;
 	void Reset() noexcept;
-	void Finalize();
 	RenderQueuePass& GetRenderQueue( const std::string& passName );
+protected:
+	void SetSinkTarget( const std::string& sinkName,const std::string& target );
+	void AddGlobalSource( std::unique_ptr<PassOutput> );
+	void AddGlobalSink( std::unique_ptr<PassInput> );
+	void Finalize();
+	void AppendPass( std::unique_ptr<Pass> pass );
 private:
 	void LinkPassInputs( Pass& pass );
 	void LinkGlobalSinks();

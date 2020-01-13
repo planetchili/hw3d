@@ -14,7 +14,8 @@
 	X( Float3 ) \
 	X( Float4 ) \
 	X( Matrix ) \
-	X( Bool )
+	X( Bool ) \
+	X( Integer )
 
 namespace Dcb
 {
@@ -76,6 +77,13 @@ namespace Dcb
 		using SysType = bool;
 		static constexpr size_t hlslSize = 4u;
 		static constexpr const char* code = "BL";
+		static constexpr bool valid = true;
+	};
+	template<> struct Map<Integer>
+	{
+		using SysType = int;
+		static constexpr size_t hlslSize = sizeof( SysType );
+		static constexpr const char* code = "IN";
 		static constexpr bool valid = true;
 	};
 	

@@ -96,6 +96,7 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="BindingPass.cpp" />
     <ClCompile Include="Blender.cpp" />
+    <ClCompile Include="BlurOutlineRenderGraph.cpp" />
     <ClCompile Include="BufferClearPass.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ChiliException.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="dxerr.cpp" />
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="DynamicConstant.cpp" />
+    <ClCompile Include="HorizontalBlurPass.cpp" />
     <ClCompile Include="PassInput.cpp" />
     <ClCompile Include="RenderGraph.cpp" />
     <ClCompile Include="FullscreenPass.cpp" />
@@ -206,7 +208,7 @@
     <ClCompile Include="TestCube.cpp" />
     <ClCompile Include="Testing.cpp" />
     <ClCompile Include="TestPlane.cpp" />
-    <ClCompile Include="TestRenderGraph.cpp" />
+    <ClCompile Include="ScaleOutlineRenderGraph.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturePreprocessor.cpp" />
     <ClCompile Include="Topology.cpp" />
@@ -215,6 +217,7 @@
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
     <ClCompile Include="VertexShader.cpp" />
+    <ClCompile Include="VerticalBlurPass.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowsMessageMap.cpp" />
     <ClCompile Include="WinMain.cpp" />
@@ -250,6 +253,8 @@
     <ClInclude Include="BindableCommon.h" />
     <ClInclude Include="BindingPass.h" />
     <ClInclude Include="Blender.h" />
+    <ClInclude Include="BlurOutlineDrawingPass.h" />
+    <ClInclude Include="BlurOutlineRenderGraph.h" />
     <ClInclude Include="BlurPack.h" />
     <ClInclude Include="BufferClearPass.h" />
     <ClInclude Include="BufferResource.h" />
@@ -267,6 +272,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DepthStencil.h" />
     <ClInclude Include="DynamicConstant.h" />
+    <ClInclude Include="HorizontalBlurPass.h" />
     <ClInclude Include="LambertianPass.h" />
     <ClInclude Include="OutlineDrawingPass.h" />
     <ClInclude Include="OutlineMaskGenerationPass.h" />
@@ -298,7 +304,7 @@
     <ClInclude Include="TechniqueProbe.h" />
     <ClInclude Include="Testing.h" />
     <ClInclude Include="TestModelProbe.h" />
-    <ClInclude Include="TestRenderGraph.h" />
+    <ClInclude Include="ScaleOutlineRenderGraph.h" />
     <ClInclude Include="TexturePreprocessor.h" />
     <ClInclude Include="TestCube.h" />
     <ClInclude Include="Drawable.h" />
@@ -337,6 +343,7 @@
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="VertexBuffer.h" />
     <ClInclude Include="VertexShader.h" />
+    <ClInclude Include="VerticalBlurPass.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsMessageMap.h" />
     <ClInclude Include="WindowsThrowMacros.h" />

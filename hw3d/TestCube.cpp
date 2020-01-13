@@ -83,7 +83,7 @@ TestCube::TestCube( Graphics& gfx,float size )
 			// TODO: better sub-layout generation tech for future consideration maybe
 			draw.AddBindable( InputLayout::Resolve( gfx,model.vertices.GetLayout(),VertexShader::Resolve( gfx,"Solid_VS.cso" )->GetBytecode() ) );
 			
-			draw.AddBindable( std::make_shared<TransformCbufScaling>( gfx,1.04f ) );
+			draw.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
 
 			// TODO: might need to specify rasterizer when doubled-sided models start being used
 
