@@ -9,6 +9,8 @@
 #include "Mesh.h"
 #include "Testing.h"
 #include "ChiliXM.h"
+#include <algorithm>
+#include <array>
 
 namespace dx = DirectX;
 
@@ -294,5 +296,35 @@ void TestDynamicConstant()
 
 		auto buf = Dcb::Buffer( std::move( lay ) );
 		assert( buf.GetSizeInBytes() == 32u );
+	}
+	// specific testing scenario (array packing issues gimme a tissue)
+	{
+		const int maxRadius = 7;
+		const int nCoef = maxRadius * 2 + 1;
+		Dcb::RawLayout l;
+		l.Add<Dcb::Integer>( "nTaps" );
+		l.Add<Dcb::Array>( "coefficients" );
+		l["coefficients"].Set<Dcb::Float>( nCoef );
+		Dcb::Buffer buf{ std::move( l ) };
+		// assert proper amount of memory allocated
+		assert( buf.GetSizeInBytes() == (nCoef + 1) * 4 * 4 );
+		// assert array empty
+		{
+			const char* begin = reinterpret_cast<char*>((int*)&buf["nTaps"]);
+			assert( std::all_of( begin,begin + buf.GetSizeInBytes(),[]( char c ) {return c == 0; } ) );
+		}
+		// assert sparse float storage
+		{
+			for( int i = 0; i < nCoef; i++ )
+			{
+				buf["coefficients"][i] = 6.9f;
+			}
+			const auto begin = reinterpret_cast<std::array<float,4>*>((float*)&buf["coefficients"][0]);
+			const auto end = begin + nCoef;
+			assert( std::all_of( begin,end,[]( const auto& arr )
+			{
+				return arr[0] == 6.9f && arr[1] == 0.0f && arr[2] == 0.0f && arr[3] == 0.0f;
+			} ) );
+		}
 	}
 }
