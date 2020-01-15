@@ -16,9 +16,10 @@ namespace Bind
 		GFX_THROW_INFO( GetDevice( gfx )->CreateRasterizerState( &rasterDesc,&pRasterizer ) );
 	}
 
-	void Rasterizer::Bind( Graphics& gfx ) noexcept
+	void Rasterizer::Bind( Graphics& gfx ) noxnd
 	{
-		GetContext( gfx )->RSSetState( pRasterizer.Get() );
+		INFOMAN_NOHR( gfx );
+		GFX_THROW_INFO_ONLY( GetContext( gfx )->RSSetState( pRasterizer.Get() ) );
 	}
 	
 	std::shared_ptr<Rasterizer> Rasterizer::Resolve( Graphics& gfx,bool twoSided )

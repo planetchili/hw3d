@@ -26,7 +26,7 @@ VerticalBlurPass::VerticalBlurPass( std::string name,Graphics& gfx )
 }
 
 // see the note on HorizontalBlurPass::Execute
-void VerticalBlurPass::Execute( Graphics& gfx ) const noexcept
+void VerticalBlurPass::Execute( Graphics& gfx ) const noxnd
 {
 	auto buf = direction->GetBuffer();
 	buf["isHorizontal"] = false;

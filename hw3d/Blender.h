@@ -9,7 +9,7 @@ namespace Bind
 	{
 	public:
 		Blender( Graphics& gfx,bool blending,std::optional<float> factor = {} );
-		void Bind( Graphics& gfx ) noexcept override;
+		void Bind( Graphics& gfx ) noxnd override;
 		void SetFactor( float factor ) noxnd;
 		float GetFactor() const noxnd;
 		static std::shared_ptr<Blender> Resolve( Graphics& gfx,bool blending,std::optional<float> factor = {} );

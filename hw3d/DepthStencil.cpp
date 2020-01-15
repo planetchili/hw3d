@@ -31,23 +31,24 @@ namespace Bind
 		) );
 	}
 
-	void DepthStencil::BindAsBuffer( Graphics& gfx ) noexcept
+	void DepthStencil::BindAsBuffer( Graphics& gfx ) noxnd
 	{
-		GetContext( gfx )->OMSetRenderTargets( 0,nullptr,pDepthStencilView.Get() );
+		INFOMAN_NOHR( gfx );
+		GFX_THROW_INFO_ONLY( GetContext( gfx )->OMSetRenderTargets( 0,nullptr,pDepthStencilView.Get() ) );
 	}
 	
-	void DepthStencil::BindAsBuffer( Graphics& gfx,BufferResource* renderTarget ) noexcept
+	void DepthStencil::BindAsBuffer( Graphics& gfx,BufferResource* renderTarget ) noxnd
 	{
 		assert( dynamic_cast<RenderTarget*>(renderTarget) != nullptr );
 		BindAsBuffer( gfx,static_cast<RenderTarget*>(renderTarget) );
 	}
 
-	void DepthStencil::BindAsBuffer( Graphics& gfx,RenderTarget* rt ) noexcept
+	void DepthStencil::BindAsBuffer( Graphics& gfx,RenderTarget* rt ) noxnd
 	{
 		rt->BindAsBuffer( gfx,this );
 	}
 
-	void DepthStencil::Clear( Graphics& gfx ) noexcept
+	void DepthStencil::Clear( Graphics& gfx ) noxnd
 	{
 		GetContext( gfx )->ClearDepthStencilView( pDepthStencilView.Get(),D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,1.0f,0u );
 	}
@@ -78,9 +79,10 @@ namespace Bind
 		) );
 	}
 
-	void ShaderInputDepthStencil::Bind( Graphics& gfx ) noexcept
+	void ShaderInputDepthStencil::Bind( Graphics& gfx ) noxnd
 	{
-		GetContext( gfx )->PSSetShaderResources( slot,1u,pShaderResourceView.GetAddressOf() );
+		INFOMAN_NOHR( gfx );
+		GFX_THROW_INFO_ONLY( GetContext( gfx )->PSSetShaderResources( slot,1u,pShaderResourceView.GetAddressOf() ) );
 	}
 
 
@@ -94,7 +96,7 @@ namespace Bind
 		DepthStencil( gfx,width,height,false )
 	{}
 
-	void OutputOnlyDepthStencil::Bind( Graphics& gfx ) noexcept
+	void OutputOnlyDepthStencil::Bind( Graphics& gfx ) noxnd
 	{
 		assert( "OutputOnlyDepthStencil cannot be bound as shader input" && false );
 	}

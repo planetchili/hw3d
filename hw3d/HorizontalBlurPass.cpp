@@ -23,7 +23,7 @@ HorizontalBlurPass::HorizontalBlurPass( std::string name,Graphics& gfx,unsigned 
 
 // this override is necessary because we cannot (yet) link input bindables directly into
 // the container of bindables (mainly because vector growth buggers references)
-void HorizontalBlurPass::Execute( Graphics& gfx ) const noexcept
+void HorizontalBlurPass::Execute( Graphics& gfx ) const noxnd
 {
 	auto buf = direction->GetBuffer();
 	buf["isHorizontal"] = true;

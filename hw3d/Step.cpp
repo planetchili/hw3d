@@ -45,7 +45,7 @@ void Step::AddBindable( std::shared_ptr<Bind::Bindable> bind_in ) noexcept
 	bindables.push_back( std::move( bind_in ) );
 }
 
-void Step::Bind( Graphics& gfx ) const
+void Step::Bind( Graphics& gfx ) const noxnd
 {
 	for( const auto& b : bindables )
 	{

@@ -7,7 +7,7 @@ namespace Bind
 	{
 	public:
 		Sampler( Graphics& gfx,bool anisoEnable,bool reflect );
-		void Bind( Graphics& gfx ) noexcept override;
+		void Bind( Graphics& gfx ) noxnd override;
 		static std::shared_ptr<Sampler> Resolve( Graphics& gfx,bool anisoEnable = true,bool reflect = false );
 		static std::string GenerateUID( bool anisoEnable,bool reflect );
 		std::string GetUID() const noexcept override;

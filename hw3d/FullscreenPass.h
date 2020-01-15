@@ -13,5 +13,5 @@ class FullscreenPass : public BindingPass
 {
 public:
 	FullscreenPass( const std::string name,Graphics& gfx ) noxnd;
-	void Execute( Graphics& gfx ) const noexcept override;
+	void Execute( Graphics& gfx ) const noxnd override;
 };

@@ -1,4 +1,5 @@
 #pragma once
+#include "ConditionalNoexcept.h"
 
 class Graphics;
 
@@ -8,8 +9,8 @@ namespace Bind
 	{
 	public:
 		virtual ~BufferResource() = default;
-		virtual void BindAsBuffer( Graphics& ) noexcept = 0;
-		virtual void BindAsBuffer( Graphics&,BufferResource* ) noexcept = 0;
-		virtual void Clear( Graphics& ) noexcept = 0;
+		virtual void BindAsBuffer( Graphics& ) noxnd = 0;
+		virtual void BindAsBuffer( Graphics&,BufferResource* ) noxnd = 0;
+		virtual void Clear( Graphics& ) noxnd = 0;
 	};
 }

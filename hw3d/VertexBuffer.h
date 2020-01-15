@@ -10,7 +10,7 @@ namespace Bind
 	public:
 		VertexBuffer( Graphics& gfx,const std::string& tag,const Dvtx::VertexBuffer& vbuf );
 		VertexBuffer( Graphics& gfx,const Dvtx::VertexBuffer& vbuf );
-		void Bind( Graphics& gfx ) noexcept override;
+		void Bind( Graphics& gfx ) noxnd override;
 		const Dvtx::VertexLayout& GetLayout() const noexcept;
 		static std::shared_ptr<VertexBuffer> Resolve( Graphics& gfx,const std::string& tag,
 			const Dvtx::VertexBuffer& vbuf );
