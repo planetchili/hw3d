@@ -1,11 +1,11 @@
-#include "PassOutput.h"
+#include "Source.h"
 #include "RenderGraphCompileException.h"
 #include <algorithm>
 #include <cctype>
 
 namespace Rgph
 {
-	PassOutput::PassOutput( std::string nameIn )
+	Source::Source( std::string nameIn )
 		:
 		name( std::move( nameIn ) )
 	{
@@ -22,17 +22,17 @@ namespace Rgph
 		}
 	}
 
-	std::shared_ptr<Bind::Bindable> PassOutput::YieldImmutable()
+	std::shared_ptr<Bind::Bindable> Source::YieldBindable()
 	{
-		throw RGC_EXCEPTION( "Output cannot be accessed as immutable" );
+		throw RGC_EXCEPTION( "Output cannot be accessed as bindable" );
 	}
 
-	std::shared_ptr<Bind::BufferResource> PassOutput::YieldBuffer()
+	std::shared_ptr<Bind::BufferResource> Source::YieldBuffer()
 	{
 		throw RGC_EXCEPTION( "Output cannot be accessed as buffer" );
 	}
 
-	const std::string& PassOutput::GetName() const noexcept
+	const std::string& Source::GetName() const noexcept
 	{
 		return name;
 	}

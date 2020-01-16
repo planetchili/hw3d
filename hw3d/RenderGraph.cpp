@@ -5,8 +5,8 @@
 #include "BindableCommon.h"
 #include "RenderGraphCompileException.h"
 #include "RenderQueuePass.h"
-#include "PassInput.h"
-#include "PassOutput.h"
+#include "Sink.h"
+#include "Source.h"
 #include <sstream>
 
 namespace Rgph
@@ -17,9 +17,9 @@ namespace Rgph
 		masterDepth( std::make_shared<Bind::OutputOnlyDepthStencil>( gfx ) )
 	{
 		// setup global sinks and sources
-		AddGlobalSource( BufferOutput<Bind::RenderTarget>::Make( "backbuffer",backBufferTarget ) );
-		AddGlobalSource( BufferOutput<Bind::DepthStencil>::Make( "masterDepth",masterDepth ) );
-		AddGlobalSink( BufferInput<Bind::RenderTarget>::Make( "backbuffer",backBufferTarget ) );
+		AddGlobalSource( DirectBufferSource<Bind::RenderTarget>::Make( "backbuffer",backBufferTarget ) );
+		AddGlobalSource( DirectBufferSource<Bind::DepthStencil>::Make( "masterDepth",masterDepth ) );
+		AddGlobalSink( DirectBufferSink<Bind::RenderTarget>::Make( "backbuffer",backBufferTarget ) );
 	}
 
 	RenderGraph::~RenderGraph()
@@ -27,7 +27,7 @@ namespace Rgph
 
 	void RenderGraph::SetSinkTarget( const std::string& sinkName,const std::string& target )
 	{
-		const auto finder = [&sinkName]( const std::unique_ptr<PassInput>& p ) {
+		const auto finder = [&sinkName]( const std::unique_ptr<Sink>& p ) {
 			return p->GetRegisteredName() == sinkName;
 		};
 		const auto i = std::find_if( globalSinks.begin(),globalSinks.end(),finder );
@@ -43,12 +43,12 @@ namespace Rgph
 		(*i)->SetTarget( targetSplit[0],targetSplit[1] );
 	}
 
-	void RenderGraph::AddGlobalSource( std::unique_ptr<PassOutput> out )
+	void RenderGraph::AddGlobalSource( std::unique_ptr<Source> out )
 	{
 		globalSources.push_back( std::move( out ) );
 	}
 
-	void RenderGraph::AddGlobalSink( std::unique_ptr<PassInput> in )
+	void RenderGraph::AddGlobalSink( std::unique_ptr<Sink> in )
 	{
 		globalSinks.push_back( std::move( in ) );
 	}
@@ -84,17 +84,17 @@ namespace Rgph
 		}
 
 		// link outputs from passes (and global outputs) to pass inputs
-		LinkPassInputs( *pass );
+		LinkSinks( *pass );
 
 		// add to container of passes
 		passes.push_back( std::move( pass ) );
 	}
 
-	void RenderGraph::LinkPassInputs( Pass& pass )
+	void RenderGraph::LinkSinks( Pass& pass )
 	{
-		for( auto& in : pass.GetInputs() )
+		for( auto& si : pass.GetSinks() )
 		{
-			const auto& inputSourcePassName = in->GetPassName();
+			const auto& inputSourcePassName = si->GetPassName();
 
 			// check check whether target source is global
 			if( inputSourcePassName == "$" )
@@ -102,9 +102,9 @@ namespace Rgph
 				bool bound = false;
 				for( auto& source : globalSources )
 				{
-					if( source->GetName() == in->GetOutputName() )
+					if( source->GetName() == si->GetOutputName() )
 					{
-						in->Bind( *source );
+						si->Bind( *source );
 						bound = true;
 						break;
 					}
@@ -112,7 +112,7 @@ namespace Rgph
 				if( !bound )
 				{
 					std::ostringstream oss;
-					oss << "Output named [" << in->GetOutputName() << "] not found in globals";
+					oss << "Output named [" << si->GetOutputName() << "] not found in globals";
 					throw RGC_EXCEPTION( oss.str() );
 				}
 			}
@@ -122,8 +122,8 @@ namespace Rgph
 				{
 					if( existingPass->GetName() == inputSourcePassName )
 					{
-						auto& source = existingPass->GetOutput( in->GetOutputName() );
-						in->Bind( source );
+						auto& source = existingPass->GetSource( si->GetOutputName() );
+						si->Bind( source );
 						break;
 					}
 				}
@@ -140,7 +140,7 @@ namespace Rgph
 			{
 				if( existingPass->GetName() == inputSourcePassName )
 				{
-					auto& source = existingPass->GetOutput( sink->GetOutputName() );
+					auto& source = existingPass->GetSource( sink->GetOutputName() );
 					sink->Bind( source );
 					break;
 				}

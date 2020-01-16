@@ -14,8 +14,8 @@ namespace Bind
 
 namespace Rgph
 {
-	class PassInput;
-	class PassOutput;
+	class Sink;
+	class Source;
 
 	class Pass
 	{
@@ -24,21 +24,21 @@ namespace Rgph
 		virtual void Execute( Graphics& gfx ) const noxnd = 0;
 		virtual void Reset() noxnd;
 		const std::string& GetName() const noexcept;
-		const std::vector<std::unique_ptr<PassInput>>& GetInputs() const;
-		PassOutput& GetOutput( const std::string& registeredName ) const;
-		PassInput& GetInput( const std::string& registeredName ) const;
-		void SetInputSource( const std::string& registeredName,const std::string& target );
+		const std::vector<std::unique_ptr<Sink>>& GetSinks() const;
+		Source& GetSource( const std::string& registeredName ) const;
+		Sink& GetSink( const std::string& registeredName ) const;
+		void SetSinkLinkage( const std::string& registeredName,const std::string& target );
 		virtual void Finalize();
 		virtual ~Pass();
 	protected:
-		void RegisterInput( std::unique_ptr<PassInput> input );
-		void RegisterOutput( std::unique_ptr<PassOutput> output );
+		void RegisterSink( std::unique_ptr<Sink> sink );
+		void RegisterSource( std::unique_ptr<Source> source );
 		void BindBufferResources( Graphics& gfx ) const noxnd;
 		std::shared_ptr<Bind::RenderTarget> renderTarget;
 		std::shared_ptr<Bind::DepthStencil> depthStencil;
 	private:
-		std::vector<std::unique_ptr<PassInput>> inputs;
-		std::vector<std::unique_ptr<PassOutput>> outputs;
+		std::vector<std::unique_ptr<Sink>> sinks;
+		std::vector<std::unique_ptr<Source>> sources;
 		std::string name;
 	};
 }

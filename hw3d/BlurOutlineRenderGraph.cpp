@@ -3,7 +3,7 @@
 #include "LambertianPass.h"
 #include "OutlineDrawingPass.h"
 #include "OutlineMaskGenerationPass.h"
-#include "PassOutput.h"
+#include "Source.h"
 #include "HorizontalBlurPass.h"
 #include "VerticalBlurPass.h"
 #include "BlurOutlineDrawingPass.h"
@@ -19,19 +19,19 @@ namespace Rgph
 	{
 		{
 			auto pass = std::make_unique<BufferClearPass>( "clear" );
-			pass->SetInputSource( "renderTarget","$.backbuffer" );
-			pass->SetInputSource( "depthStencil","$.masterDepth" );
+			pass->SetSinkLinkage( "renderTarget","$.backbuffer" );
+			pass->SetSinkLinkage( "depthStencil","$.masterDepth" );
 			AppendPass( std::move( pass ) );
 		}
 		{
 			auto pass = std::make_unique<LambertianPass>( gfx,"lambertian" );
-			pass->SetInputSource( "renderTarget","clear.renderTarget" );
-			pass->SetInputSource( "depthStencil","clear.depthStencil" );
+			pass->SetSinkLinkage( "renderTarget","clear.renderTarget" );
+			pass->SetSinkLinkage( "depthStencil","clear.depthStencil" );
 			AppendPass( std::move( pass ) );
 		}
 		{
 			auto pass = std::make_unique<OutlineMaskGenerationPass>( gfx,"outlineMask" );
-			pass->SetInputSource( "depthStencil","lambertian.depthStencil" );
+			pass->SetSinkLinkage( "depthStencil","lambertian.depthStencil" );
 			AppendPass( std::move( pass ) );
 		}
 
@@ -45,14 +45,14 @@ namespace Rgph
 				Dcb::Buffer buf{ std::move( l ) };
 				blurControl = std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,0 );
 				SetKernelGauss( radius,sigma );
-				AddGlobalSource( ImmutableOutput<Bind::CachingPixelConstantBufferEx>::Make( "blurControl",blurControl ) );
+				AddGlobalSource( DirectBindableSource<Bind::CachingPixelConstantBufferEx>::Make( "blurControl",blurControl ) );
 			}
 			{
 				Dcb::RawLayout l;
 				l.Add<Dcb::Bool>( "isHorizontal" );
 				Dcb::Buffer buf{ std::move( l ) };
 				blurDirection = std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,1 );
-				AddGlobalSource( ImmutableOutput<Bind::CachingPixelConstantBufferEx>::Make( "blurDirection",blurDirection ) );
+				AddGlobalSource( DirectBindableSource<Bind::CachingPixelConstantBufferEx>::Make( "blurDirection",blurDirection ) );
 			}
 		}
 
@@ -62,18 +62,18 @@ namespace Rgph
 		}
 		{
 			auto pass = std::make_unique<HorizontalBlurPass>( "horizontal",gfx,gfx.GetWidth(),gfx.GetHeight() );
-			pass->SetInputSource( "scratchIn","outlineDraw.scratchOut" );
-			pass->SetInputSource( "control","$.blurControl" );
-			pass->SetInputSource( "direction","$.blurDirection" );
+			pass->SetSinkLinkage( "scratchIn","outlineDraw.scratchOut" );
+			pass->SetSinkLinkage( "control","$.blurControl" );
+			pass->SetSinkLinkage( "direction","$.blurDirection" );
 			AppendPass( std::move( pass ) );
 		}
 		{
 			auto pass = std::make_unique<VerticalBlurPass>( "vertical",gfx );
-			pass->SetInputSource( "renderTarget","lambertian.renderTarget" );
-			pass->SetInputSource( "depthStencil","outlineMask.depthStencil" );
-			pass->SetInputSource( "scratchIn","horizontal.scratchOut" );
-			pass->SetInputSource( "control","$.blurControl" );
-			pass->SetInputSource( "direction","$.blurDirection" );
+			pass->SetSinkLinkage( "renderTarget","lambertian.renderTarget" );
+			pass->SetSinkLinkage( "depthStencil","outlineMask.depthStencil" );
+			pass->SetSinkLinkage( "scratchIn","horizontal.scratchOut" );
+			pass->SetSinkLinkage( "control","$.blurControl" );
+			pass->SetSinkLinkage( "direction","$.blurDirection" );
 			AppendPass( std::move( pass ) );
 		}
 		SetSinkTarget( "backbuffer","vertical.renderTarget" );

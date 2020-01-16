@@ -109,7 +109,7 @@
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="DynamicConstant.cpp" />
     <ClCompile Include="HorizontalBlurPass.cpp" />
-    <ClCompile Include="PassInput.cpp" />
+    <ClCompile Include="Sink.cpp" />
     <ClCompile Include="RenderGraph.cpp" />
     <ClCompile Include="FullscreenPass.cpp" />
     <ClCompile Include="Graphics.cpp" />
@@ -190,7 +190,7 @@
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="NullPixelShader.cpp" />
     <ClCompile Include="Pass.cpp" />
-    <ClCompile Include="PassOutput.cpp" />
+    <ClCompile Include="Source.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="PixelShader.cpp" />
@@ -288,14 +288,14 @@
     <ClInclude Include="ModelProbe.h" />
     <ClInclude Include="NullPixelShader.h" />
     <ClInclude Include="Pass.h" />
-    <ClInclude Include="PassOutput.h" />
+    <ClInclude Include="Source.h" />
     <ClInclude Include="PerfLog.h" />
     <ClInclude Include="Rasterizer.h" />
     <ClInclude Include="RenderGraphCompileException.h" />
     <ClInclude Include="RenderQueuePass.h" />
     <ClInclude Include="RenderTarget.h" />
     <ClInclude Include="ScriptCommander.h" />
-    <ClInclude Include="PassInput.h" />
+    <ClInclude Include="Sink.h" />
     <ClInclude Include="Stencil.h" />
     <ClInclude Include="Step.h" />
     <ClInclude Include="StepLinkingProbe.h" />

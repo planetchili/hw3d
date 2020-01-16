@@ -19,8 +19,8 @@ namespace Rgph
 			RenderQueuePass( std::move( name ) )
 		{
 			using namespace Bind;
-			RegisterInput( BufferInput<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
-			RegisterOutput( BufferOutput<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
+			RegisterSink( DirectBufferSink<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
+			RegisterSource( DirectBufferSource<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
 			AddBind( VertexShader::Resolve( gfx,"Solid_VS.cso" ) );
 			AddBind( NullPixelShader::Resolve( gfx ) );
 			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Write ) );

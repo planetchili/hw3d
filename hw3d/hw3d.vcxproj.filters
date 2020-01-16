@@ -243,14 +243,8 @@
     <ClCompile Include="RenderGraphCompileException.cpp">
       <Filter>Source Files\Jobber\Passlib</Filter>
     </ClCompile>
-    <ClCompile Include="PassOutput.cpp">
-      <Filter>Source Files\Jobber\Passlib</Filter>
-    </ClCompile>
     <ClCompile Include="RenderGraph.cpp">
       <Filter>Source Files\Jobber</Filter>
-    </ClCompile>
-    <ClCompile Include="PassInput.cpp">
-      <Filter>Source Files\Jobber\Passlib</Filter>
     </ClCompile>
     <ClCompile Include="StepLinkingProbe.cpp">
       <Filter>Source Files\Jobber</Filter>
@@ -284,6 +278,12 @@
     </ClCompile>
     <ClCompile Include="VerticalBlurPass.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Sink.cpp">
+      <Filter>Source Files\Jobber\Passlib</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files\Jobber\Passlib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -581,10 +581,10 @@
     <ClInclude Include="RenderQueuePass.h">
       <Filter>Header Files\Jobber\Passlib\Base</Filter>
     </ClInclude>
-    <ClInclude Include="PassInput.h">
+    <ClInclude Include="Sink.h">
       <Filter>Header Files\Jobber\Passlib\Base</Filter>
     </ClInclude>
-    <ClInclude Include="PassOutput.h">
+    <ClInclude Include="Source.h">
       <Filter>Header Files\Jobber\Passlib\Base</Filter>
     </ClInclude>
   </ItemGroup>
