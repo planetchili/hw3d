@@ -11,15 +11,12 @@ namespace Rgph
 		:
 		Pass( std::move( name ) )
 	{
-		RegisterSink( DirectBufferSink<Bind::RenderTarget>::Make( "renderTarget",renderTarget ) );
-		RegisterSink( DirectBufferSink<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
-		RegisterSource( DirectBufferSource<Bind::RenderTarget>::Make( "renderTarget",renderTarget ) );
-		RegisterSource( DirectBufferSource<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
+		RegisterSink( DirectBufferSink<Bind::BufferResource>::Make( "buffer",buffer ) );
+		RegisterSource( DirectBufferSource<Bind::BufferResource>::Make( "buffer",buffer ) );
 	}
 
 	void BufferClearPass::Execute( Graphics& gfx ) const noxnd
 	{
-		renderTarget->Clear( gfx );
-		depthStencil->Clear( gfx );
+		buffer->Clear( gfx );
 	}
 }

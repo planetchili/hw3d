@@ -110,16 +110,4 @@ namespace Rgph
 		}
 		sink.SetTarget( std::move( targetSplit[0] ),std::move( targetSplit[1] ) );
 	}
-
-	void Pass::BindBufferResources( Graphics& gfx ) const noxnd
-	{
-		if( renderTarget )
-		{
-			renderTarget->BindAsBuffer( gfx,depthStencil.get() );
-		}
-		else
-		{
-			depthStencil->BindAsBuffer( gfx );
-		}
-	}
 }
