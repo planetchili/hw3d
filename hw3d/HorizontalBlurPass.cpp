@@ -4,6 +4,7 @@
 #include "Sink.h"
 #include "Source.h"
 #include "Blender.h"
+#include "ConstantBuffersEx.h"
 
 namespace Rgph
 {
@@ -13,10 +14,10 @@ namespace Rgph
 	{
 		AddBind( Bind::PixelShader::Resolve( gfx,"BlurOutline_PS.cso" ) );
 		AddBind( Bind::Blender::Resolve( gfx,false ) );
-
-		RegisterSink( DirectBindableSink<Bind::Bindable>::Make( "control",control ) );
+		
+		AddBindSink<Bind::RenderTarget>( "scratchIn" );
+		AddBindSink<Bind::CachingPixelConstantBufferEx>( "control" );
 		RegisterSink( DirectBindableSink<Bind::CachingPixelConstantBufferEx>::Make( "direction",direction ) );
-		RegisterSink( DirectBindableSink<Bind::Bindable>::Make( "scratchIn",blurScratchIn ) );
 
 		// the renderTarget is internally sourced and then exported as a Bindable
 		renderTarget = std::make_shared<Bind::ShaderInputRenderTarget>( gfx,fullWidth / 2,fullHeight / 2,0u );
@@ -31,8 +32,6 @@ namespace Rgph
 		buf["isHorizontal"] = true;
 		direction->SetBuffer( buf );
 
-		blurScratchIn->Bind( gfx );
-		control->Bind( gfx );
 		direction->Bind( gfx );
 		FullscreenPass::Execute( gfx );
 	}

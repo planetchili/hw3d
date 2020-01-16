@@ -80,6 +80,43 @@ namespace Rgph
 	};
 
 	template<class T>
+	class ContainerBindableSink : public Sink
+	{
+		static_assert(std::is_base_of_v<Bind::Bindable,T>,"DirectBindableSink target type must be a Bindable type");
+	public:
+		void PostLinkValidate() const override
+		{
+			if( !linked )
+			{
+				throw RGC_EXCEPTION( "Unlinked input: " + GetRegisteredName() );
+			}
+		}
+		void Bind( Source& source ) override
+		{
+			auto p = std::dynamic_pointer_cast<T>(source.YieldBindable());
+			if( !p )
+			{
+				std::ostringstream oss;
+				oss << "Binding input [" << GetRegisteredName() << "] to output [" << GetPassName() << "." << GetOutputName() << "] "
+					<< " { " << typeid(T).name() << " } does not match { " << typeid(*source.YieldBindable().get()).name() << " }";
+				throw RGC_EXCEPTION( oss.str() );
+			}
+			container[index] = std::move( p );
+			linked = true;
+		}
+		ContainerBindableSink( std::string registeredName,std::vector<std::shared_ptr<Bind::Bindable>>& container,size_t index )
+			:
+			Sink( std::move( registeredName ) ),
+			container( container ),
+			index( index )
+		{}
+	private:
+		std::vector<std::shared_ptr<Bind::Bindable>>& container;
+		size_t index;
+		bool linked = false;
+	};
+
+	template<class T>
 	class DirectBindableSink : public Sink
 	{
 		static_assert(std::is_base_of_v<Bind::Bindable,T>,"DirectBindableSink target type must be a Bindable type");
