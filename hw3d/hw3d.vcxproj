@@ -255,7 +255,6 @@
     <ClInclude Include="Blender.h" />
     <ClInclude Include="BlurOutlineDrawingPass.h" />
     <ClInclude Include="BlurOutlineRenderGraph.h" />
-    <ClInclude Include="BlurPack.h" />
     <ClInclude Include="BufferClearPass.h" />
     <ClInclude Include="BufferResource.h" />
     <ClInclude Include="Camera.h" />

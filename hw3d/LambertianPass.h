@@ -8,18 +8,21 @@
 
 class Graphics;
 
-class LambertianPass : public RenderQueuePass
+namespace Rgph
 {
-public:
-	LambertianPass( Graphics& gfx,std::string name )
-		:
-		RenderQueuePass( std::move( name ) )
+	class LambertianPass : public RenderQueuePass
 	{
-		using namespace Bind;
-		RegisterInput( BufferInput<RenderTarget>::Make( "renderTarget",renderTarget ) );
-		RegisterInput( BufferInput<DepthStencil>::Make( "depthStencil",depthStencil ) );
-		RegisterOutput( BufferOutput<RenderTarget>::Make( "renderTarget",renderTarget ) );
-		RegisterOutput( BufferOutput<DepthStencil>::Make( "depthStencil",depthStencil ) );
-		AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
-	}
-};
+	public:
+		LambertianPass( Graphics& gfx,std::string name )
+			:
+			RenderQueuePass( std::move( name ) )
+		{
+			using namespace Bind;
+			RegisterInput( BufferInput<RenderTarget>::Make( "renderTarget",renderTarget ) );
+			RegisterInput( BufferInput<DepthStencil>::Make( "depthStencil",depthStencil ) );
+			RegisterOutput( BufferOutput<RenderTarget>::Make( "renderTarget",renderTarget ) );
+			RegisterOutput( BufferOutput<DepthStencil>::Make( "depthStencil",depthStencil ) );
+			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
+		}
+	};
+}

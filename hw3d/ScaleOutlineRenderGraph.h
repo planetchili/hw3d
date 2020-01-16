@@ -3,8 +3,11 @@
 
 class Graphics;
 
-class ScaleOutlineRenderGraph : public RenderGraph
+namespace Rgph
 {
-public:
-	ScaleOutlineRenderGraph( Graphics& gfx );
-};
+	class ScaleOutlineRenderGraph : public RenderGraph
+	{
+	public:
+		ScaleOutlineRenderGraph( Graphics& gfx );
+	};
+}

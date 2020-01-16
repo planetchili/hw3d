@@ -6,8 +6,12 @@
 
 class TechniqueProbe;
 class Drawable;
-class RenderQueuePass;
-class RenderGraph;
+
+namespace Rgph
+{
+	class RenderQueuePass;
+	class RenderGraph;
+}
 
 class Step
 {
@@ -22,9 +26,9 @@ public:
 	void Bind( Graphics& gfx ) const noxnd;
 	void InitializeParentReferences( const Drawable& parent ) noexcept;
 	void Accept( TechniqueProbe& probe );
-	void Link( RenderGraph& rg );
+	void Link( Rgph::RenderGraph& rg );
 private:
 	std::vector<std::shared_ptr<Bind::Bindable>> bindables;
-	RenderQueuePass* pTargetPass = nullptr;
+	Rgph::RenderQueuePass* pTargetPass = nullptr;
 	std::string targetPassName;
 };

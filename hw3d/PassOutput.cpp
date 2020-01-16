@@ -3,35 +3,37 @@
 #include <algorithm>
 #include <cctype>
 
-
-PassOutput::PassOutput( std::string nameIn )
-	:
-	name( std::move( nameIn ) )
+namespace Rgph
 {
-	if( name.empty() )
+	PassOutput::PassOutput( std::string nameIn )
+		:
+		name( std::move( nameIn ) )
 	{
-		throw RGC_EXCEPTION( "Empty output name" );
+		if( name.empty() )
+		{
+			throw RGC_EXCEPTION( "Empty output name" );
+		}
+		const bool nameCharsValid = std::all_of( name.begin(),name.end(),[]( char c ) {
+			return std::isalnum( c ) || c == '_';
+		} );
+		if( !nameCharsValid || std::isdigit( name.front() ) )
+		{
+			throw RGC_EXCEPTION( "Invalid output name: " + name );
+		}
 	}
-	const bool nameCharsValid = std::all_of( name.begin(),name.end(),[]( char c ) {
-		return std::isalnum( c ) || c == '_';
-	} );
-	if( !nameCharsValid || std::isdigit( name.front() ) )
+
+	std::shared_ptr<Bind::Bindable> PassOutput::YieldImmutable()
 	{
-		throw RGC_EXCEPTION( "Invalid output name: " + name );
+		throw RGC_EXCEPTION( "Output cannot be accessed as immutable" );
 	}
-}
 
-std::shared_ptr<Bind::Bindable> PassOutput::YieldImmutable()
-{
-	throw RGC_EXCEPTION( "Output cannot be accessed as immutable" );
-}
+	std::shared_ptr<Bind::BufferResource> PassOutput::YieldBuffer()
+	{
+		throw RGC_EXCEPTION( "Output cannot be accessed as buffer" );
+	}
 
-std::shared_ptr<Bind::BufferResource> PassOutput::YieldBuffer()
-{
-	throw RGC_EXCEPTION( "Output cannot be accessed as buffer" );
-}
-
-const std::string& PassOutput::GetName() const noexcept
-{
-	return name;
+	const std::string& PassOutput::GetName() const noexcept
+	{
+		return name;
+	}
 }

@@ -61,7 +61,7 @@ void Model::Accept( ModelProbe & probe )
 	pRoot->Accept( probe );
 }
 
-void Model::LinkTechniques( RenderGraph& rg )
+void Model::LinkTechniques( Rgph::RenderGraph& rg )
 {
 	for( auto& pMesh : meshPtrs )
 	{

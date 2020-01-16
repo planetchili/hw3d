@@ -64,7 +64,7 @@ void PointLight::Bind( Graphics& gfx,DirectX::FXMMATRIX view ) const noexcept
 	cbuf.Bind( gfx );
 }
 
-void PointLight::LinkTechniques( RenderGraph& rg )
+void PointLight::LinkTechniques( Rgph::RenderGraph& rg )
 {
 	mesh.LinkTechniques( rg );
 }

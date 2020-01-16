@@ -7,7 +7,6 @@
 #include "TestCube.h"
 #include "Model.h"
 #include "ScriptCommander.h"
-#include "ScaleOutlineRenderGraph.h"
 #include "BlurOutlineRenderGraph.h"
 
 class App
@@ -27,7 +26,7 @@ private:
 	ImguiManager imgui;
 	Window wnd;
 	ScriptCommander scriptCommander;
-	BlurOutlineRenderGraph rg{ wnd.Gfx() };
+	Rgph::BlurOutlineRenderGraph rg{ wnd.Gfx() };
 	ChiliTimer timer;
 	float speed_factor = 1.0f;
 	Camera cam;

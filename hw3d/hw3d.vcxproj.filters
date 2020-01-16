@@ -518,9 +518,6 @@
     <ClInclude Include="GraphicsResource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BlurPack.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="RenderGraphCompileException.h">
       <Filter>Header Files\Jobber\Passlib</Filter>
     </ClInclude>

@@ -7,67 +7,69 @@
 #include <sstream>
 #include <cctype>
 
-
-PassInput::PassInput( std::string registeredNameIn )
-	:
-	registeredName( std::move( registeredNameIn ) )
+namespace Rgph
 {
-	if( registeredName.empty() )
+	PassInput::PassInput( std::string registeredNameIn )
+		:
+		registeredName( std::move( registeredNameIn ) )
 	{
-		throw RGC_EXCEPTION( "Empty output name" );
-	}
-	const bool nameCharsValid = std::all_of( registeredName.begin(),registeredName.end(),[]( char c ) {
-		return std::isalnum( c ) || c == '_';
-	} );
-	if( !nameCharsValid || std::isdigit( registeredName.front() ) )
-	{
-		throw RGC_EXCEPTION( "Invalid output name: " + registeredName );
-	}
-}
-
-const std::string& PassInput::GetRegisteredName() const noexcept
-{
-	return registeredName;
-}
-
-const std::string& PassInput::GetPassName() const noexcept
-{
-	return passName;
-}
-
-const std::string& PassInput::GetOutputName() const noexcept
-{
-	return outputName;
-}
-
-void PassInput::SetTarget( std::string passName,std::string outputName )
-{
-	{
-		if( passName.empty() )
+		if( registeredName.empty() )
 		{
 			throw RGC_EXCEPTION( "Empty output name" );
 		}
-		const bool nameCharsValid = std::all_of( passName.begin(),passName.end(),[]( char c ) {
+		const bool nameCharsValid = std::all_of( registeredName.begin(),registeredName.end(),[]( char c ) {
 			return std::isalnum( c ) || c == '_';
 		} );
-		if( passName != "$" && (!nameCharsValid || std::isdigit( passName.front() )) )
+		if( !nameCharsValid || std::isdigit( registeredName.front() ) )
 		{
 			throw RGC_EXCEPTION( "Invalid output name: " + registeredName );
 		}
-		this->passName = passName;
 	}
+
+	const std::string& PassInput::GetRegisteredName() const noexcept
 	{
-		if( outputName.empty() )
+		return registeredName;
+	}
+
+	const std::string& PassInput::GetPassName() const noexcept
+	{
+		return passName;
+	}
+
+	const std::string& PassInput::GetOutputName() const noexcept
+	{
+		return outputName;
+	}
+
+	void PassInput::SetTarget( std::string passName,std::string outputName )
+	{
 		{
-			throw RGC_EXCEPTION( "Empty output name" );
+			if( passName.empty() )
+			{
+				throw RGC_EXCEPTION( "Empty output name" );
+			}
+			const bool nameCharsValid = std::all_of( passName.begin(),passName.end(),[]( char c ) {
+				return std::isalnum( c ) || c == '_';
+			} );
+			if( passName != "$" && (!nameCharsValid || std::isdigit( passName.front() )) )
+			{
+				throw RGC_EXCEPTION( "Invalid output name: " + registeredName );
+			}
+			this->passName = passName;
 		}
-		const bool nameCharsValid = std::all_of( outputName.begin(),outputName.end(),[]( char c ) {
-			return std::isalnum( c ) || c == '_';
-		} );
-		if( !nameCharsValid || std::isdigit( outputName.front() ) )
 		{
-			throw RGC_EXCEPTION( "Invalid output name: " + registeredName );
+			if( outputName.empty() )
+			{
+				throw RGC_EXCEPTION( "Empty output name" );
+			}
+			const bool nameCharsValid = std::all_of( outputName.begin(),outputName.end(),[]( char c ) {
+				return std::isalnum( c ) || c == '_';
+			} );
+			if( !nameCharsValid || std::isdigit( outputName.front() ) )
+			{
+				throw RGC_EXCEPTION( "Invalid output name: " + registeredName );
+			}
+			this->outputName = outputName;
 		}
-		this->outputName = outputName;
 	}
 }
