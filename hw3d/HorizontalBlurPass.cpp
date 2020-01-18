@@ -20,7 +20,7 @@ namespace Rgph
 		AddBind( Sampler::Resolve( gfx,Sampler::Type::Point,true ) );
 		
 		AddBindSink<Bind::RenderTarget>( "scratchIn" );
-		AddBindSink<Bind::CachingPixelConstantBufferEx>( "control" );
+		AddBindSink<Bind::CachingPixelConstantBufferEx>( "kernel" );
 		RegisterSink( DirectBindableSink<CachingPixelConstantBufferEx>::Make( "direction",direction ) );
 
 		// the renderTarget is internally sourced and then exported as a Bindable

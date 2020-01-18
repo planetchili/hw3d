@@ -20,7 +20,7 @@ namespace Rgph
 		AddBind( Sampler::Resolve( gfx,Sampler::Type::Bilinear,true ) );
 
 		AddBindSink<RenderTarget>( "scratchIn" );
-		AddBindSink<CachingPixelConstantBufferEx>( "control" );
+		AddBindSink<CachingPixelConstantBufferEx>( "kernel" );
 		RegisterSink( DirectBindableSink<CachingPixelConstantBufferEx>::Make( "direction",direction ) );
 		RegisterSink( DirectBufferSink<RenderTarget>::Make( "renderTarget",renderTarget ) );
 		RegisterSink( DirectBufferSink<DepthStencil>::Make( "depthStencil",depthStencil ) );
