@@ -4,6 +4,9 @@
 #include "PixelShader.h"
 #include "Blender.h"
 #include "Stencil.h"
+#include "Sampler.h"
+
+using namespace Bind;
 
 namespace Rgph
 {
@@ -11,19 +14,19 @@ namespace Rgph
 		:
 		FullscreenPass( std::move( name ),gfx )
 	{
-		using namespace Bind;
 		AddBind( PixelShader::Resolve( gfx,"BlurOutline_PS.cso" ) );
 		AddBind( Blender::Resolve( gfx,true ) );
 		AddBind( Stencil::Resolve( gfx,Stencil::Mode::Mask ) );
+		AddBind( Sampler::Resolve( gfx,Sampler::Type::Bilinear,true ) );
 
-		AddBindSink<Bind::RenderTarget>( "scratchIn" );
-		AddBindSink<Bind::CachingPixelConstantBufferEx>( "control" );
-		RegisterSink( DirectBindableSink<Bind::CachingPixelConstantBufferEx>::Make( "direction",direction ) );
-		RegisterSink( DirectBufferSink<Bind::RenderTarget>::Make( "renderTarget",renderTarget ) );
-		RegisterSink( DirectBufferSink<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
+		AddBindSink<RenderTarget>( "scratchIn" );
+		AddBindSink<CachingPixelConstantBufferEx>( "control" );
+		RegisterSink( DirectBindableSink<CachingPixelConstantBufferEx>::Make( "direction",direction ) );
+		RegisterSink( DirectBufferSink<RenderTarget>::Make( "renderTarget",renderTarget ) );
+		RegisterSink( DirectBufferSink<DepthStencil>::Make( "depthStencil",depthStencil ) );
 
-		RegisterSource( DirectBufferSource<Bind::RenderTarget>::Make( "renderTarget",renderTarget ) );
-		RegisterSource( DirectBufferSource<Bind::DepthStencil>::Make( "depthStencil",depthStencil ) );
+		RegisterSource( DirectBufferSource<RenderTarget>::Make( "renderTarget",renderTarget ) );
+		RegisterSource( DirectBufferSource<DepthStencil>::Make( "depthStencil",depthStencil ) );
 	}
 
 	// see the note on HorizontalBlurPass::Execute

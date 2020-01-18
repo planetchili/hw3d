@@ -4,7 +4,10 @@
 #include "Sink.h"
 #include "Source.h"
 #include "Blender.h"
+#include "Sampler.h"
 #include "ConstantBuffersEx.h"
+
+using namespace Bind;
 
 namespace Rgph
 {
@@ -12,16 +15,17 @@ namespace Rgph
 		:
 		FullscreenPass( std::move( name ),gfx )
 	{
-		AddBind( Bind::PixelShader::Resolve( gfx,"BlurOutline_PS.cso" ) );
-		AddBind( Bind::Blender::Resolve( gfx,false ) );
+		AddBind( PixelShader::Resolve( gfx,"BlurOutline_PS.cso" ) );
+		AddBind( Blender::Resolve( gfx,false ) );
+		AddBind( Sampler::Resolve( gfx,Sampler::Type::Point,true ) );
 		
 		AddBindSink<Bind::RenderTarget>( "scratchIn" );
 		AddBindSink<Bind::CachingPixelConstantBufferEx>( "control" );
-		RegisterSink( DirectBindableSink<Bind::CachingPixelConstantBufferEx>::Make( "direction",direction ) );
+		RegisterSink( DirectBindableSink<CachingPixelConstantBufferEx>::Make( "direction",direction ) );
 
 		// the renderTarget is internally sourced and then exported as a Bindable
 		renderTarget = std::make_shared<Bind::ShaderInputRenderTarget>( gfx,fullWidth / 2,fullHeight / 2,0u );
-		RegisterSource( DirectBindableSource<Bind::RenderTarget>::Make( "scratchOut",renderTarget ) );
+		RegisterSource( DirectBindableSource<RenderTarget>::Make( "scratchOut",renderTarget ) );
 	}
 
 	// this override is necessary because we cannot (yet) link input bindables directly into
