@@ -114,6 +114,7 @@ void App::DoFrame( float dt )
 	ShowImguiDemoWindow();
 	cube.SpawnControlWindow( wnd.Gfx(),"Cube 1" );
 	cube2.SpawnControlWindow( wnd.Gfx(),"Cube 2" );
+	rg.RenderWidgets( wnd.Gfx() );
 
 	// present
 	wnd.Gfx().EndFrame();
