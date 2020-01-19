@@ -2,9 +2,9 @@
 	"enabled": false,
 	"commands": [
     {
-      "command": "flip-y",
+      "command": "publish",
       "params": {
-        "source": "Models\\brick_wall\\brick_wall_normal.jpg"
+        "dest": "C:\\Users\\Chili\\Desktop\\PubTest"
       }
     }
 	]
