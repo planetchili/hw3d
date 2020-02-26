@@ -1,4 +1,5 @@
 #include "Bindable.h"
+#include <stdexcept>
 
 namespace Bind
 {
