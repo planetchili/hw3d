@@ -362,7 +362,7 @@ void D3DTestScratchPad( Window& wnd )
 		const auto bips = Bind::PixelShader::Resolve( gfx,"Test_PS.cso" );
 
 		const auto bivs = Bind::VertexShader::Resolve( gfx,vsName );
-		const auto bilay = Bind::InputLayout::Resolve( gfx,layout,bivs->GetBytecode() );
+		const auto bilay = Bind::InputLayout::Resolve( gfx,layout,*bivs );
 
 		auto rt = Bind::ShaderInputRenderTarget{ gfx,1280,720,0 };
 
@@ -379,6 +379,6 @@ void D3DTestScratchPad( Window& wnd )
 		rt.ToSurface( gfx ).Save( "Test_" + vsName + ".png" );
 	};
 
-	RenderWithVS( "Test1_VS.cso" );
 	RenderWithVS( "Test2_VS.cso" );
+	RenderWithVS( "Test1_VS.cso" );
 }
