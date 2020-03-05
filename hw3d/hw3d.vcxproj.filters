@@ -685,5 +685,14 @@
     <FxCompile Include="PhongDifMskSpc_PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
+    <FxCompile Include="Test1_VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Test2_VS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="Test_PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

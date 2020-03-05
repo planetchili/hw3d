@@ -6,6 +6,7 @@
 #include "Testing.h"
 #include "PerfLog.h"
 #include "TestModelProbe.h"
+#include "Testing.h"
 
 namespace dx = DirectX;
 
@@ -16,6 +17,7 @@ App::App( const std::string& commandLine )
 	scriptCommander( TokenizeQuoted( commandLine ) ),
 	light( wnd.Gfx() )
 {
+	D3DTestScratchPad( wnd );
 	cube.SetPos( { 4.0f,0.0f,0.0f } );
 	cube2.SetPos( { 0.0f,4.0f,0.0f } );
 	nano.SetRootTransform(
