@@ -2,7 +2,7 @@
 #include "ChiliWin.h"
 #include "ChiliException.h"
 #include <d3d11.h>
-#include <wrl.h>
+#include "ChiliWRL.h"
 #include <vector>
 #include "DxgiInfoManager.h"
 #include <d3dcompiler.h>

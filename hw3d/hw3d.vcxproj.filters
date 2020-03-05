@@ -587,6 +587,9 @@
     <ClInclude Include="Source.h">
       <Filter>Header Files\Jobber\Passlib\Base</Filter>
     </ClInclude>
+    <ClInclude Include="ChiliWRL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
