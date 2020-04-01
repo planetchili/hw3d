@@ -4,8 +4,9 @@
 
 namespace dx = DirectX;
 
-Camera::Camera( DirectX::XMFLOAT3 homePos,float homePitch,float homeYaw ) noexcept
+Camera::Camera( std::string name,DirectX::XMFLOAT3 homePos,float homePitch,float homeYaw ) noexcept
 	:
+	name( std::move( name ) ),
 	homePos( homePos ),
 	homePitch( homePitch ),
 	homeYaw( homeYaw )
@@ -30,23 +31,19 @@ DirectX::XMMATRIX Camera::GetMatrix() const noexcept
 	return XMMatrixLookAtLH( camPosition,camTarget,XMVectorSet( 0.0f,1.0f,0.0f,0.0f ) );
 }
 
-void Camera::SpawnControlWindow() noexcept
+void Camera::SpawnControlWidgets() noexcept
 {
-	if( ImGui::Begin( "Camera" ) )
+	ImGui::Text( "Position" );
+	ImGui::SliderFloat( "X",&pos.x,-80.0f,80.0f,"%.1f" );
+	ImGui::SliderFloat( "Y",&pos.y,-80.0f,80.0f,"%.1f" );
+	ImGui::SliderFloat( "Z",&pos.z,-80.0f,80.0f,"%.1f" );
+	ImGui::Text( "Orientation" );
+	ImGui::SliderAngle( "Pitch",&pitch,0.995f * -90.0f,0.995f * 90.0f );
+	ImGui::SliderAngle( "Yaw",&yaw,-180.0f,180.0f );
+	if( ImGui::Button( "Reset" ) )
 	{
-		ImGui::Text( "Position" );
-		ImGui::SliderFloat( "X",&pos.x,-80.0f,80.0f,"%.1f" );
-		ImGui::SliderFloat( "Y",&pos.y,-80.0f,80.0f,"%.1f" );
-		ImGui::SliderFloat( "Z",&pos.z,-80.0f,80.0f,"%.1f" );
-		ImGui::Text( "Orientation" );
-		ImGui::SliderAngle( "Pitch",&pitch,0.995f * -90.0f,0.995f * 90.0f );
-		ImGui::SliderAngle( "Yaw",&yaw,-180.0f,180.0f );
-		if( ImGui::Button( "Reset" ) )
-		{
-			Reset();
-		}
+		Reset();
 	}
-	ImGui::End();
 }
 
 void Camera::Reset() noexcept
@@ -79,4 +76,9 @@ void Camera::Translate( DirectX::XMFLOAT3 translation ) noexcept
 DirectX::XMFLOAT3 Camera::GetPos() const noexcept
 {
 	return pos;
+}
+
+const std::string& Camera::GetName() const noexcept
+{
+	return name;
 }

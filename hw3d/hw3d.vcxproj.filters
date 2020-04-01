@@ -285,6 +285,9 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files\Jobber\Passlib</Filter>
     </ClCompile>
+    <ClCompile Include="CameraContainer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -588,6 +591,9 @@
       <Filter>Header Files\Jobber\Passlib\Base</Filter>
     </ClInclude>
     <ClInclude Include="ChiliWRL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
