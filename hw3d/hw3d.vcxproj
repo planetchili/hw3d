@@ -112,6 +112,7 @@
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="DynamicConstant.cpp" />
     <ClCompile Include="HorizontalBlurPass.cpp" />
+    <ClCompile Include="Projection.cpp" />
     <ClCompile Include="Sink.cpp" />
     <ClCompile Include="RenderGraph.cpp" />
     <ClCompile Include="FullscreenPass.cpp" />
@@ -322,6 +323,7 @@
     <ClInclude Include="LambertianPass.h" />
     <ClInclude Include="OutlineDrawingPass.h" />
     <ClInclude Include="OutlineMaskGenerationPass.h" />
+    <ClInclude Include="Projection.h" />
     <ClInclude Include="RenderGraph.h" />
     <ClInclude Include="FullscreenPass.h" />
     <ClInclude Include="GraphicsResource.h" />

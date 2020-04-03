@@ -14,7 +14,7 @@ template<typename T>
 T wrap_angle( T theta ) noexcept
 {
 	constexpr T twoPi = (T)2 * (T)PI_D;
-	const T mod = fmod( theta,twoPi );
+	const T mod = (T)fmod( theta,twoPi );
 	if( mod > (T)PI_D )
 	{
 		return mod - twoPi;
