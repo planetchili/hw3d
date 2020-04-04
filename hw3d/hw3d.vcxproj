@@ -112,6 +112,7 @@
     <ClCompile Include="dxerr.cpp" />
     <ClCompile Include="DxgiInfoManager.cpp" />
     <ClCompile Include="DynamicConstant.cpp" />
+    <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="HorizontalBlurPass.cpp" />
     <ClCompile Include="Projection.cpp" />
     <ClCompile Include="Sink.cpp" />
@@ -321,6 +322,7 @@
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DepthStencil.h" />
     <ClInclude Include="DynamicConstant.h" />
+    <ClInclude Include="Frustum.h" />
     <ClInclude Include="HorizontalBlurPass.h" />
     <ClInclude Include="LambertianPass.h" />
     <ClInclude Include="OutlineDrawingPass.h" />
