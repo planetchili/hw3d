@@ -18,10 +18,15 @@ public:
 	void SetRotation( DirectX::XMFLOAT3 );
 	void Submit() const;
 	void LinkTechniques( Rgph::RenderGraph& rg );
+	void Reset( Graphics& gfx );
 private:
 	float width;
 	float height;
 	float nearZ;
 	float farZ;
+	float homeWidth;
+	float homeHeight;
+	float homeNearZ;
+	float homeFarZ;
 	Frustum frust;
 };
