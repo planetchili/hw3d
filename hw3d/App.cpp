@@ -18,8 +18,8 @@ App::App( const std::string& commandLine )
 	scriptCommander( TokenizeQuoted( commandLine ) ),
 	light( wnd.Gfx() )
 {
-	cameras.AddCamera( std::make_unique<Camera>( "A",dx::XMFLOAT3{ -13.5f,6.0f,3.5f },0.0f,PI / 2.0f ) );
-	cameras.AddCamera( std::make_unique<Camera>( "B",dx::XMFLOAT3{ -13.5f,28.8f,-6.4f },PI / 180.0f * 13.0f,PI / 180.0f * 61.0f ) );
+	cameras.AddCamera( std::make_unique<Camera>( wnd.Gfx(),"A",dx::XMFLOAT3{ -13.5f,6.0f,3.5f },0.0f,PI / 2.0f ) );
+	cameras.AddCamera( std::make_unique<Camera>( wnd.Gfx(),"B",dx::XMFLOAT3{ -13.5f,28.8f,-6.4f },PI / 180.0f * 13.0f,PI / 180.0f * 61.0f ) );
 
 	cube.SetPos( { 4.0f,0.0f,0.0f } );
 	cube2.SetPos( { 0.0f,4.0f,0.0f } );
@@ -38,6 +38,7 @@ App::App( const std::string& commandLine )
 	sponza.LinkTechniques( rg );
 	gobber.LinkTechniques( rg );
 	nano.LinkTechniques( rg );
+	cameras.LinkTechniques( rg );
 }
 
 void App::HandleInput( float dt )
@@ -118,6 +119,7 @@ void App::DoFrame( float dt )
 	cube2.Submit();
 	gobber.Submit();
 	nano.Submit();
+	cameras.Submit();
 
 	rg.Execute( wnd.Gfx() );
 	

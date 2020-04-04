@@ -18,6 +18,6 @@ void Projection::RenderWidgets()
 {
 	ImGui::SliderFloat( "Width",&width,0.01f,4.0f,"%.2f",1.5f );
 	ImGui::SliderFloat( "Height",&height,0.01f,4.0f,"%.2f",1.5f );
-	ImGui::SliderFloat( "Near Z",&nearZ,0.01f,400.0f,"%.2f",10.0f );
-	ImGui::SliderFloat( "Far Z",&farZ,0.01f,400.0f,"%.2f",10.0f );
+	ImGui::SliderFloat( "Near Z",&nearZ,0.01f,400.0f,"%.2f",4.0f );
+	ImGui::SliderFloat( "Far Z",&farZ,0.01f,400.0f,"%.2f",4.0f );
 }
