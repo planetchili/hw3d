@@ -9,6 +9,8 @@ namespace Rgph
 	class RenderGraph;
 }
 
+class Camera;
+
 class PointLight
 {
 public:
@@ -18,6 +20,7 @@ public:
 	void Submit() const noxnd;
 	void Bind( Graphics& gfx,DirectX::FXMMATRIX view ) const noexcept;
 	void LinkTechniques( Rgph::RenderGraph& );
+	std::shared_ptr<Camera> ShareCamera() const noexcept;
 private:
 	struct PointLightCBuf
 	{
@@ -33,4 +36,5 @@ private:
 	PointLightCBuf cbData;
 	mutable SolidSphere mesh;
 	mutable Bind::PixelConstantBuffer<PointLightCBuf> cbuf;
+	std::shared_ptr<Camera> pCamera;
 };

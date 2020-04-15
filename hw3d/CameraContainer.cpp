@@ -44,7 +44,7 @@ void CameraContainer::Bind( Graphics& gfx )
 	gfx.SetCamera( (*this)->GetMatrix() );
 }
 
-void CameraContainer::AddCamera( std::unique_ptr<Camera> pCam )
+void CameraContainer::AddCamera( std::shared_ptr<Camera> pCam )
 {
 	cameras.push_back( std::move( pCam ) );
 }
