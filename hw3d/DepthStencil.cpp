@@ -99,7 +99,7 @@ namespace Bind
 		GetContext( gfx )->ClearDepthStencilView( pDepthStencilView.Get(),D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,1.0f,0u );
 	}
 
-	Surface Bind::DepthStencil::ToSurface( Graphics& gfx ) const
+	Surface Bind::DepthStencil::ToSurface( Graphics& gfx,bool linearlize ) const
 	{
 		INFOMAN( gfx );
 		namespace wrl = Microsoft::WRL;
@@ -141,14 +141,33 @@ namespace Bind
 				if( textureDesc.Format == DXGI_FORMAT::DXGI_FORMAT_R24G8_TYPELESS )
 				{
 					const auto raw = 0xFFFFFF & *reinterpret_cast<const unsigned int*>(pSrcRow + x);
-					const unsigned char channel = raw >> 16;
-					s.PutPixel( x,y,{ channel,channel,channel } );
+					if( linearlize )
+					{
+						const auto normalized = (float)raw / (float)0xFFFFFF;
+						const auto linearized = 0.01f / (1.01f - normalized);
+						const auto channel = unsigned char( linearized * 255.0f );
+						s.PutPixel( x,y,{ channel,channel,channel } );
+					}
+					else
+					{
+						const unsigned char channel = raw >> 16;
+						s.PutPixel( x,y,{ channel,channel,channel } );
+					}
 				}
 				else if( textureDesc.Format == DXGI_FORMAT::DXGI_FORMAT_R32_TYPELESS )
 				{
 					const auto raw = *reinterpret_cast<const float*>(pSrcRow + x);
-					const auto channel = unsigned char(raw * 255.0f);
-					s.PutPixel( x,y,{ channel,channel,channel } );
+					if( linearlize )
+					{
+						const auto linearized = 0.01f / (1.01f - raw);
+						const auto channel = unsigned char(linearized * 255.0f);
+						s.PutPixel( x,y,{ channel,channel,channel } );
+					}
+					else
+					{
+						const auto channel = unsigned char( raw * 255.0f );
+						s.PutPixel( x,y,{ channel,channel,channel } );
+					}
 				}
 				else
 				{
