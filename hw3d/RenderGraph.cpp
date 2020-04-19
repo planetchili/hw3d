@@ -185,4 +185,8 @@ namespace Rgph
 		}
 		throw RGC_EXCEPTION( "In RenderGraph::GetRenderQueue, pass not found: " + passName );
 	}
+	void Rgph::RenderGraph::StoreDepth( Graphics& gfx,const std::string& path )
+	{
+		masterDepth->ToSurface( gfx ).Save( path );
+	}
 }
