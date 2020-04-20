@@ -308,6 +308,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraContainer.h" />
     <ClInclude Include="CameraIndicator.h" />
+    <ClInclude Include="Channels.h" />
     <ClInclude Include="ChiliException.h" />
     <ClInclude Include="ChiliMath.h" />
     <ClInclude Include="ChiliTimer.h" />

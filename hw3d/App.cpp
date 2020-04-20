@@ -8,6 +8,7 @@
 #include "TestModelProbe.h"
 #include "Testing.h"
 #include "Camera.h"
+#include "Channels.h"
 
 namespace dx = DirectX;
 
@@ -117,13 +118,13 @@ void App::DoFrame( float dt )
 	cameras->BindToGraphics( wnd.Gfx() );
 	light.Bind( wnd.Gfx(),cameras->GetMatrix() );
 		
-	light.Submit();
-	cube.Submit();
-	sponza.Submit();
-	cube2.Submit();
-	gobber.Submit();
-	nano.Submit();
-	cameras.Submit();
+	light.Submit( Chan::main );
+	cube.Submit( Chan::main );
+	sponza.Submit( Chan::main );
+	cube2.Submit( Chan::main );
+	gobber.Submit( Chan::main );
+	nano.Submit( Chan::main );
+	cameras.Submit( Chan::main );
 
 	rg.Execute( wnd.Gfx() );
 	

@@ -4,6 +4,7 @@
 #include "Vertex.h"
 #include "Sphere.h"
 #include "Stencil.h"
+#include "Channels.h"
 
 namespace dx = DirectX;
 
@@ -44,7 +45,7 @@ Frustum::Frustum( Graphics& gfx,float width,float height,float nearZ,float farZ 
 	pTopology = Topology::Resolve( gfx,D3D11_PRIMITIVE_TOPOLOGY_LINELIST );
 
 	{
-		Technique line;
+		Technique line{ Chan::main };
 		{
 			Step unoccluded( "lambertian" );
 

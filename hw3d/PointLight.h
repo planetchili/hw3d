@@ -17,7 +17,7 @@ public:
 	PointLight( Graphics& gfx,float radius = 0.5f );
 	void SpawnControlWindow() noexcept;
 	void Reset() noexcept;
-	void Submit() const noxnd;
+	void Submit( size_t channels ) const noxnd;
 	void Bind( Graphics& gfx,DirectX::FXMMATRIX view ) const noexcept;
 	void LinkTechniques( Rgph::RenderGraph& );
 	std::shared_ptr<Camera> ShareCamera() const noexcept;

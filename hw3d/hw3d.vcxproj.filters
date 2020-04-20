@@ -617,6 +617,9 @@
     <ClInclude Include="WireframePass.h">
       <Filter>Header Files\Jobber\Passlib</Filter>
     </ClInclude>
+    <ClInclude Include="Channels.h">
+      <Filter>Header Files\Jobber\Graphlib</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">

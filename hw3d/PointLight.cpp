@@ -59,10 +59,10 @@ void PointLight::Reset() noexcept
 	};
 }
 
-void PointLight::Submit() const noxnd
+void PointLight::Submit( size_t channels ) const noxnd
 {
 	mesh.SetPos( cbData.pos );
-	mesh.Submit();
+	mesh.Submit( channels );
 }
 
 void PointLight::Bind( Graphics& gfx,DirectX::FXMMATRIX view ) const noexcept

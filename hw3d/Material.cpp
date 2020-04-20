@@ -5,6 +5,7 @@
 #include "TransformCbufScaling.h"
 #include "Stencil.h"
 #include <filesystem>
+#include "Channels.h"
 
 Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesystem::path& path ) noxnd
 	:
@@ -19,7 +20,7 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 	}
 	// phong technique
 	{
-		Technique phong{ "Phong" };
+		Technique phong{ "Phong",Chan::main };
 		Step step( "lambertian" );
 		std::string shaderCode = "Phong";
 		aiString texFileName;
@@ -127,7 +128,7 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 	}
 	// outline technique
 	{
-		Technique outline( "Outline",false );
+		Technique outline{ "Outline",Chan::main,false };
 		{
 			Step mask( "outlineMask" );
 

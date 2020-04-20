@@ -8,11 +8,11 @@
 using namespace Bind;
 
 
-void Drawable::Submit() const noexcept
+void Drawable::Submit( size_t channelFilter ) const noexcept
 {
 	for( const auto& tech : techniques )
 	{
-		tech.Submit( *this );
+		tech.Submit( *this,channelFilter );
 	}
 }
 
