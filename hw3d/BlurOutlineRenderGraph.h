@@ -4,6 +4,7 @@
 #include "ConstantBuffersEx.h"
 
 class Graphics;
+class Camera;
 namespace Bind
 {
 	class Bindable;
@@ -17,6 +18,8 @@ namespace Rgph
 	public:
 		BlurOutlineRenderGraph( Graphics& gfx );
 		void RenderWidgets( Graphics& gfx );
+		void BindMainCamera( Camera& cam );
+		void BindShadowCamera( Camera& cam );
 	private:
 		// private functions
 		void SetKernelGauss( int radius,float sigma ) noxnd;
