@@ -342,6 +342,7 @@
     <ClInclude Include="ModelProbe.h" />
     <ClInclude Include="NullPixelShader.h" />
     <ClInclude Include="Pass.h" />
+    <ClInclude Include="ShadowMappingPass.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="PerfLog.h" />
     <ClInclude Include="Rasterizer.h" />

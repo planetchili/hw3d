@@ -41,6 +41,8 @@ App::App( const std::string& commandLine )
 	gobber.LinkTechniques( rg );
 	nano.LinkTechniques( rg );
 	cameras.LinkTechniques( rg );
+
+	rg.BindShadowCamera( *light.ShareCamera() );
 }
 
 void App::HandleInput( float dt )
@@ -126,7 +128,20 @@ void App::DoFrame( float dt )
 	nano.Submit( Chan::main );
 	cameras.Submit( Chan::main );
 
+	sponza.Submit( Chan::shadow );
+	cube.Submit( Chan::shadow );
+	sponza.Submit( Chan::shadow );
+	cube2.Submit( Chan::shadow );
+	gobber.Submit( Chan::shadow );
+	nano.Submit( Chan::shadow );
+
 	rg.Execute( wnd.Gfx() );
+
+	if( savingDepth )
+	{
+		rg.DumpShadowMap( wnd.Gfx(),"shadow.png" );
+		savingDepth = false;
+	}
 	
 	// imgui windows
 	static MP sponzeProbe{ "Sponza" };
@@ -146,12 +161,6 @@ void App::DoFrame( float dt )
 	// present
 	wnd.Gfx().EndFrame();
 	rg.Reset();
-
-	if( savingDepth )
-	{
-		rg.StoreDepth( wnd.Gfx(),"depth.png" );
-		savingDepth = false;
-	}
 }
 
 void App::ShowImguiDemoWindow()

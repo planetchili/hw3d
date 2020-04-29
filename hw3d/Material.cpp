@@ -163,6 +163,23 @@ Material::Material( Graphics& gfx,const aiMaterial& material,const std::filesyst
 		}
 		techniques.push_back( std::move( outline ) );
 	}
+	// shadow map technique
+	{
+		Technique map{ "ShadowMap",Chan::shadow,true };
+		{
+			Step draw( "shadowMap" );
+
+			// TODO: better sub-layout generation tech for future consideration maybe
+			draw.AddBindable( InputLayout::Resolve( gfx,vtxLayout,*VertexShader::Resolve( gfx,"Solid_VS.cso" ) ) );
+
+			draw.AddBindable( std::make_shared<TransformCbuf>( gfx ) );
+
+			// TODO: might need to specify rasterizer when doubled-sided models start being used
+
+			map.AddStep( std::move( draw ) );
+		}
+		techniques.push_back( std::move( map ) );
+	}
 }
 Dvtx::VertexBuffer Material::ExtractVertices( const aiMesh& mesh ) const noexcept
 {
