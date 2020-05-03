@@ -32,7 +32,7 @@ namespace Rgph
 			AddBind( NullPixelShader::Resolve( gfx ) );
 			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
 			AddBind( Blender::Resolve( gfx,false ) );
-			RegisterSource( DirectBindableSource<Bind::DepthStencil>::Make( "shadowMap",depthStencil ) );
+			RegisterSource( DirectBindableSource<Bind::DepthStencil>::Make( "map",depthStencil ) );
 		}
 		void Execute( Graphics& gfx ) const noxnd override
 		{
