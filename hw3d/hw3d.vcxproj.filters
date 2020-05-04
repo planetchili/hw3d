@@ -300,6 +300,9 @@
     <ClCompile Include="ShadowCameraCBuf.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ShadowSampler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WindowsMessageMap.h">
@@ -629,6 +632,9 @@
     <ClInclude Include="ShadowCameraCBuf.h">
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
+    <ClInclude Include="ShadowSampler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -734,6 +740,12 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="Test_PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="ShadowTest_PS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="ShadowTest_VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
