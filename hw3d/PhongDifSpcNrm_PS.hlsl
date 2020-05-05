@@ -22,7 +22,7 @@ Texture2D nmap : register(t2);
 SamplerState splr : register(s0);
 
 
-float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float3 viewTan : Tangent, float3 viewBitan : Bitangent, float2 tc : Texcoord, float3 spos : ShadowPosition) : SV_Target
+float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float3 viewTan : Tangent, float3 viewBitan : Bitangent, float2 tc : Texcoord, float4 spos : ShadowPosition) : SV_Target
 {
     float3 diffuse;
     float3 specularReflected;
