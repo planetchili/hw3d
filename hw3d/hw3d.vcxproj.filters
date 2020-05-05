@@ -632,9 +632,6 @@
     <ClInclude Include="ShadowSampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.hlsli">
-      <Filter>Shader\Common</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -663,6 +660,18 @@
       <Filter>Shader\Common</Filter>
     </None>
     <None Include="PShadow.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="LightVectorData.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="PointLight.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="ShaderOps.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="Transform.hlsli">
       <Filter>Shader\Common</Filter>
     </None>
   </ItemGroup>
@@ -729,15 +738,6 @@
     </FxCompile>
     <FxCompile Include="ShadowTest_VS.hlsl">
       <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="LightVectorData.hlsli">
-      <Filter>Shader\Common</Filter>
-    </FxCompile>
-    <FxCompile Include="ShaderOps.hlsli">
-      <Filter>Shader\Common</Filter>
-    </FxCompile>
-    <FxCompile Include="Transform.hlsli">
-      <Filter>Shader\Common</Filter>
     </FxCompile>
     <FxCompile Include="Offset_VS_deprecated.hlsl">
       <Filter>Shader</Filter>

@@ -3,5 +3,5 @@ SamplerState ssam : register(s1);
 
 bool ShadowUnoccluded(const in float3 shadowScreenPos)
 {
-    return smap.Sample(ssam, shadowScreenPos.xy).r > shadowScreenPos.z - 0.005f;
+    return shadowScreenPos.z > 1.0f ? true : smap.Sample(ssam, shadowScreenPos.xy).r > shadowScreenPos.z - 0.005f;
 }

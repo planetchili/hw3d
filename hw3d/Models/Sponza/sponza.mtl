@@ -161,7 +161,7 @@ newmtl floor
 	Ke 0.0000 0.0000 0.0000
 	map_Kd textures\sponza_floor_a_diff.png
 	map_Kn textures\sponza_floor_ddn.jpg
-	#map_Ks textures\sponza_floor_a_diff_spec.png
+	map_Ks textures\sponza_floor_a_diff_spec.png
 
 newmtl column_c
 	Ns 10.0000
