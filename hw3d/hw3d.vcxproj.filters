@@ -458,9 +458,6 @@
     <ClInclude Include="TestCube.h">
       <Filter>Header Files\Drawable</Filter>
     </ClInclude>
-    <ClInclude Include="PointLight.hlsl">
-      <Filter>Shader\Common</Filter>
-    </ClInclude>
     <ClInclude Include="ChiliXM.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -635,6 +632,9 @@
     <ClInclude Include="ShadowSampler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PointLight.hlsli">
+      <Filter>Shader\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="hw3d.rc">
@@ -659,17 +659,11 @@
     <None Include="process.json">
       <Filter>Other</Filter>
     </None>
+    <None Include="VShadow.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="ShaderOps.hlsl">
-      <Filter>Shader\Common</Filter>
-    </FxCompile>
-    <FxCompile Include="Transform.hlsl">
-      <Filter>Shader\Common</Filter>
-    </FxCompile>
-    <FxCompile Include="LightVectorData.hlsl">
-      <Filter>Shader\Common</Filter>
-    </FxCompile>
     <FxCompile Include="PhongDifMskSpcNrm_PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
@@ -677,9 +671,6 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="PhongDifNrm_VS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="xPhongDifNro.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="PhongDif_PS.hlsl">
@@ -733,20 +724,20 @@
     <FxCompile Include="PhongDifMskSpc_PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Test1_VS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Test2_VS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
-    <FxCompile Include="Test_PS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="ShadowTest_PS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="ShadowTest_VS.hlsl">
       <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="LightVectorData.hlsli">
+      <Filter>Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="ShaderOps.hlsli">
+      <Filter>Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="Transform.hlsli">
+      <Filter>Shader\Common</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

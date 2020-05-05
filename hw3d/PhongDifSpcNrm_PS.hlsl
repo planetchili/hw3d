@@ -1,7 +1,7 @@
-#include "ShaderOps.hlsl"
-#include "LightVectorData.hlsl"
+#include "ShaderOps.hlsli"
+#include "LightVectorData.hlsli"
 
-#include "PointLight.hlsl"
+#include "PointLight.hlsli"
 
 cbuffer ObjectCBuf
 {
