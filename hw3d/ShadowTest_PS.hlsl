@@ -24,7 +24,7 @@ float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float2 tc
     
     // shadow map test
     spos.xyz = spos.xyz / spos.w;
-    if (smap.Sample(ssam, spos.xy).r > spos.z)
+    if (smap.Sample(ssam, spos.xy).r > spos.z - 0.005)
     {
         // renormalize interpolated normal
         viewNormal = normalize(viewNormal);
