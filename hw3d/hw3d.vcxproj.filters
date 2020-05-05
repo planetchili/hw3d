@@ -709,9 +709,6 @@
     <FxCompile Include="PhongDifSpcNrm_VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="Offset_VS.hlsl">
-      <Filter>Shader</Filter>
-    </FxCompile>
     <FxCompile Include="Fullscreen_VS.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
@@ -741,6 +738,9 @@
     </FxCompile>
     <FxCompile Include="Transform.hlsli">
       <Filter>Shader\Common</Filter>
+    </FxCompile>
+    <FxCompile Include="Offset_VS_deprecated.hlsl">
+      <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
