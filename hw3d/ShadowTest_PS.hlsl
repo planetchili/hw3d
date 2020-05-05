@@ -17,14 +17,13 @@ SamplerState splr;
 SamplerState ssam;
 
 
-float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float2 tc : Texcoord, float4 spos : ShadowPosition) : SV_Target
+float4 main(float3 viewFragPos : Position, float3 viewNormal : Normal, float2 tc : Texcoord, float3 spos : ShadowPosition) : SV_Target
 {
     float3 diffuse;
     float3 specular;
     
     // shadow map test
-    spos.xyz = spos.xyz / spos.w;
-    if (smap.Sample(ssam, spos.xy).r > spos.z - 0.005)
+    if (smap.Sample(ssam, spos.xy).r > spos.z - 0.005f)
     {
         // renormalize interpolated normal
         viewNormal = normalize(viewNormal);
