@@ -630,7 +630,7 @@
       <Filter>Header Files\Bindable</Filter>
     </ClInclude>
     <ClInclude Include="ShadowSampler.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Bindable</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
