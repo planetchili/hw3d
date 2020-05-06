@@ -18,7 +18,7 @@ float Shadow(const in float4 shadowHomoPos)
         const float dx = 0.5f / width;
         const float dy = 0.5f / height;
         // sample 4 pixels around actual shadow map position
-        const float zBiased = spos.z - 0.00005f; 
+        const float zBiased = spos.z - 0.0005f; 
         shadowLevel += smap.Sample(ssam, spos.xy + float2(dx, dy)).r >= zBiased ? 0.25f : 0.0f;
         shadowLevel += smap.Sample(ssam, spos.xy + float2(-dx, dy)).r >= zBiased ? 0.25f : 0.0f;
         shadowLevel += smap.Sample(ssam, spos.xy + float2(dx, -dy)).r >= zBiased ? 0.25f : 0.0f;
