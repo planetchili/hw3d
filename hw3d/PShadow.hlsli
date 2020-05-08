@@ -1,5 +1,7 @@
 Texture2D smap : register(t3);
-SamplerState ssam : register(s1);
+SamplerComparisonState ssam : register(s1);
+
+#define PCF_RANGE 4
 
 float Shadow(const in float4 shadowHomoPos)
 {    
@@ -12,17 +14,15 @@ float Shadow(const in float4 shadowHomoPos)
     }
     else
     {
-        // dimensions for pixel sampling with uv
-        uint width, height;
-        smap.GetDimensions(width, height);
-        const float dx = 0.5f / width;
-        const float dy = 0.5f / height;
-        // sample 4 pixels around actual shadow map position
-        const float zBiased = spos.z - 0.0005f; 
-        shadowLevel += smap.Sample(ssam, spos.xy + float2(dx, dy)).r >= zBiased ? 0.25f : 0.0f;
-        shadowLevel += smap.Sample(ssam, spos.xy + float2(-dx, dy)).r >= zBiased ? 0.25f : 0.0f;
-        shadowLevel += smap.Sample(ssam, spos.xy + float2(dx, -dy)).r >= zBiased ? 0.25f : 0.0f;
-        shadowLevel += smap.Sample(ssam, spos.xy + float2(-dx, -dy)).r >= zBiased ? 0.25f : 0.0f;
+        [unroll]
+        for (int x = -PCF_RANGE; x <= PCF_RANGE; x += 2)
+        {
+            [unroll]
+            for (int y = -PCF_RANGE; y <= PCF_RANGE; y += 2)
+            {
+                shadowLevel = smap.SampleCmpLevelZero(ssam, spos.xy, spos.b - 0.0005f, int2(x, y));
+            }
+        }            
     }
     return shadowLevel;
 }
