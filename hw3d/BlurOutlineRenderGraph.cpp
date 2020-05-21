@@ -34,11 +34,27 @@ namespace Rgph
 			auto pass = std::make_unique<ShadowMappingPass>( gfx,"shadowMap" );
 			AppendPass( std::move( pass ) );
 		}
+
+		// setup shadow control buffer
+		{
+			{
+				Dcb::RawLayout l;
+				l.Add<Dcb::Integer>( "pcfLevel" );
+				l.Add<Dcb::Float>( "depthBias" );
+				Dcb::Buffer buf{ std::move( l ) };
+				buf["pcfLevel"] = 0;
+				buf["depthBias"] = 0.0005f;
+				shadowControl = std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,2 );
+				AddGlobalSource( DirectBindableSource<Bind::CachingPixelConstantBufferEx>::Make( "shadowControl",shadowControl ) );
+			}
+		}
+
 		{
 			auto pass = std::make_unique<LambertianPass>( gfx,"lambertian" );
 			pass->SetSinkLinkage( "shadowMap","shadowMap.map" );
 			pass->SetSinkLinkage( "renderTarget","clearRT.buffer" );
 			pass->SetSinkLinkage( "depthStencil","clearDS.buffer" );
+			pass->SetSinkLinkage( "shadowControl","$.shadowControl" );
 			AppendPass( std::move( pass ) );
 		}
 		{
@@ -133,8 +149,29 @@ namespace Rgph
 		}
 		blurKernel->SetBuffer( k );
 	}
-	
-	void BlurOutlineRenderGraph::RenderWidgets( Graphics& gfx )
+
+	void BlurOutlineRenderGraph::RenderWindows( Graphics& gfx )
+	{
+		RenderShadowWindow( gfx );
+		RenderKernelWindow( gfx );
+	}
+
+	void BlurOutlineRenderGraph::RenderShadowWindow( Graphics& gfx )
+	{
+		if( ImGui::Begin( "Shadows" ) )
+		{
+			auto ctrl = shadowControl->GetBuffer();
+			bool pfcChange = ImGui::SliderInt( "PCF Level",&ctrl["pcfLevel"],0,4 );
+			bool biasChange = ImGui::SliderFloat( "Depth Bias",&ctrl["depthBias"],0.0f,0.1f,"%.6f",3.6f );
+			if( pfcChange || biasChange )
+			{
+				shadowControl->SetBuffer( ctrl );
+			}
+		}
+		ImGui::End();
+	}
+
+	void BlurOutlineRenderGraph::RenderKernelWindow( Graphics& gfx )
 	{
 		if( ImGui::Begin( "Kernel" ) )
 		{
