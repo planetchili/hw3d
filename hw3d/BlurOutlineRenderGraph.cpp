@@ -13,6 +13,7 @@
 #include "DynamicConstant.h"
 #include "imgui/imgui.h"
 #include "ChiliMath.h"
+#include "ShadowSampler.h"
 
 namespace Rgph
 {
@@ -41,9 +42,11 @@ namespace Rgph
 				Dcb::RawLayout l;
 				l.Add<Dcb::Integer>( "pcfLevel" );
 				l.Add<Dcb::Float>( "depthBias" );
+				l.Add<Dcb::Bool>( "hwPcf" );
 				Dcb::Buffer buf{ std::move( l ) };
 				buf["pcfLevel"] = 0;
 				buf["depthBias"] = 0.0005f;
+				buf["hwPcf"] = true;
 				shadowControl = std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,2 );
 				AddGlobalSource( DirectBindableSource<Bind::CachingPixelConstantBufferEx>::Make( "shadowControl",shadowControl ) );
 			}
@@ -161,12 +164,20 @@ namespace Rgph
 		if( ImGui::Begin( "Shadows" ) )
 		{
 			auto ctrl = shadowControl->GetBuffer();
-			bool pfcChange = ImGui::SliderInt( "PCF Level",&ctrl["pcfLevel"],0,4 );
+			bool bilin = shadowSampler->GetBilinear();
+
+			bool pcfChange = ImGui::SliderInt( "PCF Level",&ctrl["pcfLevel"],0,4 );
 			bool biasChange = ImGui::SliderFloat( "Depth Bias",&ctrl["depthBias"],0.0f,0.1f,"%.6f",3.6f );
-			if( pfcChange || biasChange )
+			bool hwPcfChange = ImGui::Checkbox( "HW PCF",&ctrl["hwPcf"] );
+			ImGui::Checkbox( "Bilinear",&bilin );
+
+			if( pcfChange || biasChange || hwPcfChange )
 			{
 				shadowControl->SetBuffer( ctrl );
 			}
+
+			shadowSampler->SetHwPcf( ctrl["hwPcf"] );
+			shadowSampler->SetBilinear( bilin );
 		}
 		ImGui::End();
 	}

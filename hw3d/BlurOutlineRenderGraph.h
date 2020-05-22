@@ -9,6 +9,7 @@ namespace Bind
 {
 	class Bindable;
 	class RenderTarget;
+	class ShadowSampler;
 }
 
 namespace Rgph
@@ -39,5 +40,6 @@ namespace Rgph
 		std::shared_ptr<Bind::CachingPixelConstantBufferEx> blurKernel;
 		std::shared_ptr<Bind::CachingPixelConstantBufferEx> blurDirection;
 		std::shared_ptr<Bind::CachingPixelConstantBufferEx> shadowControl;
+		std::shared_ptr<Bind::ShadowSampler> shadowSampler;
 	};
 }
