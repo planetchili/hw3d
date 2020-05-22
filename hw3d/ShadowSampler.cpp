@@ -21,12 +21,12 @@ namespace Bind
 
 	void ShadowSampler::SetBilinear( bool bilin )
 	{
-		curSampler = (curSampler & 0b01) | (bilin ? 0b01 : 0);
+		curSampler = (curSampler & ~0b01) | (bilin ? 0b01 : 0);
 	}
 
 	void ShadowSampler::SetHwPcf( bool hwPcf )
 	{
-		curSampler = (curSampler & 0b10) | (hwPcf ? 0b10 : 0);
+		curSampler = (curSampler & ~0b10) | (hwPcf ? 0b10 : 0);
 	}
 
 	bool ShadowSampler::GetBilinear() const
