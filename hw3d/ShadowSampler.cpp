@@ -11,8 +11,12 @@ namespace Bind
 			curSampler = i;
 			samplers[i] = MakeSampler( gfx,GetBilinear(),GetHwPcf() );
 		}
+		// pre-bind something to both sampler slots by default so that no slot is unbound during drawing
 		SetBilinear( true );
+		SetHwPcf( false );
+		Bind( gfx );
 		SetHwPcf( true );
+		Bind( gfx );
 	}
 
 	void ShadowSampler::SetBilinear( bool bilin )
