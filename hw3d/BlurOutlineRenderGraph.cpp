@@ -36,7 +36,7 @@ namespace Rgph
 			AppendPass( std::move( pass ) );
 		}
 
-		// setup shadow control buffer
+		// setup shadow control buffer and sampler
 		{
 			{
 				Dcb::RawLayout l;
@@ -50,6 +50,10 @@ namespace Rgph
 				shadowControl = std::make_shared<Bind::CachingPixelConstantBufferEx>( gfx,buf,2 );
 				AddGlobalSource( DirectBindableSource<Bind::CachingPixelConstantBufferEx>::Make( "shadowControl",shadowControl ) );
 			}
+			{
+				shadowSampler = std::make_shared<Bind::ShadowSampler>( gfx );
+				AddGlobalSource( DirectBindableSource<Bind::ShadowSampler>::Make( "shadowSampler",shadowSampler ) );
+			}
 		}
 
 		{
@@ -58,6 +62,7 @@ namespace Rgph
 			pass->SetSinkLinkage( "renderTarget","clearRT.buffer" );
 			pass->SetSinkLinkage( "depthStencil","clearDS.buffer" );
 			pass->SetSinkLinkage( "shadowControl","$.shadowControl" );
+			pass->SetSinkLinkage( "shadowSampler","$.shadowSampler" );
 			AppendPass( std::move( pass ) );
 		}
 		{
