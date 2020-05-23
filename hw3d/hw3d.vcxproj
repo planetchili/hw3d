@@ -116,6 +116,7 @@
     <ClCompile Include="Frustum.cpp" />
     <ClCompile Include="HorizontalBlurPass.cpp" />
     <ClCompile Include="Projection.cpp" />
+    <ClCompile Include="ShadowRasterizer.cpp" />
     <ClCompile Include="ShadowSampler.cpp" />
     <ClCompile Include="Sink.cpp" />
     <ClCompile Include="RenderGraph.cpp" />
@@ -330,6 +331,7 @@
     <ClInclude Include="NullPixelShader.h" />
     <ClInclude Include="Pass.h" />
     <ClInclude Include="ShadowMappingPass.h" />
+    <ClInclude Include="ShadowRasterizer.h" />
     <ClInclude Include="ShadowSampler.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="PerfLog.h" />
