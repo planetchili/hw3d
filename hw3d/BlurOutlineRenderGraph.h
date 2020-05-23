@@ -25,7 +25,6 @@ namespace Rgph
 		void BindShadowCamera( Camera& cam );
 	private:
 		void RenderKernelWindow( Graphics& gfx );
-		void RenderShadowWindow( Graphics& gfx );
 		// private functions
 		void SetKernelGauss( int radius,float sigma ) noxnd;
 		void SetKernelBox( int radius ) noxnd;
@@ -40,8 +39,5 @@ namespace Rgph
 		float sigma = 2.0f;
 		std::shared_ptr<Bind::CachingPixelConstantBufferEx> blurKernel;
 		std::shared_ptr<Bind::CachingPixelConstantBufferEx> blurDirection;
-		std::shared_ptr<Bind::CachingPixelConstantBufferEx> shadowControl;
-		std::shared_ptr<Bind::ShadowSampler> shadowSampler;
-		std::shared_ptr<Bind::ShadowRasterizer> shadowRasterizer;
 	};
 }

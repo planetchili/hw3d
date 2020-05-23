@@ -665,9 +665,6 @@
     <None Include="VShadow.hlsli">
       <Filter>Shader\Common</Filter>
     </None>
-    <None Include="PShadow.hlsli">
-      <Filter>Shader\Common</Filter>
-    </None>
     <None Include="LightVectorData.hlsli">
       <Filter>Shader\Common</Filter>
     </None>
@@ -678,6 +675,15 @@
       <Filter>Shader\Common</Filter>
     </None>
     <None Include="Transform.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="_PShadow_Dynamic.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="_PShadow_Static.hlsli">
+      <Filter>Shader\Common</Filter>
+    </None>
+    <None Include="PShadow.hlsli">
       <Filter>Shader\Common</Filter>
     </None>
   </ItemGroup>

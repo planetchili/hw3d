@@ -273,6 +273,7 @@
       <ObjectFileOutput Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectDir)\ShaderBins\%(Filename).cso</ObjectFileOutput>
     </FxCompile>
     <None Include="PShadow.hlsli" />
+    <None Include="_PShadow_Dynamic.hlsli" />
     <None Include="Transform.hlsli">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
@@ -280,6 +281,7 @@
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <FileType>Document</FileType>
     </None>
+    <None Include="_PShadow_Static.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />

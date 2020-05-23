@@ -10,6 +10,7 @@
 #include "RenderTarget.h"
 #include "Blender.h"
 #include "NullPixelShader.h"
+#include "ShadowRasterizer.h"
 
 class Graphics;
 
@@ -32,7 +33,7 @@ namespace Rgph
 			AddBind( NullPixelShader::Resolve( gfx ) );
 			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
 			AddBind( Blender::Resolve( gfx,false ) );
-			AddBindSink<Bind::Bindable>( "shadowRasterizer" );
+			AddBind( std::make_shared<Bind::ShadowRasterizer>( gfx,50,2.0f,0.1f ) );
 			RegisterSource( DirectBindableSource<Bind::DepthStencil>::Make( "map",depthStencil ) );
 		}
 		void Execute( Graphics& gfx ) const noxnd override
