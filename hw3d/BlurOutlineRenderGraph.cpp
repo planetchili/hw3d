@@ -35,7 +35,7 @@ namespace Rgph
 
 		// setup shadow rasterizer
 		{
-			shadowRasterizer = std::make_shared<Bind::ShadowRasterizer>( gfx,0,0.005f,1.0f );
+			shadowRasterizer = std::make_shared<Bind::ShadowRasterizer>( gfx,10000,0.0005f,1.0f );
 			AddGlobalSource( DirectBindableSource<Bind::ShadowRasterizer>::Make( "shadowRasterizer",shadowRasterizer ) );
 		}
 
@@ -181,7 +181,7 @@ namespace Rgph
 			bool bilin = shadowSampler->GetBilinear();
 
 			bool pcfChange = ImGui::SliderInt( "PCF Level",&ctrl["pcfLevel"],0,4 );
-			bool biasChange = ImGui::SliderFloat( "Depth Bias",&ctrl["depthBias"],0.0f,0.1f,"%.6f",3.6f );
+			bool biasChange = ImGui::SliderFloat( "Post Bias",&ctrl["depthBias"],0.0f,0.1f,"%.6f",3.6f );
 			bool hwPcfChange = ImGui::Checkbox( "HW PCF",&ctrl["hwPcf"] );
 			ImGui::Checkbox( "Bilinear",&bilin );
 
@@ -192,6 +192,21 @@ namespace Rgph
 
 			shadowSampler->SetHwPcf( ctrl["hwPcf"] );
 			shadowSampler->SetBilinear( bilin );
+
+			{
+				auto bias = shadowRasterizer->GetDepthBias();
+				auto slope = shadowRasterizer->GetSlopeBias();
+				auto clamp = shadowRasterizer->GetClamp();
+
+				bool biasChange = ImGui::SliderInt( "Pre Bias",&bias,0,100000 );
+				bool slopeChange = ImGui::SliderFloat( "Slope Bias",&slope,0.0f,100.0f,"%.4f",4.0f );
+				bool clampChange = ImGui::SliderFloat( "Clamp",&clamp,0.0001f,0.5f,"%.4f",2.5f );
+
+				if( biasChange || slopeChange || clampChange )
+				{
+					shadowRasterizer->ChangeDepthBiasParameters( gfx,bias,slope,clamp );
+				}
+			}
 		}
 		ImGui::End();
 	}
