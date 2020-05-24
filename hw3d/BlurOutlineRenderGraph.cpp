@@ -13,6 +13,7 @@
 #include "DynamicConstant.h"
 #include "imgui/imgui.h"
 #include "ChiliMath.h"
+#include "SkyboxPass.h"
 
 namespace Rgph
 {
@@ -25,6 +26,7 @@ namespace Rgph
 			pass->SetSinkLinkage( "buffer","$.backbuffer" );
 			AppendPass( std::move( pass ) );
 		}
+
 		{
 			auto pass = std::make_unique<BufferClearPass>( "clearDS" );
 			pass->SetSinkLinkage( "buffer","$.masterDepth" );
@@ -43,9 +45,17 @@ namespace Rgph
 			pass->SetSinkLinkage( "depthStencil","clearDS.buffer" );
 			AppendPass( std::move( pass ) );
 		}
+
+		{
+			auto pass = std::make_unique<SkyboxPass>( gfx,"skybox" );
+			pass->SetSinkLinkage( "renderTarget","lambertian.renderTarget" );
+			pass->SetSinkLinkage( "depthStencil","lambertian.depthStencil" );
+			AppendPass( std::move( pass ) );
+		}
+
 		{
 			auto pass = std::make_unique<OutlineMaskGenerationPass>( gfx,"outlineMask" );
-			pass->SetSinkLinkage( "depthStencil","lambertian.depthStencil" );
+			pass->SetSinkLinkage( "depthStencil","skybox.depthStencil" );
 			AppendPass( std::move( pass ) );
 		}
 
@@ -74,6 +84,7 @@ namespace Rgph
 			auto pass = std::make_unique<BlurOutlineDrawingPass>( gfx,"outlineDraw",gfx.GetWidth(),gfx.GetHeight() );
 			AppendPass( std::move( pass ) );
 		}
+
 		{
 			auto pass = std::make_unique<HorizontalBlurPass>( "horizontal",gfx,gfx.GetWidth(),gfx.GetHeight() );
 			pass->SetSinkLinkage( "scratchIn","outlineDraw.scratchOut" );
@@ -81,15 +92,17 @@ namespace Rgph
 			pass->SetSinkLinkage( "direction","$.blurDirection" );
 			AppendPass( std::move( pass ) );
 		}
+
 		{
 			auto pass = std::make_unique<VerticalBlurPass>( "vertical",gfx );
-			pass->SetSinkLinkage( "renderTarget","lambertian.renderTarget" );
+			pass->SetSinkLinkage( "renderTarget","skybox.renderTarget" );
 			pass->SetSinkLinkage( "depthStencil","outlineMask.depthStencil" );
 			pass->SetSinkLinkage( "scratchIn","horizontal.scratchOut" );
 			pass->SetSinkLinkage( "kernel","$.blurKernel" );
 			pass->SetSinkLinkage( "direction","$.blurDirection" );
 			AppendPass( std::move( pass ) );
 		}
+
 		{
 			auto pass = std::make_unique<WireframePass>( gfx,"wireframe" );
 			pass->SetSinkLinkage( "renderTarget","vertical.renderTarget" );
@@ -199,6 +212,7 @@ namespace Rgph
 	void Rgph::BlurOutlineRenderGraph::BindMainCamera( Camera& cam )
 	{
 		dynamic_cast<LambertianPass&>(FindPassByName( "lambertian" )).BindMainCamera( cam );
+		dynamic_cast<SkyboxPass&>(FindPassByName( "skybox" )).BindMainCamera( cam );
 	}
 	void Rgph::BlurOutlineRenderGraph::BindShadowCamera( Camera& cam )
 	{
