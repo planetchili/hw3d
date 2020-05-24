@@ -43,9 +43,9 @@ namespace Rgph
 				auto model = Cube::Make();
 				model.Transform( DirectX::XMMatrixScaling( 3.0f,3.0f,3.0f ) );
 				const auto geometryTag = "$cube_map";
-				AddBind( VertexBuffer::Resolve( gfx,geometryTag,model.vertices ) );
+				AddBind( VertexBuffer::Resolve( gfx,geometryTag,std::move( model.vertices ) ) );
 				count = (UINT)model.indices.size();
-				AddBind( IndexBuffer::Resolve( gfx,geometryTag,model.indices ) );
+				AddBind( IndexBuffer::Resolve( gfx,geometryTag,std::move( model.indices ) ) );
 				AddBind( InputLayout::Resolve( gfx,model.vertices.GetLayout(),*pvs ) );
 				AddBind( std::move( pvs ) );
 			}
