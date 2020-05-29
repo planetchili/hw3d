@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <memory>
 
 class Graphics;
 
