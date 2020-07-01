@@ -16,6 +16,7 @@
 #include "IndexBuffer.h"
 #include "Topology.h"
 #include "InputLayout.h"
+#include "Sphere.h"
 
 class Graphics;
 
@@ -40,12 +41,22 @@ namespace Rgph
 			AddBind( Topology::Resolve( gfx,D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST ) );
 			{ // geometry-related
 				auto pvs = Bind::VertexShader::Resolve( gfx,"Skybox_VS.cso" );
-				auto model = Cube::Make();
-				const auto geometryTag = "$cube_map";
-				pCubeVertices = VertexBuffer::Resolve( gfx,geometryTag,std::move( model.vertices ) );
-				cubeCount = (UINT)model.indices.size();
-				pCubeIndices = IndexBuffer::Resolve( gfx,geometryTag,std::move( model.indices ) );
-				AddBind( InputLayout::Resolve( gfx,model.vertices.GetLayout(),*pvs ) );
+				{ // cube
+					auto model = Cube::Make();
+					const auto geometryTag = "$cube_map";
+					pCubeVertices = VertexBuffer::Resolve( gfx,geometryTag,std::move( model.vertices ) );
+					pCubeIndices = IndexBuffer::Resolve( gfx,geometryTag,std::move( model.indices ) );
+					cubeCount = (UINT)model.indices.size();
+					// layout is shared between cube and sphere; use cube data to generate
+					AddBind( InputLayout::Resolve( gfx,model.vertices.GetLayout(),*pvs ) );
+				}
+				{ // sphere
+					auto model = Sphere::Make();
+					const auto geometryTag = "$sphere_map";
+					pSphereVertices = VertexBuffer::Resolve( gfx,geometryTag,std::move( model.vertices ) );
+					pSphereIndices = IndexBuffer::Resolve( gfx,geometryTag,std::move( model.indices ) );
+					sphereCount = (UINT)model.indices.size();
+				}
 				AddBind( std::move( pvs ) );
 			}
 			RegisterSource( DirectBufferSource<RenderTarget>::Make( "renderTarget",renderTarget ) );
@@ -58,14 +69,33 @@ namespace Rgph
 		void Execute( Graphics& gfx ) const noxnd override
 		{
 			assert( pMainCamera );
+			UINT indexCount;
 			pMainCamera->BindToGraphics( gfx );
-			pCubeVertices->Bind( gfx );
-			pCubeIndices->Bind( gfx );
+			if( useSphere )
+			{
+				pSphereVertices->Bind( gfx );
+				pSphereIndices->Bind( gfx );
+				indexCount = sphereCount;
+			}
+			else
+			{
+				pCubeVertices->Bind( gfx );
+				pCubeIndices->Bind( gfx );
+				indexCount = cubeCount;
+			}
 			BindAll( gfx ); 
-			gfx.DrawIndexed( cubeCount );
+			gfx.DrawIndexed( indexCount );
+		}
+		void RenderWindow()
+		{
+			if( ImGui::Begin( "Skybox" ) )
+			{
+				ImGui::Checkbox( "Use sphere",&useSphere );
+			}
+			ImGui::End();
 		}
 	private:
-		bool useSphere = false;
+		bool useSphere = true;
 		const Camera* pMainCamera = nullptr;
 		std::shared_ptr<Bind::VertexBuffer> pCubeVertices;
 		std::shared_ptr<Bind::IndexBuffer> pCubeIndices;
