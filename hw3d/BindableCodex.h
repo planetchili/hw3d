@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Bindable.h"
-#include "BindableCodex.h"
 #include <type_traits>
 #include <memory>
 #include <unordered_map>
