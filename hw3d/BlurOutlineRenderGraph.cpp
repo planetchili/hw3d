@@ -208,7 +208,7 @@ namespace Rgph
 	}
 	void Rgph::BlurOutlineRenderGraph::DumpShadowMap( Graphics& gfx,const std::string& path )
 	{
-		dynamic_cast<ShadowMappingPass&>(FindPassByName( "shadowMap" )).DumpShadowMap( gfx,path );
+		//dynamic_cast<ShadowMappingPass&>(FindPassByName( "shadowMap" )).DumpShadowMap( gfx,path );
 	}
 	void Rgph::BlurOutlineRenderGraph::BindMainCamera( Camera& cam )
 	{

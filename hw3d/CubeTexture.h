@@ -24,11 +24,11 @@ namespace Bind
 	public:
 		DepthCubeTexture( Graphics& gfx,UINT size,UINT slot = 0 );
 		void Bind( Graphics& gfx ) noxnd override;
-		OutputOnlyDepthStencil& GetDepthBuffer( size_t index ) const;
+		std::shared_ptr<OutputOnlyDepthStencil> GetDepthBuffer( size_t index ) const;
 	private:
 		unsigned int slot;
 	protected:
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pTextureView;
-		std::vector<std::unique_ptr<OutputOnlyDepthStencil>> depthBuffers;
+		std::vector<std::shared_ptr<OutputOnlyDepthStencil>> depthBuffers;
 	};
 }

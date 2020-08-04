@@ -105,13 +105,13 @@ namespace Bind
 		// make depth buffer resources for capturing shadow map
 		for( UINT face = 0; face < 6; face++ )
 		{
-			depthBuffers.push_back( std::make_unique<OutputOnlyDepthStencil>( gfx,pTexture,face ) );
+			depthBuffers.push_back( std::make_shared<OutputOnlyDepthStencil>( gfx,pTexture,face ) );
 		}
 	}
 
-	OutputOnlyDepthStencil& Bind::DepthCubeTexture::GetDepthBuffer( size_t index ) const
+	std::shared_ptr<OutputOnlyDepthStencil> Bind::DepthCubeTexture::GetDepthBuffer( size_t index ) const
 	{
-		return *depthBuffers[index];
+		return depthBuffers[index];
 	}
 
 	void DepthCubeTexture::Bind( Graphics& gfx ) noxnd
