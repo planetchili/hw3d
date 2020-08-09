@@ -151,6 +151,7 @@ namespace Rgph
 
 	void BlurOutlineRenderGraph::RenderWindows( Graphics& gfx )
 	{
+		RenderShadowWindow( gfx );
 		RenderKernelWindow( gfx );
 		dynamic_cast<SkyboxPass&>(FindPassByName( "skybox" )).RenderWindow();
 	}
@@ -206,9 +207,17 @@ namespace Rgph
 		}
 		ImGui::End();
 	}
-	void Rgph::BlurOutlineRenderGraph::DumpShadowMap( Graphics& gfx,const std::string& path )
+
+	void Rgph::BlurOutlineRenderGraph::RenderShadowWindow( Graphics& gfx )
 	{
-		//dynamic_cast<ShadowMappingPass&>(FindPassByName( "shadowMap" )).DumpShadowMap( gfx,path );
+		if( ImGui::Begin( "Shadow" ) )
+		{
+			if( ImGui::Button( "Dump Cubemap" ) )
+			{
+				DumpShadowMap( gfx,"Dumps\\shadow_" );
+			}
+		}
+		ImGui::End();
 	}
 	void Rgph::BlurOutlineRenderGraph::BindMainCamera( Camera& cam )
 	{
@@ -219,5 +228,9 @@ namespace Rgph
 	{
 		dynamic_cast<ShadowMappingPass&>(FindPassByName( "shadowMap" )).BindShadowCamera( cam );
 		dynamic_cast<LambertianPass&>(FindPassByName( "lambertian" )).BindShadowCamera( cam );
+	}
+	void Rgph::BlurOutlineRenderGraph::DumpShadowMap( Graphics& gfx,const std::string& path )
+	{
+		dynamic_cast<ShadowMappingPass&>(FindPassByName( "shadowMap" )).DumpShadowMap( gfx,path );
 	}
 }
