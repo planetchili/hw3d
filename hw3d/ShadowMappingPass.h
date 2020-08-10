@@ -53,10 +53,10 @@ namespace Rgph
 			DirectX::XMStoreFloat3( &cameraUps[1],DirectX::XMVectorSet( 0.0f,1.0f,0.0f,0.0f ) );
 			// +y
 			DirectX::XMStoreFloat3( &cameraDirections[2],DirectX::XMVectorSet( 0.0f,1.0f,0.0f,0.0f ) );
-			DirectX::XMStoreFloat3( &cameraUps[2],DirectX::XMVectorSet( 1.0f,0.0f,0.0f,0.0f ) );
+			DirectX::XMStoreFloat3( &cameraUps[2],DirectX::XMVectorSet( 0.0f,0.0f,-1.0f,0.0f ) );
 			// -y
 			DirectX::XMStoreFloat3( &cameraDirections[3],DirectX::XMVectorSet( 0.0f,-1.0f,0.0f,0.0f ) );
-			DirectX::XMStoreFloat3( &cameraUps[3],DirectX::XMVectorSet( -1.0f,0.0f,0.0f,0.0f ) );
+			DirectX::XMStoreFloat3( &cameraUps[3],DirectX::XMVectorSet( 0.0f,0.0f,1.0f,0.0f ) );
 			// +z
 			DirectX::XMStoreFloat3( &cameraDirections[4],DirectX::XMVectorSet( 0.0f,0.0f,1.0f,0.0f ) );
 			DirectX::XMStoreFloat3( &cameraUps[4],DirectX::XMVectorSet( 0.0f,1.0f,0.0f,0.0f ) );
