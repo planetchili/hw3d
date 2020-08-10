@@ -37,8 +37,8 @@ private:
 	float yaw;
 	static constexpr float travelSpeed = 12.0f;
 	static constexpr float rotationSpeed = 0.004f;
-	bool enableCameraIndicator = true;
-	bool enableFrustumIndicator = true;
+	bool enableCameraIndicator = false;
+	bool enableFrustumIndicator = false;
 	Projection proj;
 	CameraIndicator indicator;
 };
