@@ -8,10 +8,14 @@ namespace Bind
 	class Viewport : public Bindable
 	{
 	public:
-		Viewport( Graphics& gfx,float maxDepth = 1.0f )
+		Viewport( Graphics& gfx )
+			:
+			Viewport( gfx,(float)gfx.GetWidth(),(float)gfx.GetHeight() )
+		{}
+		Viewport( Graphics& gfx,float width,float height )
 		{
-			vp.Width = (float)gfx.GetWidth();
-			vp.Height = (float)gfx.GetHeight();
+			vp.Width = width;
+			vp.Height = height;
 			vp.MinDepth = 0.0f;
 			vp.MaxDepth = 1.0f;
 			vp.TopLeftX = 0.0f;
