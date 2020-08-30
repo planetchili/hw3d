@@ -9,6 +9,7 @@
 #include "DepthStencil.h"
 #include "ShadowCameraCBuf.h"
 #include "ShadowSampler.h"
+#include "Sampler.h"
 
 class Graphics;
 
@@ -28,6 +29,7 @@ namespace Rgph
 			RegisterSink( DirectBufferSink<DepthStencil>::Make( "depthStencil",depthStencil ) );
 			AddBindSink<Bind::Bindable>( "shadowMap" );
 			AddBind( std::make_shared<Bind::ShadowSampler>( gfx ) );
+			AddBind( std::make_shared<Bind::Sampler>( gfx,Bind::Sampler::Type::Anisotropic,false,2 ) );
 			RegisterSource( DirectBufferSource<RenderTarget>::Make( "renderTarget",renderTarget ) );
 			RegisterSource( DirectBufferSource<DepthStencil>::Make( "depthStencil",depthStencil ) );
 			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
