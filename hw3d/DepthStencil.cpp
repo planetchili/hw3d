@@ -4,6 +4,7 @@
 #include "GraphicsThrowMacros.h"
 #include <stdexcept>
 #include "Surface.h"
+#include "cnpy.h"
 
 namespace wrl = Microsoft::WRL;
 
@@ -77,7 +78,6 @@ namespace Bind
 		) );
 	}
 
-
 	DepthStencil::DepthStencil( Graphics& gfx,wrl::ComPtr<ID3D11Texture2D> pTexture,UINT face )
 	{
 		INFOMAN( gfx );
@@ -122,10 +122,9 @@ namespace Bind
 		GetContext( gfx )->ClearDepthStencilView( pDepthStencilView.Get(),D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL,1.0f,0u );
 	}
 
-	Surface Bind::DepthStencil::ToSurface( Graphics& gfx,bool linearlize ) const
+	std::pair<Microsoft::WRL::ComPtr<ID3D11Texture2D>,D3D11_TEXTURE2D_DESC> DepthStencil::MakeStaging( Graphics& gfx ) const
 	{
 		INFOMAN( gfx );
-		namespace wrl = Microsoft::WRL;
 
 		// get info about the stencil view
 		D3D11_DEPTH_STENCIL_VIEW_DESC srcViewDesc{};
@@ -158,6 +157,15 @@ namespace Bind
 		{
 			GFX_THROW_INFO_ONLY( GetContext( gfx )->CopyResource( pTexTemp.Get(),pTexSource.Get() ) );
 		}
+
+		return { std::move( pTexTemp ),srcTextureDesc };
+	}
+
+	Surface Bind::DepthStencil::ToSurface( Graphics& gfx,bool linearlize ) const
+	{
+		INFOMAN( gfx );
+		// copy from resource to staging
+		auto [pTexTemp,srcTextureDesc] = MakeStaging( gfx );
 
 		// create Surface and copy from temp texture to it
 		const auto width = GetWidth();

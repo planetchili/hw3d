@@ -26,6 +26,8 @@ namespace Bind
 		Surface ToSurface( Graphics& gfx,bool linearlize = true ) const;
 		unsigned int GetWidth() const;
 		unsigned int GetHeight() const;
+	private:
+		std::pair<Microsoft::WRL::ComPtr<ID3D11Texture2D>,D3D11_TEXTURE2D_DESC> MakeStaging( Graphics& gfx ) const;
 	protected:
 		DepthStencil( Graphics& gfx,Microsoft::WRL::ComPtr<ID3D11Texture2D> pTexture,UINT face );
 		DepthStencil( Graphics& gfx,UINT width,UINT height,bool canBindShaderInput,Usage usage );
