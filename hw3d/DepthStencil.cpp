@@ -225,6 +225,46 @@ namespace Bind
 		return s;
 	}
 
+	void Bind::DepthStencil::Dumpy( Graphics& gfx,const std::string& path ) const
+	{
+		INFOMAN( gfx );
+		// copy from resource to staging
+		auto [pTexTemp,srcTextureDesc] = MakeStaging( gfx );
+
+		// create Surface and copy from temp texture to it
+		const auto width = GetWidth();
+		const auto height = GetHeight();
+		std::vector<float> arr;
+		arr.reserve( width * height );
+		D3D11_MAPPED_SUBRESOURCE msr = {};
+		GFX_THROW_INFO( GetContext( gfx )->Map( pTexTemp.Get(),0,D3D11_MAP::D3D11_MAP_READ,0,&msr ) );
+		auto pSrcBytes = static_cast<const char*>(msr.pData);
+
+		if( srcTextureDesc.Format != DXGI_FORMAT::DXGI_FORMAT_R32_TYPELESS )
+		{
+			throw std::runtime_error{ "Bad format in Depth Stencil for dumpy" };
+		}
+
+		// flatten texture elements
+		for( unsigned int y = 0; y < height; y++ )
+		{
+			struct Pixel
+			{
+				char data[4];
+			};
+			auto pSrcRow = reinterpret_cast<const Pixel*>(pSrcBytes + msr.RowPitch * size_t( y ));
+			for( unsigned int x = 0; x < width; x++ )
+			{
+				const auto& raw = *reinterpret_cast<const float*>(pSrcRow + x);
+				arr.push_back( raw );
+			}
+		}
+		GFX_THROW_INFO_ONLY( GetContext( gfx )->Unmap( pTexTemp.Get(),0 ) );
+
+		// dump to numpy array
+		cnpy::npy_save( path,arr.data(),{ height,width } );
+	}
+
 	unsigned int Bind::DepthStencil::GetWidth() const
 	{
 		return width;

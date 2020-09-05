@@ -90,6 +90,7 @@ namespace Rgph
 			{
 				auto d = pDepthCube->GetDepthBuffer( i );
 				d->ToSurface( gfx ).Save( path + std::to_string( i ) + ".png" );
+				d->Dumpy( gfx,path + std::to_string( i ) + ".npy" );
 			}
 		}
 	private:

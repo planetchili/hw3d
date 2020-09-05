@@ -24,6 +24,7 @@ namespace Bind
 		void BindAsBuffer( Graphics& gfx,RenderTarget* rt ) noxnd;
 		void Clear( Graphics& gfx ) noxnd override;
 		Surface ToSurface( Graphics& gfx,bool linearlize = true ) const;
+		void Dumpy( Graphics& gfx,const std::string& path ) const;
 		unsigned int GetWidth() const;
 		unsigned int GetHeight() const;
 	private:
