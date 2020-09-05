@@ -38,7 +38,7 @@ namespace Rgph
 			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
 			AddBind( Blender::Resolve( gfx,false ) );
 			AddBind( std::make_shared<Viewport>( gfx,(float)size,(float)size ) );
-			AddBind( std::make_shared<Bind::ShadowRasterizer>( gfx,50,2.0f,0.1f ) );
+			AddBind( std::make_shared<Bind::Rasterizer>( gfx,false ) );
 			RegisterSource( DirectBindableSource<Bind::DepthCubeTexture>::Make( "map",pDepthCube ) );
 
 			DirectX::XMStoreFloat4x4(
