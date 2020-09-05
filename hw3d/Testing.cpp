@@ -16,8 +16,15 @@
 #include "BindableCommon.h"
 #include "RenderTarget.h"
 #include "Surface.h"
+#include "cnpy.h"
 
 namespace dx = DirectX;
+
+void TestNumpy()
+{
+	auto v = std::vector{ 0,1,2,4,5,6 };
+	cnpy::npy_save( "test.npy",v.data(),{ 3,2 } );
+}
 
 void TestDynamicMeshLoading()
 {

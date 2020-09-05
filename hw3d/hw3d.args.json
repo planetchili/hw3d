@@ -1,0 +1,10 @@
+{
+  "FileVersion": 2,
+  "Id": "63e56790-0977-47cc-b52b-b1bf8746afd4",
+  "Items": [
+    {
+      "Id": "37decec4-6c5b-49d0-9e9f-1847fb11f1d1",
+      "Command": "--commands \"process.json\""
+    }
+  ]
+}

@@ -1,11 +1,9 @@
 {
-	"enabled": false,
-	"commands": [
+  "enabled": true,
+  "commands": [
     {
-      "command": "publish",
-      "params": {
-        "dest": "C:\\Users\\Chili\\Desktop\\PubTest"
-      }
+      "command": "run-tests",
+      "params": {}
     }
-	]
+  ]
 }
