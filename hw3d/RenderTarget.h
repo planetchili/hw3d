@@ -20,7 +20,9 @@ namespace Bind
 		void Clear( Graphics& gfx,const std::array<float,4>& color ) noxnd;
 		UINT GetWidth() const noexcept;
 		UINT GetHeight() const noexcept;
+		Surface ToSurface( Graphics& gfx ) const;
 	private:
+		std::pair<Microsoft::WRL::ComPtr<ID3D11Texture2D>,D3D11_TEXTURE2D_DESC> MakeStaging( Graphics& gfx ) const;
 		void BindAsBuffer( Graphics& gfx,ID3D11DepthStencilView* pDepthStencilView ) noxnd;
 	protected:
 		RenderTarget( Graphics& gfx,ID3D11Texture2D* pTexture,std::optional<UINT> face );
@@ -35,7 +37,6 @@ namespace Bind
 	public:
 		ShaderInputRenderTarget( Graphics& gfx,UINT width,UINT height,UINT slot );
 		void Bind( Graphics& gfx ) noxnd override;
-		Surface ToSurface( Graphics& gfx ) const;
 	private:
 		UINT slot;
 		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> pShaderResourceView;
