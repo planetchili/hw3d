@@ -2,7 +2,9 @@
 #include "GraphicsThrowMacros.h"
 #include "DepthStencil.h"
 #include "Surface.h"
+#include <stdexcept>
 #include <array>
+#include "cnpy.h"
 
 namespace wrl = Microsoft::WRL;
 
@@ -108,6 +110,11 @@ namespace Bind
 
 		auto [pTexTemp,desc] = MakeStaging( gfx );
 
+		if( desc.Format != DXGI_FORMAT::DXGI_FORMAT_B8G8R8A8_UNORM )
+		{
+			throw std::runtime_error( "tosurface in RenderTarget on bad dxgi format" );
+		}
+
 		// create Surface and copy from temp texture to it
 		const auto width = GetWidth();
 		const auto height = GetHeight();
@@ -126,6 +133,41 @@ namespace Bind
 		GFX_THROW_INFO_ONLY( GetContext( gfx )->Unmap( pTexTemp.Get(),0 ) );
 
 		return s;
+	}
+
+	void Bind::RenderTarget::Dumpy( Graphics& gfx,const std::string& path ) const
+	{
+		INFOMAN( gfx );
+
+		auto [pTexTemp,srcTextureDesc] = MakeStaging( gfx );
+
+		// create Surface and copy from temp texture to it
+		const auto width = GetWidth();
+		const auto height = GetHeight();
+		std::vector<float> arr;
+		arr.reserve( width * height );
+		D3D11_MAPPED_SUBRESOURCE msr = {};
+		GFX_THROW_INFO( GetContext( gfx )->Map( pTexTemp.Get(),0,D3D11_MAP::D3D11_MAP_READ,0,&msr ) );
+		auto pSrcBytes = static_cast<const char*>(msr.pData);
+
+		if( srcTextureDesc.Format != DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT )
+		{
+			throw std::runtime_error{ "Bad format in RenderTarget for dumpy" };
+		}
+
+		// flatten texture elements
+		for( unsigned int y = 0; y < height; y++ )
+		{
+			auto pSrcRow = reinterpret_cast<const float*>(pSrcBytes + msr.RowPitch * size_t( y ));
+			for( unsigned int x = 0; x < width; x++ )
+			{
+				arr.push_back( pSrcRow[x] );
+			}
+		}
+		GFX_THROW_INFO_ONLY( GetContext( gfx )->Unmap( pTexTemp.Get(),0 ) );
+
+		// dump to numpy array
+		cnpy::npy_save( path,arr.data(),{ height,width } );
 	}
 
 	void RenderTarget::BindAsBuffer( Graphics& gfx ) noxnd

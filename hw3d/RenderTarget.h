@@ -21,6 +21,7 @@ namespace Bind
 		UINT GetWidth() const noexcept;
 		UINT GetHeight() const noexcept;
 		Surface ToSurface( Graphics& gfx ) const;
+		void Dumpy( Graphics& gfx,const std::string& path ) const;
 	private:
 		std::pair<Microsoft::WRL::ComPtr<ID3D11Texture2D>,D3D11_TEXTURE2D_DESC> MakeStaging( Graphics& gfx ) const;
 		void BindAsBuffer( Graphics& gfx,ID3D11DepthStencilView* pDepthStencilView ) noxnd;
