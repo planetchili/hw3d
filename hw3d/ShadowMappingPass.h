@@ -33,12 +33,13 @@ namespace Rgph
 		{
 			using namespace Bind;
 			depthStencil = std::make_shared<OutputOnlyDepthStencil>( gfx,size,size );
-			pDepthCube = std::make_shared<CubeTargetTexture>( gfx,size,size,3,DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT );
+			pDepthCube = std::make_shared<CubeTargetTexture>( gfx,size,size,3,DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT );
 			AddBind( VertexShader::Resolve( gfx,"Shadow_VS.cso" ) );
 			AddBind( PixelShader::Resolve( gfx,"Shadow_PS.cso" ) );
 			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
 			AddBind( Blender::Resolve( gfx,false ) );
 			AddBind( std::make_shared<Viewport>( gfx,(float)size,(float)size ) );
+			//AddBind( std::make_shared<Bind::ShadowRasterizer>( gfx,0.0f,2.0f,1.0f ) );
 			AddBind( std::make_shared<Bind::Rasterizer>( gfx,false ) );
 			RegisterSource( DirectBindableSource<Bind::CubeTargetTexture>::Make( "map",pDepthCube ) );
 
@@ -77,20 +78,22 @@ namespace Rgph
 				auto rt = pDepthCube->GetRenderTarget( i );
 				rt->Clear( gfx );
 				depthStencil->Clear( gfx );
-				SetRenderTarget( std::move( rt ) );
+				SetRenderTarget( rt );
 				const auto lookAt = pos + XMLoadFloat3( &cameraDirections[i] );
 				gfx.SetCamera( XMMatrixLookAtLH( pos,lookAt,XMLoadFloat3( &cameraUps[i] ) ) );
 				RenderQueuePass::Execute( gfx );
+
+				if( dumpFlag )
+				{
+					rt->Dumpy( gfx,"Dumps\\shadow_map_" + std::to_string( i ) + ".npy" );
+				}
 			}
+
+			dumpFlag = false;
 		}
 		void DumpShadowMap( Graphics& gfx,const std::string& path ) const
 		{
-			//for( size_t i = 0; i < 6; i++ )
-			//{
-			//	auto d = pDepthCube->GetRenderTarget( i );
-			//	d->ToSurface( gfx ).Save( path + std::to_string( i ) + ".png" );
-			//	d->Dumpy( gfx,path + std::to_string( i ) + ".npy" );
-			//}
+			dumpFlag = true;
 		}
 	private:
 		void SetRenderTarget( std::shared_ptr<Bind::RenderTarget> rt ) const
@@ -103,5 +106,6 @@ namespace Rgph
 		DirectX::XMFLOAT4X4 projection;
 		std::vector<DirectX::XMFLOAT3> cameraDirections{ 6 };
 		std::vector<DirectX::XMFLOAT3> cameraUps{ 6 };
+		mutable bool dumpFlag = false;
 	};
 }

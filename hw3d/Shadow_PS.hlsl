@@ -1,4 +1,4 @@
-float4 main(float3 viewPos : Position) : SV_TARGET
+float2 main(float4 pos : SV_Position, float4 viewPos : Position) : SV_TARGET
 {	
-    return length(viewPos) / 100.0f + 0.005;
+    return float2(pos.z, 5.0f);
 }

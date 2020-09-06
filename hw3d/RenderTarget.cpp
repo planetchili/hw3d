@@ -80,6 +80,9 @@ namespace Bind
 	{
 		INFOMAN( gfx );
 
+		// get info about the stencil view
+		D3D11_RENDER_TARGET_VIEW_DESC srcViewDesc{};
+		pTargetView->GetDesc( &srcViewDesc );
 		// creating a temp texture compatible with the source, but with CPU read access
 		wrl::ComPtr<ID3D11Resource> pResSource;
 		pTargetView->GetResource( &pResSource );
@@ -98,8 +101,16 @@ namespace Bind
 			&tmpTextureDesc,nullptr,&pTexTemp
 		) );
 
-		// copy the contents to temp staging texture
-		GFX_THROW_INFO_ONLY( GetContext( gfx )->CopyResource( pTexTemp.Get(),pTexSource.Get() ) );
+		// copy texture contents
+		if( srcViewDesc.ViewDimension == D3D11_RTV_DIMENSION::D3D11_RTV_DIMENSION_TEXTURE2DARRAY )
+		{
+			// source is actually inside a cubemap texture, use view info to find the correct slice and copy subresource
+			GFX_THROW_INFO_ONLY( GetContext( gfx )->CopySubresourceRegion( pTexTemp.Get(),0,0,0,0,pTexSource.Get(),srcViewDesc.Texture2DArray.FirstArraySlice,nullptr ) );
+		}
+		else
+		{
+			GFX_THROW_INFO_ONLY( GetContext( gfx )->CopyResource( pTexTemp.Get(),pTexSource.Get() ) );
+		}
 
 		return { std::move( pTexTemp ),srcTextureDesc };
 	}
@@ -141,7 +152,7 @@ namespace Bind
 
 		auto [pTexTemp,srcTextureDesc] = MakeStaging( gfx );
 
-		// create Surface and copy from temp texture to it
+		// mapping texture and preparing vector
 		const auto width = GetWidth();
 		const auto height = GetHeight();
 		std::vector<float> arr;
@@ -150,24 +161,48 @@ namespace Bind
 		GFX_THROW_INFO( GetContext( gfx )->Map( pTexTemp.Get(),0,D3D11_MAP::D3D11_MAP_READ,0,&msr ) );
 		auto pSrcBytes = static_cast<const char*>(msr.pData);
 
-		if( srcTextureDesc.Format != DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT )
-		{
-			throw std::runtime_error{ "Bad format in RenderTarget for dumpy" };
-		}
+		UINT nElements = 0;
 
-		// flatten texture elements
-		for( unsigned int y = 0; y < height; y++ )
+		// flatten texture elements		
+		if( srcTextureDesc.Format == DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT )
 		{
-			auto pSrcRow = reinterpret_cast<const float*>(pSrcBytes + msr.RowPitch * size_t( y ));
-			for( unsigned int x = 0; x < width; x++ )
+			nElements = 1;
+			for( unsigned int y = 0; y < height; y++ )
 			{
-				arr.push_back( pSrcRow[x] );
+				auto pSrcRow = reinterpret_cast<const float*>(pSrcBytes + msr.RowPitch * size_t( y ));
+				for( unsigned int x = 0; x < width; x++ )
+				{
+					arr.push_back( pSrcRow[x] );
+				}
 			}
+		}
+		else if( srcTextureDesc.Format == DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT )
+		{
+			nElements = 2;
+			struct Element
+			{
+				float r;
+				float g;
+			};
+			for( unsigned int y = 0; y < height; y++ )
+			{
+				auto pSrcRow = reinterpret_cast<const Element*>(pSrcBytes + msr.RowPitch * size_t( y ));
+				for( unsigned int x = 0; x < width; x++ )
+				{
+					arr.push_back( pSrcRow[x].r );
+					arr.push_back( pSrcRow[x].g );
+				}
+			}
+		}
+		else
+		{
+			GFX_THROW_INFO_ONLY( GetContext( gfx )->Unmap( pTexTemp.Get(),0 ) );
+			throw std::runtime_error{ "Bad format in RenderTarget for dumpy" };
 		}
 		GFX_THROW_INFO_ONLY( GetContext( gfx )->Unmap( pTexTemp.Get(),0 ) );
 
 		// dump to numpy array
-		cnpy::npy_save( path,arr.data(),{ height,width } );
+		cnpy::npy_save( path,arr.data(),{ height,width,nElements } );
 	}
 
 	void RenderTarget::BindAsBuffer( Graphics& gfx ) noxnd
