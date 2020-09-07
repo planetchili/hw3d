@@ -11,6 +11,6 @@ Output main(float3 pos : Position)
     Output output;
 	output.pos = mul(float4(pos, 1.0f), modelViewProj);
 	output.viewPos.xyz = mul(float4(pos, 1.0f), modelView).xyz;
-    output.viewPos.w = output.pos.z / output.pos.w;
+    output.viewPos.w = output.pos.z;
 	return output;
 }
