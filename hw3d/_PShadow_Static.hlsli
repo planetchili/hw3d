@@ -8,8 +8,13 @@ static const float c0 = -zn * zf / (zf - zn);
 
 float CalculateShadowDepth(const in float4 shadowPos)
 {
-    const float3 d = abs(shadowPos).xyz;
-    return (c1 * max(d.x, max(d.y, d.z)) + c0) / d.z;
+    // get magnitudes for each basis component
+    const float3 m = abs(shadowPos).xyz;
+    // get the length in the dominant axis
+    // (this correlates with shadow map face and derives comparison depth)
+    const float major = max(m.x, max(m.y, m.z));
+    // converting from distance in shadow light space to projected depth
+    return (c1 * major + c0) / major;
 }
 
 float Shadow(const in float4 shadowPos)
