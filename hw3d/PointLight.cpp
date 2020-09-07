@@ -14,8 +14,8 @@ PointLight::PointLight( Graphics& gfx,DirectX::XMFLOAT3 pos,float radius )
 		{ 1.0f,1.0f,1.0f },
 		1.0f,
 		1.0f,
-		0.045f,
-		0.0075f,
+		0.025f,
+		0.0030f,
 	};
 	Reset();
 	pCamera = std::make_shared<Camera>( gfx,"Light",cbData.pos,0.0f,PI / 2.0f,true );

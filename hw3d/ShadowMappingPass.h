@@ -33,14 +33,14 @@ namespace Rgph
 		{
 			using namespace Bind;
 			depthStencil = std::make_shared<OutputOnlyDepthStencil>( gfx,size,size );
-			pDepthCube = std::make_shared<CubeTargetTexture>( gfx,size,size,3,DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT );
+			pDepthCube = std::make_shared<CubeTargetTexture>( gfx,size,size,3,DXGI_FORMAT::DXGI_FORMAT_R32_FLOAT );
 			AddBind( VertexShader::Resolve( gfx,"Shadow_VS.cso" ) );
 			AddBind( PixelShader::Resolve( gfx,"Shadow_PS.cso" ) );
 			AddBind( Stencil::Resolve( gfx,Stencil::Mode::Off ) );
 			AddBind( Blender::Resolve( gfx,false ) );
 			AddBind( std::make_shared<Viewport>( gfx,(float)size,(float)size ) );
-			//AddBind( std::make_shared<Bind::ShadowRasterizer>( gfx,0.0f,2.0f,1.0f ) );
-			AddBind( std::make_shared<Bind::Rasterizer>( gfx,false ) );
+			AddBind( std::make_shared<Bind::ShadowRasterizer>( gfx,0,20.0f,1.0f ) );
+			//AddBind( std::make_shared<Bind::Rasterizer>( gfx,false ) );
 			RegisterSource( DirectBindableSource<Bind::CubeTargetTexture>::Make( "map",pDepthCube ) );
 
 			DirectX::XMStoreFloat4x4(
